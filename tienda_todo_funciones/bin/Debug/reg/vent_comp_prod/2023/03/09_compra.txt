@@ -1,0 +1,1 @@
+dia|total_venta|total_compra|

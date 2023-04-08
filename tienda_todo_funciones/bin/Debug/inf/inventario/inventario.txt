@@ -1,0 +1,1 @@
+id_0|producto_1|precio_de_venta_2|0_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|ligar_productos_para_sabor_10|impuesto_11|tipo_producto_para_impuesto_12|

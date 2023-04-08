@@ -1,0 +1,1 @@
+nombre_promocion|codigo_barras¬cantidad¬nombre_producto°codigo_barras_2¬cantidad_2¬nombre_producto_2|precio|
