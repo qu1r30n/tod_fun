@@ -35,7 +35,7 @@ namespace tienda_todo_funciones.desinger
 
 
         AutoCompleteStringCollection autoComplete;
-        public void fun_txt_prediccion_palabra(TextBox txt_a_configurar, string orden_conlumnas = null, string caracter_separacion_col = "|")
+        public void fun_txt_prediccion_palabra(TextBox txt_a_configurar, string orden_conlumnas = null, string caracter_separacion_col = G_caracteres_separacion[0])
         {
             autoComplete = new AutoCompleteStringCollection();
             // Inicializar AutoCompleteStringCollection
@@ -164,11 +164,11 @@ namespace tienda_todo_funciones.desinger
             {
                 if (e.KeyValue == (char)(Keys.Add))
                 {
-                    promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
+                    //promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
                 }
                 else if (e.KeyValue == (char)(Keys.Subtract))
                 {
-                    promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
+                    //promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
                 }
             };
 
@@ -178,17 +178,17 @@ namespace tienda_todo_funciones.desinger
             {
                 if (e.KeyValue == (char)Keys.Enter)
                 {
-                    promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
+                    //promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
 
                 }
 
                 else if (e.KeyValue == (char)(Keys.Add))
                 {
-                    promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
+                    //promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
                 }
                 else if (e.KeyValue == (char)(Keys.Subtract))
                 {
-                    promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
+                    //promociones(lstb_a_configurar, lstb_promociones, lstb_descripcion_promo);
                 }
 
             };
@@ -199,7 +199,7 @@ namespace tienda_todo_funciones.desinger
 
 
         //herramientas--------------------------------------------------------------------------------------------------------------------------------------
-        public string OrdenarColumnas_string(string columnas, string orden, string caracter_separacion = "|")
+        public string OrdenarColumnas_string(string columnas, string orden, string caracter_separacion = G_caracteres_separacion[0])
         {
             char caracter = Convert.ToChar(caracter_separacion);
             string[] columnasArr = columnas.Split(caracter);
@@ -215,7 +215,7 @@ namespace tienda_todo_funciones.desinger
             return resultado;
         }
 
-        public string[] OrdenarColumnas_arreglo(string[] columnasArr, string orden, string caracter_separacion = "|")
+        public string[] OrdenarColumnas_arreglo(string[] columnasArr, string orden, string caracter_separacion = G_caracteres_separacion[0])
         {
             char caracter = Convert.ToChar(caracter_separacion);
             string[] ordenArr = orden.Split(caracter);
@@ -340,20 +340,20 @@ namespace tienda_todo_funciones.desinger
             {
 
 
-                string[] promo_1_nom_produc_precio = promos[i].Split('|');
-                string[] promo_produc = promo_1_nom_produc_precio[1].Split('°');
+                string[] promo_1_nom_produc_precio = promos[i].Split(Convert.ToChar(G_caracteres_separacion[0]);
+                string[] promo_produc = promo_1_nom_produc_precio[1].Split(Convert.ToChar(G_caracteres_separacion[1]);
 
                 string[] si_cumple_cantidad_pa_promo = new string[promo_produc.Length];
 
                 for (int j = 0; j < promo_produc.Length; j++)
                 {
-                    string[] datos_producto_promo = promo_produc[j].Split('¬');
+                    string[] datos_producto_promo = promo_produc[j].Split(Convert.ToChar(G_caracteres_separacion[2]);
 
 
                     //chequeo_lista_ventas-----------------------------------------------------------------------------------
                     for (int k = 0; k < Lst_ventas.Items.Count; k++)
                     {
-                        string[] produc_list_split = Lst_ventas.Items[k].ToString().Split('|');
+                        string[] produc_list_split = Lst_ventas.Items[k].ToString().Split(Convert.ToChar(G_caracteres_separacion[0]);
                         double dato_list_comparar = Convert.ToDouble(produc_list_split[8]);
                         double dato_promo_comparar = Convert.ToDouble(datos_producto_promo[1]);
                         if (produc_list_split[0] == datos_producto_promo[0] && dato_promo_comparar <= dato_list_comparar)
@@ -382,7 +382,7 @@ namespace tienda_todo_funciones.desinger
                     {
 
                         promo_1_nom_produc_precio[3] = "1";
-                        promos[i] = string.Join("|", promo_1_nom_produc_precio);
+                        promos[i] = string.Join(G_caracteres_separacion[0], promo_1_nom_produc_precio);
 
                     }
                     //-------------------------------------------------------------------------------------------
@@ -392,7 +392,7 @@ namespace tienda_todo_funciones.desinger
             lstb_promociones.Items.Clear();
             for (int i = 1; i < promos.Length; i++)
             {
-                string[] pro_split = promos[i].Split('|');
+                string[] pro_split = promos[i].Split(Convert.ToChar(G_caracteres_separacion[0]);
                 if (pro_split[3] == "1")
                 {
                     lstb_promociones.Items.Add(promos[i]);
