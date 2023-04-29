@@ -9,3 +9,4 @@ C:\Users\pc1\source\repos\tienda_todo_funciones\tienda_todo_funciones\obj\Debug\
 C:\Users\pc1\source\repos\tienda_todo_funciones\tienda_todo_funciones\obj\Debug\tienda_todo_funciones.pdb
 C:\Users\pc1\source\repos\tienda_todo_funciones\tienda_todo_funciones\obj\Debug\tienda_todo_funciones.Form1.resources
 C:\Users\pc1\source\repos\tienda_todo_funciones\tienda_todo_funciones\obj\Debug\tienda_todo_funciones.forms_prueba.ventas.resources
+C:\Users\pc1\source\repos\tienda_todo_funciones\tienda_todo_funciones\obj\Debug\tienda_todo_funciones.desinger.herramientas_para_elementos_del_form.resources

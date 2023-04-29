@@ -80,6 +80,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="variables_glob_conf.cs" />
+    <EmbeddedResource Include="desinger\herramientas_para_elementos_del_form.resx">
+      <DependentUpon>herramientas_para_elementos_del_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

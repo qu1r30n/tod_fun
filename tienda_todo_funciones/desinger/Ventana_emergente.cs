@@ -15,7 +15,6 @@ namespace tienda_todo_funciones.desinger
     public partial class Ventana_emergente : Form
     {
 
-        string[] G_dir = variables_glob_conf.GG_direccion_base;
 
         char[] G_parametros = { '|', '°', '¬', '^' };
         string G_datos_de_boton = "";
@@ -623,7 +622,7 @@ namespace tienda_todo_funciones.desinger
             if (parametros == "ocultar_control")
             {
                 G_bandera = 1;
-                if (G_control_a_ocultar == 21)
+                if (G_control_a_ocultar == 21 && this.Controls.Count >= 21)
                 {
 
 

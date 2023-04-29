@@ -10,7 +10,6 @@ namespace tienda_todo_funciones.modelos
 {
     class mod_comp_vent
     {
-        string[] G_dir = variables_glob_conf.GG_direccion_base;
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
 
         procesamientos pr = new procesamientos();

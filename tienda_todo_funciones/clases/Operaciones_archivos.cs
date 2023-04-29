@@ -11,11 +11,10 @@ namespace tienda_todo_funciones.clases
 {
     class Operaciones_archivos
     {
-        string[] G_dir = variables_glob_conf.GG_direccion_base;
 
         static public string direccion_programa = System.Windows.Forms.Application.ExecutablePath.ToString();
-        
 
+        
 
 
         public string[] Contenido_directorio(string direccion_archivo, string decicion = null)

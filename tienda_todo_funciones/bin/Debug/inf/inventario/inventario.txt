@@ -1,1 +1,8 @@
-id_0|producto_1|precio_de_venta_2|0_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|ligar_productos_para_sabor_10|impuesto_11|tipo_producto_para_impuesto_12|
+id_0|producto_1|precio_de_venta_2|0_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|produc_elaborados_10|ligar_productos_para_sabo_11|impuesto_12|tipo_producto_para_impuesto_13|
+1||0|1|1|0|nose|1||1|||0|nose|
+2||0|nhiao|1|0|nose|1||1|||0|prueba|
+3||0|add|1|0|prueba|1||1|||0|pru|
+4||0|fdakn|1|0|provedor_1|1||1|||0|nose|
+5||0|pgfdsa|1|0|provedor_2|1||1|||0|nose|
+6||0|afdioa|1|0|provedor_3|1||1|||0|nose|
+7||0|afdmpos|1|0|provedor_4|1||1|||0|nose|

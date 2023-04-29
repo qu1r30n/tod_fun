@@ -1,0 +1,1 @@
+nuevo_producto~inf\inventario\inventario.txt~1||0|1|1|0|nose|1||1|||0|nose|

@@ -11,13 +11,13 @@ namespace tienda_todo_funciones.clases
 {
     class Tex_base
     {
-        string[] G_dir = variables_glob_conf.GG_direccion_base;
 
         string G_palabra = "", G_entrando = "", G_temp = "";
 
         char[] G_parametros = { '|', '°', '¬', '^' };
         string[] G_linea, G_buscar, G_remplasar;
 
+        
 
         public void Crear_archivo_y_directorio(string direccion_archivo, string valor_inicial = null, string[] columnas = null)//columnas: es para crearlas y se separan la columnas por un '|' valor_inicial: no se utilisa en este programa era para poner un tipo eslogan o un titulo  pero en este programa no lo nesesite
         {
@@ -121,7 +121,7 @@ namespace tienda_todo_funciones.clases
 
 
 
-        public string Seleccionar(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_extraer = null, string caracter_sep_string="|")
+        public string Seleccionar(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_extraer = null, string caracter_sep_string = "|")
         {
             char caracter_separacion = Convert.ToChar(caracter_sep_string);
 
@@ -227,7 +227,7 @@ namespace tienda_todo_funciones.clases
 
             int cont;
 
-            
+
             string[] pos_str = posiciones.Split(G_parametros[0]);
             int[] pos_in = new int[pos_str.Length];
 
@@ -506,7 +506,7 @@ namespace tienda_todo_funciones.clases
 
         }
 
-        public string Eliminar(string direccion_archivo, int columna_comp, string comparar,string caracter_separacion="|" )
+        public string Eliminar(string direccion_archivo, int columna_comp, string comparar, string caracter_separacion = "|")
         {
             char caracter_separacion_char = Convert.ToChar(caracter_separacion);
             bool bandera = true;
@@ -756,7 +756,7 @@ namespace tienda_todo_funciones.clases
             return result;//editar
         }
 
-        public string si_existe_suma_sino_agega_extra(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|',bool los_valores_seam_menores_0=true)
+        public string si_existe_suma_sino_agega_extra(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true)
         {
             Crear_archivo_y_directorio(direccion_archivo);
             bool bandera = false;
@@ -790,13 +790,13 @@ namespace tienda_todo_funciones.clases
                                 {
                                     linea_espliteada[Convert.ToInt32(num_col_spliteadas[i])] = "" + (Convert.ToDecimal(linea_espliteada[Convert.ToInt32(num_col_spliteadas[i])]) + Convert.ToDecimal(cantidad_spliteada[i]));
                                     double resultado = Convert.ToDouble(linea_espliteada[Convert.ToInt32(num_col_spliteadas[i])]);
-                                    if (resultado<0)
+                                    if (resultado < 0)
                                     {
                                         linea_espliteada[Convert.ToInt32(num_col_spliteadas[i])] = "0";
                                     }
-                                    
+
                                 }
-                                
+
                             }
                             linea = string.Join("|", linea_espliteada);
                             bandera = true;
@@ -842,7 +842,7 @@ namespace tienda_todo_funciones.clases
             string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
             StreamWriter sw = new StreamWriter(dir_tem, true);
             string exito_o_fallo;
-            
+
 
             try
             {
@@ -876,7 +876,7 @@ namespace tienda_todo_funciones.clases
                 {
                     exito_o_fallo = "2)no_encontrado";
                 }
-                
+
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
@@ -1002,14 +1002,14 @@ namespace tienda_todo_funciones.clases
             return texto_editado;
         }
 
-        public string Incrementa_celda(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_editar, string cantidad_a_sumar,string caracter_separacion_str = "|")
+        public string Incrementa_celda(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string caracter_separacion_str = "|")
         {
             char caracter_separacion = Convert.ToChar(caracter_separacion_str);
             Crear_archivo_y_directorio(direccion_archivo);
             StreamReader sr = new StreamReader(direccion_archivo);
             string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
             StreamWriter sw = new StreamWriter(dir_tem, true);
-            string exito_o_fallo="";
+            string exito_o_fallo = "";
 
             try
             {
@@ -1046,14 +1046,14 @@ namespace tienda_todo_funciones.clases
                         }
                     }
                 }
-                if (exito_o_fallo != "1" + caracter_separacion + "exito") 
+                if (exito_o_fallo != "1" + caracter_separacion + "exito")
                 {
                     exito_o_fallo = "2" + caracter_separacion + "no_se_encontro";
                 }
 
                 sr.Close();
                 sw.Close();
-                
+
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
             }
@@ -1067,7 +1067,7 @@ namespace tienda_todo_funciones.clases
             return exito_o_fallo;
         }
 
-        public string[] Ordenar(string direccion_archivo, int columna_comparar, string tipo = "numero", string orden = "mayor_menor", char caracter_separacion = '|',int fila_donde_comiensa=0)
+        public string[] Ordenar(string direccion_archivo, int columna_comparar, string tipo = "numero", string orden = "mayor_menor", char caracter_separacion = '|', int fila_donde_comiensa = 0)
         {
             Tex_base bas = new Tex_base();
             string[] lineas = bas.Leer(direccion_archivo);
@@ -1219,7 +1219,7 @@ namespace tienda_todo_funciones.clases
                 }
                 if (bandera == false)
                 {
-                    //id_0|producto_1|precio_de_venta_2|cod_bar_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|ligar_productos_para_sabor_10|impuesto_11|tipo_producto_para_impuesto_12|
+                    //id_0|producto_1|precio_de_venta_2|cod_bar_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|productos_elaborados_10|ligar_productos_para_sabor_11|impuesto_12|tipo_producto_para_impuesto_13|
                     bas.Editar_espesifico(direccion_archivo_1, columna_1, info_1[columna_1], "4", "0");
                 }
 
@@ -1303,5 +1303,7 @@ namespace tienda_todo_funciones.clases
         {
             File.Move(direccion1, direccion2);//renombramos el archivo temporal por el que tenia el original
         }
+
+        
     }
 }

@@ -11,7 +11,7 @@ namespace tienda_todo_funciones.clases
     class Operaciones_textos
     {
         
-        string[] G_dir = variables_glob_conf.GG_direccion_base;
+        
         public string cambiar_caracter(string texto, char caracter_a_buscar, char caracter_a_cambiar)
         {
             string[] texto_espliteado = texto.Split(caracter_a_buscar);

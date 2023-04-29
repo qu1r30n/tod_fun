@@ -1,1 +1,7 @@
 provedor_0|id_1|
+nose|1
+prueba|2
+provedor_1|3
+provedor_2|4
+provedor_3|5
+provedor_4|6

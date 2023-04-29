@@ -5,47 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.IO;
+using tienda_todo_funciones.clases;
 
 namespace tienda_todo_funciones
 {
     class variables_glob_conf
     {
+        //statics--------------------------------------------------------------------------------
+        static public string[] GG_caracter_separacion =
+        {
+            "|",
+            "°",
+            "¬",
+            "^",
+            "~"//este lo estoy usando para el area de registros de movimientos
+        };
+
         //variables globales para configuracion-----------------------------------------------------------
         public string GG_string_transferir = "";
         public List<string> GG_list_transferir = new List<string>();
 
-
-        public string[] GG_dir_reg =
-        {
-            "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\"+ DateTime.Now.ToString("yyyyMMdd") + "_venta.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_compra.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_producto.txt",
-             //------------------------------------------------------------------------------------------------------------------------
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_venta.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_compra.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_producto.txt",
-             //-------------------------------------------------------------------------------------------------------------------------
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_venta.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_compra.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_producto.txt",
-             //----------------------------------------------------------------------------------------------------------------------------
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_venta.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_compra.txt",
-             "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_producto.txt",
-             //--------------------------------------------------------------------------------------------
-             "reg\\vent_comp_prod\\tod_venta.txt",
-             "reg\\vent_comp_prod\\tod_compra.txt",
-             "reg\\vent_comp_prod\\tod_producto.txt",
-             //------------------------------------------------------------------------------------------------------
-             //-------------------------------------------------------------------------------------------------------
-             Directory.GetCurrentDirectory() + "\\inf\\ranking\\" + DateTime.Now.ToString("yyyy") + "_ranking.txt"
-
-
-        };
-
-
-        //------------------------------------------------------------------------------------------------
-        static public string GG_info_intercambiable = "";//despues de usarlo en otra ventana porfavor vuelvelo a dejar la variable con ""
 
         static public string[] GG_direccion_base =
         {
@@ -53,31 +32,97 @@ namespace tienda_todo_funciones
             ""//este es dir bace para registros de compra venta y productos por si lo quieres enviara a otra carpeta
         };//solo modificar en esta clase y si se modifica tendras que pasar los directorios a la nueva direccion
 
-        static public string[] GG_nom_archivos =
+        //formato   {direccion_de_archivo,fila_inicial_archivo}
+        static public string[,] GG_dir_reg =
         {
-            "inf\\inventario\\inventario.txt",
-            "inf\\inventario\\provedores.txt",
-            "inf\\inventario\\promociones.txt",
-            "",
-            "inf\\ven\\vent.txt"
+             /*0*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\"+ DateTime.Now.ToString("yyyyMMdd") + "_venta.txt", "hora_min_seg" + GG_caracter_separacion[0] + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "pagado_por_promocion" + GG_caracter_separacion[0]},
+             /*1*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_compra.txt" ,"hora_min_seg" + GG_caracter_separacion[0] + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*2*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre" + GG_caracter_separacion[0]},
+             //------------------------------------------------------------------------------------------------------------------------
+             /*3*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_venta.txt" ,"dia" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*4*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_compra.txt" ,"dia" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*5*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             //-------------------------------------------------------------------------------------------------------------------------
+             /*6*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_venta.txt" ,"mes" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*7*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_compra.txt" ,"mes" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*8*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             //----------------------------------------------------------------------------------------------------------------------------
+             /*9*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_venta.txt" ,"año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*10*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_compra.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*11*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             //--------------------------------------------------------------------------------------------
+             /*12*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\tod_venta.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*13*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\tod_compra.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*14*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\tod_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             //------------------------------------------------------------------------------------------------------
+             //-------------------------------------------------------------------------------------------------------
+             /*15*/{ Directory.GetCurrentDirectory() + "\\inf\\ranking\\" + DateTime.Now.ToString("yyyy") + "_ranking.txt" ,""}
+        };
+
+        //formato   {direccion_de_archivo,fila_inicial_archivo}
+        static public string[,] GG_nom_archivos =
+        {
+            /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", "id_0" + GG_caracter_separacion[0] + "producto_1" + GG_caracter_separacion[0] + "precio_de_venta_2" + GG_caracter_separacion[0] + "0_3" + GG_caracter_separacion[0] + "cantidad_4" + GG_caracter_separacion[0] + "costo_compra_5" + GG_caracter_separacion[0] + "provedor_6" + GG_caracter_separacion[0] + "grupo_7" + GG_caracter_separacion[0] + "multiusos_8" + GG_caracter_separacion[0] + "cantidad_productos_por_paquete_9" + GG_caracter_separacion[0] + "produc_elaborados_10" + GG_caracter_separacion[0] + "ligar_productos_para_sabo_11" + GG_caracter_separacion[0] + "impuesto_12" + GG_caracter_separacion[0] + "tipo_producto_para_impuesto_13" + GG_caracter_separacion[0] + "" },
+            /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor_0" + GG_caracter_separacion[0] + "id_1" + GG_caracter_separacion[0] + "" },
+            /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[0] + "codigo_barras" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "nombre_producto" + GG_caracter_separacion[1] + "codigo_barras_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "nombre_producto_2" + GG_caracter_separacion[0] + "precio_anterior " + GG_caracter_separacion[0] + "precio" + GG_caracter_separacion[0] },
+            /*3*/{GG_direccion_base[0]+"inf\\ven\\vent.txt", ""},
+            /*4*/{GG_direccion_base[0]+"inf\\ven\\impuestos.txt", "nombre_impuesto" + GG_caracter_separacion[1] + "porcentage" + GG_caracter_separacion[1]}
         };//solo modificar en esta clase y si se modifica tendras que pasar los directorios a la nueva direccion
 
+        //------------------------------------------------------------------------------------------------
+        static public string GG_info_intercambiable = "";//despues de usarlo en otra ventana porfavor vuelvelo a dejar la variable con ""
 
-        static public string[] GG_caracter_separacion =
-        {
-            "|",
-            "°",
-            "¬",
-            "^"
-        };
+
+        //------------------------------------------------------------------------------------------------
+
+        //prueba parsar todo lo nesesario a variables estaticas----------------------------------------------------------------
+
+
+        static public string[][] GG_arrays_carga_de_archivos=new string[GG_nom_archivos.GetLength(0)][];
+
+
 
 
         
-        static public string[] GG_var_modificacion =
+        
+
+        //------------------------------------------------------------------------------------------------------
+        //1=textbox  1°titulo_texbox°contenido_text_box°restriccion_de_dato      ejemplo "1°precio venta°0°2" //el 2 es la restriccion que solo resivira numeros y punto decimal         
+        //2=labels   2°titulo_label°abajo_pondra_otro_label_con_el_contenido    ejemplo "2°id°9999"
+        //3=boton    3°titulo_del_boton°valor_del_boton°numero_de_Funcion            ejemplo "3°es_paquete°1°0" //cuando oprima el boton devolvera el valor 1 
+        //4=combobox "4°
+        //            titulo_combobox°
+        //            valor_inicial_si anteriormente_no_se_a_modificado°
+        //            restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion°
+        //            " + valor_inicial_si_se_modifico + '°'
+        //            + todas_las_opciones_del_combobox_separadas_por_"°"
+        //
+        //            ejemplo "4°grupo°2°4°1°1°2°3°4"
+
+        public string[] GG_ventana_emergente_productos =
         {
-            ""//este se supone que sirve paracambiar el nom_archivos
+            "2°id°" + (GG_arrays_carga_de_archivos[0].Length),
+             "1°producto",
+             "1°precio venta°0°2",
+             "2°codigo de barras°" + GG_provedor_anterior_y_codbar[0],
+             "1°cantidad°1°2",
+             "1°costo de compra°0°2",
+             "4°provedor°nose°°" + GG_provedor_anterior_y_codbar[1] + '°' + GG_provedor_anterior_y_codbar[2],
+             "4°grupo°2°4°1°1°2°3°4",
+             "2°no poner nada°",
+             "1°cantidad_productos_por_paquete°1°2",
+             "1°productos_elaborados°°3",
+             "1°ligar_productos_sabor",
+             "1°precio impuesto°0°2",
+             "4°tipo_producto_para_impuesto°nose°°" /* + tipo_impuesto_anterior* +'°' + todos los impuestos anteriores */ 
         };
-        //------------------------------------------------------------------------------------------------
+        
+        static public string[] GG_provedor_anterior_y_codbar =
+        {
+            "",//tex_esplit[0]//codbar
+            "",//prov_anterior
+            "" //provedores_txt//todos_los_provedores
+        };
 
     }
 }
