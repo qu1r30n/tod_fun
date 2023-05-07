@@ -83,6 +83,9 @@
     <EmbeddedResource Include="desinger\herramientas_para_elementos_del_form.resx">
       <DependentUpon>herramientas_para_elementos_del_form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="desinger\Ventana_emergente.resx">
+      <DependentUpon>Ventana_emergente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

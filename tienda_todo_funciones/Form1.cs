@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using tienda_todo_funciones.forms_prueba;
 using tienda_todo_funciones.procesos;
-using tienda_todo_funciones.clases;
+using tienda_todo_funciones.desinger;
 
 namespace tienda_todo_funciones
 {

@@ -1,8 +1,0 @@
-nuevo_producto~inf\inventario\inventario.txt~1|1_producto|2|3|4|5|6_provedor|7_grupo||9||11_ligar_producto|12|13_tipo_impuesto|
-nuevo_producto~inf\inventario\inventario.txt~2|producto_2|0|6|1|0|nose|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~3||0|4|1|0|nose|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~1||0|3|1|0|nose|q||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~2||0|9|1|0|nose|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~3||0|7|1|0|nose|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~4||0|1|1|0|nose|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~5||0|2|1|0|nose|1||1|||0|nose|

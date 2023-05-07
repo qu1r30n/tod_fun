@@ -9,30 +9,54 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using tienda_todo_funciones.desinger;
+using tienda_todo_funciones.clases;
 
 namespace tienda_todo_funciones.forms_prueba
 {
     public partial class ventas : Form
     {
-        
-        
+
+        Tex_base bas = new Tex_base();
+        variables_glob_conf var_glob = new variables_glob_conf();
 
         public ventas()
         {   
             InitializeComponent();
-            //id_0|producto_1|precio_de_venta_2|cod_bar_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|productos_elaborados_10|ligar_productos_para_sabor_11|impuesto_12|tipo_producto_para_impuesto_13|
+            //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             herramientas_para_elementos_del_form herr_form = new herramientas_para_elementos_del_form();
+            string[] orden_arr =
+            {
+                "0_5",
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+                "precio_de_venta_4",
+                "grupo_9"
 
-            string orden_1 = "3" + variables_glob_conf.GG_caracter_separacion[0] + "2" + variables_glob_conf.GG_caracter_separacion[0] + "1" + variables_glob_conf.GG_caracter_separacion[0] + "3" + variables_glob_conf.GG_caracter_separacion[0] + "7";//se repite el 3 en la [3] pocicion por que de hay se agarrara el codigo de barras para procesarlo
-            string orden_2 = "1" + variables_glob_conf.GG_caracter_separacion[0] + "2" + variables_glob_conf.GG_caracter_separacion[0] + "3" + variables_glob_conf.GG_caracter_separacion[0] + "3" + variables_glob_conf.GG_caracter_separacion[0] + "7";//se repite el 3 en la [3] pocicion por que de hay se agarrara el codigo de barras para procesarlo
-            
+            };
+            string orden_1 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+
+            orden_arr = new string[]
+            {
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+                "0_5",
+                "precio_de_venta_4",
+                "grupo_9"
+            };
+            string orden_2 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+
 
             herr_form.fun_txt_prediccion_palabra(Txt_buscar_producto, orden_1);
             herr_form.fun_txt_prediccion_palabra(Txt_nom_producto, orden_2);
 
             herr_form.fun_txt_procesar_tecleos(Txt_buscar_producto, Lst_ventas);
-            string orden_3 = "2" + variables_glob_conf.GG_caracter_separacion[0] + "1" + variables_glob_conf.GG_caracter_separacion[0] + "0" + variables_glob_conf.GG_caracter_separacion[0] + "3" + variables_glob_conf.GG_caracter_separacion[0] + "4";//se repite el 3 en la [3] pocicion por que de hay se agarrara el codigo de barras para procesarlo
-            herr_form.fun_txt_nom_produc_pasar_a_txt_codigo(Txt_nom_producto, Txt_buscar_producto,orden_3);
+            
+            
+            herr_form.fun_txt_nom_produc_pasar_a_txt_codigo(Txt_nom_producto, Txt_buscar_producto,"4");
 
             herr_form.fun_lstb_procesar_tecleos(Lst_ventas);
             herr_form.fun_promociones_procesar_tecleos(Txt_buscar_producto, Lst_ventas,lstb_promociones,lstb_descripcion_promo);

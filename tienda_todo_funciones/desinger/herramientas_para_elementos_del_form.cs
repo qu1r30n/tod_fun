@@ -44,7 +44,7 @@ namespace tienda_todo_funciones.desinger
 
             for (int i = 0; i < inv.Length; i++)
             {
-                autoComplete.Add(inv[i]+(variables_glob_conf.GG_caracter_separacion[0]+"")+i);
+                autoComplete.Add(inv[i]);
             }
         }
 
@@ -60,12 +60,12 @@ namespace tienda_todo_funciones.desinger
                 {
                     
                     string[] tex_esplit = txt_a_configurar.Text.Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-                    variables_glob_conf.GG_provedor_anterior_y_codbar[0] = tex_esplit[0];
+                    variables_glob_conf.GG_variables_string[0] = tex_esplit[0];
                     string indice_producto = "";
-                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+                    for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
                     {
                         string[] producto_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-                        if (variables_glob_conf.GG_provedor_anterior_y_codbar[0] == producto_espliteado[3])
+                        if (variables_glob_conf.GG_variables_string[0] == producto_espliteado[5])
                         {
                             indice_producto = "" + i;
                             break;
@@ -79,17 +79,24 @@ namespace tienda_todo_funciones.desinger
 
                     else
                     {
+                        //tipos_medida_producto
+                        if(variables_glob_conf.GG_variables_string[5] == null || variables_glob_conf.GG_variables_string[5] == "")
+                        {
+                            variables_glob_conf.GG_variables_string[5] = "nose";
+                        }
+                        //fin_tipos_medida_producto
+                        //provedores
+                        if (variables_glob_conf.GG_variables_string[1] == null || variables_glob_conf.GG_variables_string[1] == "")
+                        {
+                            variables_glob_conf.GG_variables_string[1] = "nose";
+                        }
+                        //fin_provedores
+                        variables_glob_conf.GG_variables_string[2] = op_text.join_paresido(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]), variables_glob_conf.GG_arrays_carga_de_archivos[1]);
+                        variables_glob_conf.GG_variables_string[6] = op_text.join_paresido(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]), variables_glob_conf.GG_arrays_carga_de_archivos[5]);
 
                         
-                        if (variables_glob_conf.GG_provedor_anterior_y_codbar[1] == null || variables_glob_conf.GG_provedor_anterior_y_codbar[1] == "")
-                        {
-                            variables_glob_conf.GG_provedor_anterior_y_codbar[1] = "nose";
-                        }
-
-                        variables_glob_conf.GG_provedor_anterior_y_codbar[2] = op_text.join_paresido(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]), variables_glob_conf.GG_arrays_carga_de_archivos[1]);
-
-                        Ventana_emergente emergente_vent = new Ventana_emergente();
                         variables_glob_conf var_glob = new variables_glob_conf();
+                        Ventana_emergente emergente_vent = new Ventana_emergente();
                         string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos,caracter_spliteo:Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]));
                         
 
@@ -188,7 +195,7 @@ namespace tienda_todo_funciones.desinger
                     if (txt_de_donde_agregara_info.Text != "" && txt_de_donde_agregara_info.Text != null)
                     {
                         string[] info_pa_comparar = txt_de_donde_agregara_info.Text.Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-                        sumar_o_restar_producto(lstb_a_configurar, info_pa_comparar[0], cantidad);
+                        sumar_o_restar_producto(lstb_a_configurar, info_pa_comparar[4], cantidad);
 
                         txt_de_donde_agregara_info.Text = "";
                     }
@@ -394,10 +401,22 @@ namespace tienda_todo_funciones.desinger
                 for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
                 {
                     string[] producto_invent=variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-                    if (codigo== producto_invent[3])
+                    if (codigo== producto_invent[5])
                     {
-                       //se agrega +(i + "") + antes de cantidad para saber en que indice del inventario se encuentra
-                       lstb_a_configurar.Items.Add(producto_invent[3] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[2] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[1] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[3] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[4] + variables_glob_conf.GG_caracter_separacion[0] + (i+"") + variables_glob_conf.GG_caracter_separacion[0] + cantidad);
+                        //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|0_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|produc_elaborados_12|ligar_productos_para_sabo_13|impuesto_14|tipo_producto_para_impuesto_15
+                        string[] orden_arr =
+                        {
+                            "0_5",
+                            "producto_1",
+                            "cantidad_producto_2",
+                            "tipo_de_medida_3",
+                            "0_5",
+                            "precio_de_venta_4",
+                            "grupo_9",
+                            cantidad+""
+                        };
+                        bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                       lstb_a_configurar.Items.Add(producto_invent[5] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[4] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[1] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[5] + variables_glob_conf.GG_caracter_separacion[0] + producto_invent[6] + variables_glob_conf.GG_caracter_separacion[0] + cantidad);
                     }
                 }
             }
@@ -516,7 +535,7 @@ namespace tienda_todo_funciones.desinger
                 
                 bas.Agregar(variables_glob_conf.GG_nom_archivos[1,0], nuevo_producto_espliteado[6] + variables_glob_conf.GG_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[1].Length);
                 variables_glob_conf.GG_arrays_carga_de_archivos[1] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[1], nuevo_producto_espliteado[6]);
-                variables_glob_conf.GG_provedor_anterior_y_codbar[1] = nuevo_producto_espliteado[6];
+                variables_glob_conf.GG_variables_string[1] = nuevo_producto_espliteado[6];
 
             }
 

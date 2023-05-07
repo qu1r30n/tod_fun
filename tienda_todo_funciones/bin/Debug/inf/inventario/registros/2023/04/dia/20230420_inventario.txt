@@ -1,6 +1,0 @@
-nuevo_producto~inf\inventario\inventario.txt~2||0|nhiao|1|0|nose|1||1|||0|prueba|
-nuevo_producto~inf\inventario\inventario.txt~3||0|add|1|0|prueba|1||1|||0|pru|
-nuevo_producto~inf\inventario\inventario.txt~4||0|fdakn|1|0|provedor_1|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~5||0|pgfdsa|1|0|provedor_2|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~6||0|afdioa|1|0|provedor_3|1||1|||0|nose|
-nuevo_producto~inf\inventario\inventario.txt~7||0|afdmpos|1|0|provedor_4|1||1|||0|nose|

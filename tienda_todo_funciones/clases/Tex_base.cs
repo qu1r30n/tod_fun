@@ -756,6 +756,75 @@ namespace tienda_todo_funciones.clases
             return result;//editar
         }
 
+        public string[] arreglo_conv_nom_a_indice(string[] nom_col_busc, string primera_fila_del_arrego, char caracter_separacion_primera_fila_arr = '|')
+        {
+            string[] nombres_columnas = primera_fila_del_arrego.Split(caracter_separacion_primera_fila_arr);
+            string[] indices_columnas = new string[nom_col_busc.Length];
+
+            for (int i = 0; i < nom_col_busc.Length; i++)
+            {
+                bool esta = false;
+                for (int j = 0; j < nombres_columnas.Length; j++)
+                {
+                    if (nom_col_busc[i] == nombres_columnas[j])
+                    {
+                        esta = true;
+                        indices_columnas[i] = j+"";
+                        break;
+                    }
+                }
+                if (!esta)
+                {
+                    indices_columnas[i] = "no_se_encuentra";
+                }
+            }
+
+            return indices_columnas;
+        }
+
+        public string arr_str_conv_nom_a_indice(string[] nom_col_busc, string primera_fila_del_arrego, char caracter_separacion_primera_fila_arr = '|')
+        {
+            string[] nombres_columnas = primera_fila_del_arrego.Split(caracter_separacion_primera_fila_arr);
+            string indices_columnas = "";
+
+            for (int i = 0; i < nom_col_busc.Length; i++)
+            {
+                bool esta = false;
+                for (int j = 0; j < nombres_columnas.Length; j++)
+                {
+                    if (nom_col_busc[i] == nombres_columnas[j])
+                    {
+                        esta = true;
+                        if (i < nom_col_busc.Length-1)
+                        {
+                            indices_columnas = indices_columnas + (j + "") + caracter_separacion_primera_fila_arr;
+                        }
+                        else
+                        {
+                            indices_columnas = indices_columnas + (j + "");
+                        }
+                        
+                        break;
+                    }
+                }
+                if (!esta)
+                {
+                    if (i < nom_col_busc.Length - 1)
+                    {
+                        indices_columnas = indices_columnas + "no_se_encuentra" + caracter_separacion_primera_fila_arr;
+                    }
+                    else
+                    {
+                        indices_columnas = indices_columnas + "no_se_encuentra";
+                    }
+                    
+                }
+            }
+
+            return indices_columnas;
+        }
+
+
         public string si_existe_suma_sino_agega_extra(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true)
         {
             Crear_archivo_y_directorio(direccion_archivo);
@@ -1219,7 +1288,7 @@ namespace tienda_todo_funciones.clases
                 }
                 if (bandera == false)
                 {
-                    //id_0|producto_1|precio_de_venta_2|cod_bar_3|cantidad_4|costo_compra_5|provedor_6|grupo_7|multiusos_8|cantidad_productos_por_paquete_9|productos_elaborados_10|ligar_productos_para_sabor_11|impuesto_12|tipo_producto_para_impuesto_13|
+                    //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
                     bas.Editar_espesifico(direccion_archivo_1, columna_1, info_1[columna_1], "4", "0");
                 }
 

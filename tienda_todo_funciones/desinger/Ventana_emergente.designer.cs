@@ -29,10 +29,17 @@ namespace tienda_todo_funciones.desinger
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Ventana_emergente
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(335, 101);
+            this.Name = "Ventana_emergente";
             this.Text = "Ventana_emergente";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -15,8 +15,8 @@ namespace tienda_todo_funciones.desinger
     public partial class Ventana_emergente : Form
     {
 
-
-        char[] G_parametros = { '|', '°', '¬', '^' };
+        //char[] G_parametros = { '|', '°', '¬', '^' };
+        string[] G_parametros = variables_glob_conf.GG_caracter_separacion;
         string G_datos_de_boton = "";
         int G_contador = 0;
         int G_control_a_ocultar;
@@ -27,7 +27,7 @@ namespace tienda_todo_funciones.desinger
         public Ventana_emergente()
         {
             InitializeComponent();
-            
+
 
         }
 
@@ -46,9 +46,11 @@ namespace tienda_todo_funciones.desinger
             //            ejemplo "4°grupo°2°4°1°1°2°3°4"
 
             this.Text = titulo_ventana;
+            this.AutoScroll = true;
+            this.VerticalScroll.Enabled = true;
 
             int x = 120;
-            int y = 0;
+            int y__ = 0;
             int ancho = 100;
             int alto = 50;
             int acumleft = 0;
@@ -105,22 +107,22 @@ namespace tienda_todo_funciones.desinger
                         TextBox Txt = new TextBox();
                         if (contador_en_horisontal_Txtbox <= 4)
                         {
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            Txt.Top = y + separacion_y;
+                            Txt.Top = y__ + separacion_y;
                             Txt.Left = acumleft;
 
                         }
                         else
                         {
                             contador_en_horisontal_Txtbox = 0;
-                            y = y + 40;
+                            y__ = y__ + 40;
                             acumleft = 0;
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            Txt.Top = y + separacion_y;
+                            Txt.Top = y__ + separacion_y;
                             Txt.Left = acumleft;
                         }
 
@@ -136,7 +138,7 @@ namespace tienda_todo_funciones.desinger
 
                         if (espliteado.Length >= 4)
                         {
-                            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(G_parametros[3]);
+                            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(Convert.ToChar(G_parametros[3]));
                             for (int j = 0; j < restriccion_de_caracteres_a_usar.Length; j++)
                             {
                                 string parametros = "";
@@ -199,22 +201,22 @@ namespace tienda_todo_funciones.desinger
                         arraytextbox[i] = espliteado[2];
                         if (contador_en_horisontal_Txtbox <= 4)
                         {
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            Lbl2.Top = y + separacion_y;
+                            Lbl2.Top = y__ + separacion_y;
                             Lbl2.Left = acumleft;
 
                         }
                         else
                         {
                             contador_en_horisontal_Txtbox = 0;
-                            y = y + 40;
+                            y__ = y__ + 40;
                             acumleft = 0;
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            Lbl2.Top = y + separacion_y;
+                            Lbl2.Top = y__ + separacion_y;
                             Lbl2.Left = acumleft;
 
                         }
@@ -257,16 +259,16 @@ namespace tienda_todo_funciones.desinger
 
                         if (contador_en_horisontal_Txtbox <= 4)
                         {
-                            Btn_nuevoboton.Top = y + separacion_y;
+                            Btn_nuevoboton.Top = y__ + separacion_y;
                             Btn_nuevoboton.Left = acumleft;
                         }
                         else
                         {
                             contador_en_horisontal_Txtbox = 0;
-                            y = y + 40;
+                            y__ = y__ + 40;
                             acumleft = 0;
 
-                            Btn_nuevoboton.Top = y + separacion_y;
+                            Btn_nuevoboton.Top = y__ + separacion_y;
                             Btn_nuevoboton.Left = acumleft;
                         }
 
@@ -295,22 +297,22 @@ namespace tienda_todo_funciones.desinger
                         ComboBox cmb = new ComboBox();
                         if (contador_en_horisontal_Txtbox <= 4)
                         {
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            cmb.Top = y + separacion_y;
+                            cmb.Top = y__ + separacion_y;
                             cmb.Left = acumleft;
 
                         }
                         else
                         {
                             contador_en_horisontal_Txtbox = 0;
-                            y = y + 40;
+                            y__ = y__ + 40;
                             acumleft = 0;
-                            lb.Top = y;
+                            lb.Top = y__;
                             lb.Left = acumleft;
 
-                            cmb.Top = y + separacion_y;
+                            cmb.Top = y__ + separacion_y;
                             cmb.Left = acumleft;
                         }
 
@@ -319,7 +321,7 @@ namespace tienda_todo_funciones.desinger
 
                         if (espliteado.Length >= 3)
                         {
-                            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(G_parametros[3]);
+                            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(Convert.ToChar(G_parametros[3]));
                             for (int j = 0; j < restriccion_de_caracteres_a_usar.Length; j++)
                             {
                                 string parametros = "";
@@ -327,36 +329,50 @@ namespace tienda_todo_funciones.desinger
                                 {
                                     case "1":
                                         parametros = "solo_letras";
+                                        cmb.Text = espliteado[2];
+
                                         break;
                                     case "2":
                                         parametros = "solo_numeros";
+                                        cmb.Text = espliteado[2];
+
                                         break;
                                     case "3":
                                         parametros = "ingredientes_primarios";
+                                        cmb.Text = espliteado[2];
+
                                         break;
                                     case "4":
                                         parametros = "ocultar_control";
+                                        cmb.TextChanged += new EventHandler((sender2, e2) => tex_change_y_oculta_control_21(sender2, e2, parametros));
+                                        cmb.Text = espliteado[2];
+                                        break;
+
+                                    case "5":
+                                        parametros = "pasar_impuestos";
+                                        cmb.KeyDown += new KeyEventHandler((sender2, e2) => pasar_datos_impuestos_si_da_enter(sender2, e2, parametros));
+                                        cmb.Text = espliteado[2];
                                         break;
 
                                     default:
+                                        cmb.Text = espliteado[2];
                                         break;
                                 }
                                 //Txt.KeyPress += new KeyPressEventHandler(restriccion_caracteres_forma_1);//llamar forma normal al precionar un carcter
                                 //cmb.KeyPress += new KeyPressEventHandler((sender1, e1) => restriccion_caracteres(sender1, e1, parametros));////llama funcion al precionar un carcter envia imformacion extra y parametros 
 
-                                cmb.TextChanged += new EventHandler((sender2, e2) => tex_change_y_oculta_control_21(sender2, e2, parametros));
+
                                 //xa = 1;//eliminar cuando convines el textchange con creo el keypress algo por el estilo hay que checar
                             }
                         }
 
                         if (espliteado.Length >= 4)
                         {
-                            cmb.Text = espliteado[2];
+
                             cmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                             cmb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                             for (int j = 5; j < espliteado.Length; j++)
                             {
-
                                 cmb.Items.Add(espliteado[j]);
                                 cmb.AutoCompleteCustomSource.Add(espliteado[j]);
 
@@ -380,7 +396,12 @@ namespace tienda_todo_funciones.desinger
 
                     }
 
+
+                    
                 }
+
+                //tamaño_ventana
+                tamaño_ventana(nom_datos_recolectados.Length);
 
                 //recuerda que el for que esta aqui arriba crea todos los controles
                 G_control_a_ocultar = 21;//se usa para ocultar el textbox que es el de productos_elaborados que es el control 21 y se pone aqui por que es cuando termina de poner todos los controles
@@ -397,8 +418,8 @@ namespace tienda_todo_funciones.desinger
 
                     Btn_aceptar.Width = ancho;
                     Btn_aceptar.Height = alto;
-                    Btn_aceptar.Top = y + 60;
-                    Btn_aceptar.Left = x;
+                    Btn_aceptar.Top = y__ + 60;
+                    Btn_aceptar.Left = 10;
                     Btn_aceptar.Name = "Btn_aceptar_1";
                     Btn_aceptar.Text = "aceptar";
                     this.Controls.Add(Btn_aceptar);//le agrega un indice al control para luego utilisarlo por su indise en  la funcion devolver string
@@ -427,6 +448,7 @@ namespace tienda_todo_funciones.desinger
                     union = nuevo_boton;
                 }
 
+
             }
 
             else { MessageBox.Show("no has puesto ningun dato"); }
@@ -443,13 +465,58 @@ namespace tienda_todo_funciones.desinger
             return union;
         }
 
+        public void tamaño_ventana(int cantidad_elementos_para_la_ventana)
+        {
+
+            if (cantidad_elementos_para_la_ventana<=1)
+            {
+                this.Size = new Size(150, 150);
+            }
+
+            else if (cantidad_elementos_para_la_ventana == 2)
+            {
+                this.Size = new Size(250, 150);
+            }
+
+            else if (cantidad_elementos_para_la_ventana == 3)
+            {
+                this.Size = new Size(350, 150);
+            }
+
+            else if (cantidad_elementos_para_la_ventana == 4)
+            {
+                this.Size = new Size(500, 150);
+            }
+            else if (cantidad_elementos_para_la_ventana == 5)
+            {
+                this.Size = new Size(650, 150);
+            }
+
+            else if (cantidad_elementos_para_la_ventana >= 6 && cantidad_elementos_para_la_ventana <= 10)
+            {
+                this.Size = new Size(650, 150);
+            }
+
+            else if (cantidad_elementos_para_la_ventana >= 11 && cantidad_elementos_para_la_ventana <= 15)
+            {
+                this.Size = new Size(650, 250);
+            }
+
+            else if (cantidad_elementos_para_la_ventana >= 16)
+            {
+                this.Size = new Size(650, 270);
+            }
+
+
+        }
+
         public string[] Boton_aceptar(string[] arraytextbox, int modificara = 0, string[] infoextra = null, char caracter_spliteo = '°')
         {
             Tex_base bas = new Tex_base();
             Operaciones_archivos op = new Operaciones_archivos();
             string temp2 = "";
 
-            string[] info_detro_celda = G_datos_de_boton.Split(G_parametros[0]);
+            string[] info_detro_celda = G_datos_de_boton.Split(Convert.ToChar((G_parametros[0])));
 
             for (int i = 0; i < info_detro_celda.Length; i++)
             {
@@ -494,7 +561,7 @@ namespace tienda_todo_funciones.desinger
                 temp2 = temp2 + arraytextbox[i] + G_parametros[0];
             }
             Operaciones_textos op_tex = new Operaciones_textos();
-            op_tex.Trimend_paresido(temp2, G_parametros[0]);
+            op_tex.Trimend_paresido(temp2, Convert.ToChar(G_parametros[0]));
 
 
             bas.Crear_archivo_y_directorio("inf\\inventario\\cosas_no_estaban.txt");
@@ -616,29 +683,41 @@ namespace tienda_todo_funciones.desinger
 
         public void tex_change_y_oculta_control_21(Object sender, EventArgs e, string parametros)
         {
-            //xb = 1;
+
             ComboBox contenido_contol = sender as ComboBox;
 
             if (parametros == "ocultar_control")
             {
                 G_bandera = 1;
-                if (G_control_a_ocultar == 21 && this.Controls.Count >= 21)
+                if (G_control_a_ocultar == 21)
                 {
 
 
                     if (contenido_contol.Text == "3")
                     {
-                        this.Controls[G_control_a_ocultar].Visible = true;
+                        this.Controls[21].Visible = true;
                     }
 
                     else
                     {
-                        this.Controls[G_control_a_ocultar].Visible = false;
+                        this.Controls[21].Visible = false;
                     }
                 }
 
             }
+        }
 
+        public void pasar_datos_impuestos_si_da_enter(Object sender, KeyEventArgs e, string parametros)
+        {
+            ComboBox contenido_contol = sender as ComboBox;
+            if (e.KeyCode == Keys.Enter)
+            {
+                
+                string[] dato_espliteado= contenido_contol.Text.Split(Convert.ToChar(G_parametros[1]));
+                this.Controls[25].Text = dato_espliteado[0];
+                //destino.Items.Add(origen.Text);
+
+            }
         }
 
 
