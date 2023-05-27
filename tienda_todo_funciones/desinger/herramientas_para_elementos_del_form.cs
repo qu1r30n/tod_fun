@@ -19,10 +19,7 @@ namespace tienda_todo_funciones.desinger
         
         Tex_base bas = new Tex_base();
         Operaciones_textos op_text = new Operaciones_textos();
-           
         
-        
-
         public herramientas_para_elementos_del_form()
         {
             InitializeComponent();
@@ -52,8 +49,6 @@ namespace tienda_todo_funciones.desinger
         public void fun_txt_procesar_tecleos(TextBox txt_a_configurar, ListBox lstb_a_configurar)
         {
             
-            
-
             txt_a_configurar.KeyDown += (sender, e) =>
             {
                 if (e.KeyValue == (char)Keys.Enter)
@@ -90,19 +85,20 @@ namespace tienda_todo_funciones.desinger
                         {
                             variables_glob_conf.GG_variables_string[1] = "nose";
                         }
-                        //fin_provedores
                         variables_glob_conf.GG_variables_string[2] = op_text.join_paresido(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]), variables_glob_conf.GG_arrays_carga_de_archivos[1]);
+                        //fin_provedores
                         variables_glob_conf.GG_variables_string[6] = op_text.join_paresido(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]), variables_glob_conf.GG_arrays_carga_de_archivos[5]);
 
                         
                         variables_glob_conf var_glob = new variables_glob_conf();
                         Ventana_emergente emergente_vent = new Ventana_emergente();
-                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos,caracter_spliteo:Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]));
+
+                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos,caracter_spliteo:Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
                         
 
                         if (datos_introducidos!=variables_glob_conf.GG_caracter_separacion[0])
                         {
-                            registro_nuevo_producto(txt_a_configurar, datos_introducidos);
+                            //registro_nuevo_producto(txt_a_configurar, datos_introducidos);
                         }
                         
                     }
@@ -515,7 +511,6 @@ namespace tienda_todo_funciones.desinger
 
             //promociones fin-----------------------------------------------------------------------------------------------------------
         }
-
 
         public void registro_nuevo_producto(TextBox txt_a_configurar, string registro_agregar)
         {

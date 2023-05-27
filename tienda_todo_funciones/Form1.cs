@@ -22,7 +22,15 @@ namespace tienda_todo_funciones
             
             procesamientos procesos = new procesamientos();
             procesos.crear_archivos_inicio_programa();
-
+            string[] a =
+            {
+                "4|grupo|2|4|1|1°2°3|ingredientes_primarios",
+                "3|titulo_del_boton|2|0",
+                "3|titulo_del_boton|3|0",
+                "3|titulo_del_boton|4|0"
+            };
+            Ventana_emergente b = new Ventana_emergente();
+            string k =b.Proceso_ventana_emergente(a, 0, "prueba");
             ventas vent = new ventas();
             vent.Show();
         }

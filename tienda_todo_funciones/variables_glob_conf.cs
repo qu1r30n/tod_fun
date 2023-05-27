@@ -94,38 +94,41 @@ namespace tienda_todo_funciones
 
 
         //------------------------------------------------------------------------------------------------------
-        //1=textbox  1°titulo_texbox°contenido_text_box°restriccion_de_dato      ejemplo "1°precio venta°0°2" //el 2 es la restriccion que solo resivira numeros y punto decimal         
-        //2=labels   2°titulo_label°abajo_pondra_otro_label_con_el_contenido    ejemplo "2°id°9999"
-        //3=boton    3°titulo_del_boton°valor_del_boton°numero_de_Funcion            ejemplo "3°es_paquete°1°0" //cuando oprima el boton devolvera el valor 1 
-        //4=combobox "4°
-        //           /*0*/ titulo_combobox°
-        //           /*1*/ valor_inicial_si anteriormente_no_se_a_modificado°
-        //           /*2*/ restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion°
-        //           /*3*/ " + valor_inicial_si_se_modifico + '°'
-        //           /*4*/ + todas_las_opciones_del_combobox_separadas_por_"°"
-        //
-        //            ejemplo "4°grupo°2°4°1°1°2°3°4"
+        //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato      ejemplo "1|precio venta|0|2" //el 2 es la restriccion que solo resivira numeros y punto decimal         
+        //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
+        //3=boton    3|titulo_del_boton|valor_del_boton|numero_de_Funcion            ejemplo "3|es_paquete|1|0" //cuando oprima el boton devolvera el valor 1 
+
+        //4=combobox "
+        //           /*0*/ 4|
+        //           /*1*/ titulo_combobox|
+        //           /*2*/ valor_inicial_si anteriormente_no_se_a_modificado|
+        //           /*3*/ restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion|
+        //           /*4*/ " + valor_inicial_si_se_modifico + '|'
+        //           /*5*/ + todas_las_opciones_del_combobox_separadas_por_"°"
+        //           /*6*/ + otras funciones
+
+        //            ejemplo "4|grupo|2|4|1|1°2°3|ingredientes_primarios",
 
         public string[] GG_ventana_emergente_productos =
         {
-             /*0*/"2°id°" + (GG_arrays_carga_de_archivos[0].Length),
-             /*1*/"1°producto",
-             /**/"1°cant_produc°0°2",
-             /**/"4°tipo_medida°nose°°" + GG_variables_string[5] + '°' + GG_variables_string[6],
-             /*2*/"1°precio_vent°0°2",
-             /*3*/"2°cod_barras°" + GG_variables_string[0],
-             /*4*/"1°cantidad°1°2",
-             /*5*/"1°costo_comp°0°2",
-             /*6*/"4°provedor°nose°°" + GG_variables_string[1] + '°' + GG_variables_string[2],
-             /*7*/"4°grupo°1°4°1°1°2°3°4",
-             /*8*/"2°no poner nada°",
-             /*9*/"1°cant_produc_x_paquet°1°2",
-             /*10*/"1°produc_elab°°3",
-             /*11*/"1°ligar_produc_sab",
-             /*12*/"1°impuestos°°",
-             /*13*/"4°tipo_impuesto°nose°5°"+GG_variables_string[3] + '°' + GG_variables_string[4] /* + tipo_impuesto_anterior* +'°' + todos los impuestos anteriores */ 
+             /*0*/"2|id|" + (GG_arrays_carga_de_archivos[0].Length),
+             /*1*/"1|producto",
+             /*2*/"1|cant_produc|0|2",
+             /*3*/"4|tipo_medida|nose||" + GG_variables_string[5] + '|' + GG_variables_string[6],
+             /*4*/"1|precio_vent|0|2",
+             /*5*/"2|cod_barras|" + GG_variables_string[0],
+             /*6*/"1|cantidad|1|2",
+             /*7*/"1|costo_comp|0|2",
+             /*8*/"4|provedor|nose||" + GG_variables_string[1] + '|' + GG_variables_string[2],
+             /*9*/"4|grupo|1|4|1|1|2|3|4",
+             /*10*/"2|no poner nada|",
+             /*11*/"1|cant_produc_x_paquet|1|2",
+             /*12*/"1|produc_elab||3",
+             /*13*/"1|ligar_produc_sab",
+             /*14*/"1|impuestos||",
+             /*15*/"4|tipo_impuesto|nose|5|"+GG_variables_string[3] + '|' + GG_variables_string[4] /* + tipo_impuesto_anterior* +'|' + todos los impuestos anteriores */ 
         };
-        
+
         static public string[] GG_variables_string =
         {
            /*0*/ "",//tex_esplit[0]//codbar
