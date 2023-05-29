@@ -107,7 +107,7 @@ namespace tienda_todo_funciones
         //           /*5*/ + todas_las_opciones_del_combobox_separadas_por_"°"
         //           /*6*/ + otras funciones
 
-        //            ejemplo "4|grupo|2|4|1|1°2°3|ingredientes_primarios",
+        //            ejemplo "4|grupo|1|restricciones|1|1°2°producto_elaborado°4|ocultar_control¬25¬producto_elaborado°reyeno_textbox_ventana"
 
         public string[] GG_ventana_emergente_productos =
         {
@@ -120,10 +120,10 @@ namespace tienda_todo_funciones
              /*6*/"1|cantidad|1|2",
              /*7*/"1|costo_comp|0|2",
              /*8*/"4|provedor|nose||" + GG_variables_string[1] + '|' + GG_variables_string[2],
-             /*9*/"4|grupo|1|4|1|1|2|3|4",
+             /*9*/"4|grupo|1|restricciones|1|1°2°producto_elaborado°4|ocultar_control¬25¬producto_elaborado°ingredientes_primarios  ",
              /*10*/"2|no poner nada|",
              /*11*/"1|cant_produc_x_paquet|1|2",
-             /*12*/"1|produc_elab||3",
+             /*12*/"1|produc_elab|||||no_visible",
              /*13*/"1|ligar_produc_sab",
              /*14*/"1|impuestos||",
              /*15*/"4|tipo_impuesto|nose|5|"+GG_variables_string[3] + '|' + GG_variables_string[4] /* + tipo_impuesto_anterior* +'|' + todos los impuestos anteriores */ 

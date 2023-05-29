@@ -15,12 +15,12 @@ namespace tienda_todo_funciones.procesos
         
         Tex_base bas = new Tex_base();
 
+        string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
+
         //----------------------------------------------------------------------------------------------
         public void crear_archivos_inicio_programa()
         {
             
-            
-
             //archivos del programa
             for (int i = 0; i < variables_glob_conf.GG_nom_archivos.GetLength(0); i++)
             {
@@ -71,7 +71,7 @@ namespace tienda_todo_funciones.procesos
             {
                 bas.Incrementa_celda(direccion_inventario, 3, codigos[i], "4", "-" + cantidades[i]);
             }
-            bas.si_existe_suma_sino_agega_extra(direccion_ventas, 0, año_mes_dia, "1", (total - descuento) + "", año_mes_dia + variables_glob_conf.GG_caracter_separacion[0] + total + variables_glob_conf.GG_caracter_separacion[0] + "0");//incrementa la cantidad de dinero ganado
+            bas.si_existe_suma_sino_agega_extra(direccion_ventas, 0, año_mes_dia, "1", (total - descuento) + "", año_mes_dia + G_caracter_separacion[0] + total + G_caracter_separacion[0] + "0");//incrementa la cantidad de dinero ganado
 
             registro_ventas(codigos,cantidades, (total - descuento) + "");
             
@@ -92,7 +92,7 @@ namespace tienda_todo_funciones.procesos
             double acum_compra = 0;
             for (int i = 0; i < inv.Length; i++)
             {
-                string[] info_produc = inv[i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                string[] info_produc = inv[i].Split(Convert.ToChar(G_caracter_separacion[0]));
                 for (int j = 0; j < codigo.Length; j++)
                 {
                     if (info_produc[3]==codigo[j])
@@ -103,7 +103,7 @@ namespace tienda_todo_funciones.procesos
                         acum_venta = acum_venta + (costo_venta*cantidad_double);
                         acum_compra = acum_compra + (costo_compra*cantidad_double);
                         //hora_min_seg|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|pagado_por_promocion
-                        info = info + codigo[j] + variables_glob_conf.GG_caracter_separacion[2] + info_produc[1] + variables_glob_conf.GG_caracter_separacion[2] + cantidad[j] + variables_glob_conf.GG_caracter_separacion[2] + (costo_venta * cantidad_double) + variables_glob_conf.GG_caracter_separacion[2] + (costo_compra * cantidad_double) + variables_glob_conf.GG_caracter_separacion[2];
+                        info = info + codigo[j] + G_caracter_separacion[2] + info_produc[1] + G_caracter_separacion[2] + cantidad[j] + G_caracter_separacion[2] + (costo_venta * cantidad_double) + G_caracter_separacion[2] + (costo_compra * cantidad_double) + G_caracter_separacion[2];
                         codigo = eliminar_registro_del_array(codigo, j);
                         cantidad = eliminar_registro_del_array(cantidad, j);
                         j = j - 1;
@@ -111,7 +111,7 @@ namespace tienda_todo_funciones.procesos
                         {
                             break;
                         }
-                        info = info + variables_glob_conf.GG_caracter_separacion[1];
+                        info = info + G_caracter_separacion[1];
 
                     }
                     
@@ -125,18 +125,18 @@ namespace tienda_todo_funciones.procesos
             //hora_min_seg|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|dinero_pagado
             if (dinero_pagado=="-0")
             {
-                info = info + variables_glob_conf.GG_caracter_separacion[0] + acum_venta + variables_glob_conf.GG_caracter_separacion[0] + acum_compra + variables_glob_conf.GG_caracter_separacion[0] + acum_venta;
+                info = info + G_caracter_separacion[0] + acum_venta + G_caracter_separacion[0] + acum_compra + G_caracter_separacion[0] + acum_venta;
             }
             else
             {
-                info = info + variables_glob_conf.GG_caracter_separacion[0] + acum_venta + variables_glob_conf.GG_caracter_separacion[0] + acum_compra + variables_glob_conf.GG_caracter_separacion[0] + dinero_pagado;
+                info = info + G_caracter_separacion[0] + acum_venta + G_caracter_separacion[0] + acum_compra + G_caracter_separacion[0] + dinero_pagado;
             }
 
             variables_glob_conf var_glob = new variables_glob_conf();
             string dir_temp = variables_glob_conf.GG_dir_reg[0,0];
             DateTime fecha_hora = DateTime.Now;
             string hora_min_seg = fecha_hora.ToString("HH:mm:ss");
-            bas.Agregar(dir_temp, hora_min_seg + variables_glob_conf.GG_caracter_separacion[0] + info);
+            bas.Agregar(dir_temp, hora_min_seg + G_caracter_separacion[0] + info);
         }
 
         public string[] eliminar_registro_del_array(string[] arreglo,int num_registro)
@@ -171,7 +171,7 @@ namespace tienda_todo_funciones.procesos
             string[] inv = bas.Leer(direccion_inventario);
             for (int i = 0; i < inv.Length; i++)
             {
-                string[] info = inv[i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                string[] info = inv[i].Split(Convert.ToChar(G_caracter_separacion[0]));
                 for (int j = 0; j < codigo.Length; j++)
                 {
                     if (codigo[j] == info[i])
@@ -190,35 +190,35 @@ namespace tienda_todo_funciones.procesos
                         double cantidad_comprada = Convert.ToDouble(cantidad[j]);
                         double cantidad_total = cantidad_comprada + cantidad_en_inventario;
 
-                        string columnas_editar = "4" + variables_glob_conf.GG_caracter_separacion[0] + "5";
+                        string columnas_editar = "4" + G_caracter_separacion[0] + "5";
                         string info_editar = "";
                         
                         if (aplicar_impuesto_a_la_compra)
                         {
-                            info_editar = cantidad_total + variables_glob_conf.GG_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar*(1+(impuesto_double/100)));
+                            info_editar = cantidad_total + G_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar*(1+(impuesto_double/100)));
                         }
                         else
                         {
-                            info_editar = cantidad_total + variables_glob_conf.GG_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar);
+                            info_editar = cantidad_total + G_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar);
                         }
 
                         if (descuento!="0")
                         {
-                            info_editar = cantidad_total + variables_glob_conf.GG_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar - descuento_double);
+                            info_editar = cantidad_total + G_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar - descuento_double);
                         }
                         else
                         {
-                            info_editar = cantidad_total + variables_glob_conf.GG_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar);
+                            info_editar = cantidad_total + G_caracter_separacion[0] + (precio_nuevo_double * porcentaje_elevar);
                         }
 
-                        columnas_editar = columnas_editar + variables_glob_conf.GG_caracter_separacion[0] + "11";
-                        info_editar = info_editar + variables_glob_conf.GG_caracter_separacion[0] + impuesto_porcentage;
+                        columnas_editar = columnas_editar + G_caracter_separacion[0] + "11";
+                        info_editar = info_editar + G_caracter_separacion[0] + impuesto_porcentage;
                         
                         
 
                         if (precio_nuevo_double<=(precio_inven_comp*minimo_porcentaje_ganancia))
                         {
-                            bas.Editar_espesifico(direccion_inventario, 3, codigo[j], columnas_editar, info_editar,variables_glob_conf.GG_caracter_separacion[0]);
+                            bas.Editar_espesifico(direccion_inventario, 3, codigo[j], columnas_editar, info_editar,G_caracter_separacion[0]);
                         }
                         
                         
@@ -250,7 +250,7 @@ namespace tienda_todo_funciones.procesos
             double acum_compra = 0;
             for (int i = 0; i < inv.Length; i++)
             {
-                string[] info_produc = inv[i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                string[] info_produc = inv[i].Split(Convert.ToChar(G_caracter_separacion[0]));
                 for (int j = 0; j < codigo.Length; j++)
                 {
                     if (info_produc[3] == codigo[j])
@@ -261,7 +261,7 @@ namespace tienda_todo_funciones.procesos
                         //acum_venta = acum_venta + (costo_venta * cantidad_double);
                         acum_compra = acum_compra + (costo_compra * cantidad_double);
                         //hora_min_seg|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|pagado_por_promocion
-                        info = info + codigo[j] + variables_glob_conf.GG_caracter_separacion[2] + info_produc[1] + variables_glob_conf.GG_caracter_separacion[2] + cantidad[j] + variables_glob_conf.GG_caracter_separacion[2] + (costo_venta * cantidad_double) + variables_glob_conf.GG_caracter_separacion[2] + (costo_compra * cantidad_double) + variables_glob_conf.GG_caracter_separacion[2];
+                        info = info + codigo[j] + G_caracter_separacion[2] + info_produc[1] + G_caracter_separacion[2] + cantidad[j] + G_caracter_separacion[2] + (costo_venta * cantidad_double) + G_caracter_separacion[2] + (costo_compra * cantidad_double) + G_caracter_separacion[2];
                         codigo = eliminar_registro_del_array(codigo, j);
                         cantidad = eliminar_registro_del_array(cantidad, j);
                         j = j - 1;
@@ -269,7 +269,7 @@ namespace tienda_todo_funciones.procesos
                         {
                             break;
                         }
-                        info = info + variables_glob_conf.GG_caracter_separacion[1];
+                        info = info + G_caracter_separacion[1];
 
                     }
 
@@ -281,12 +281,12 @@ namespace tienda_todo_funciones.procesos
             }
 
             //hora_min_seg|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|pagado_por_promocion
-            info = info + variables_glob_conf.GG_caracter_separacion[0] + acum_venta + variables_glob_conf.GG_caracter_separacion[0] + acum_compra + variables_glob_conf.GG_caracter_separacion[0] + (acum_compra - Convert.ToDouble(descuento));
+            info = info + G_caracter_separacion[0] + acum_venta + G_caracter_separacion[0] + acum_compra + G_caracter_separacion[0] + (acum_compra - Convert.ToDouble(descuento));
 
             DateTime fecha_hora = DateTime.Now;
             string hora_min_seg = fecha_hora.ToString("HH:mm:ss");
             string dir_temp = variables_glob_conf.GG_dir_reg[1,0];
-            bas.Agregar(dir_temp, hora_min_seg + variables_glob_conf.GG_caracter_separacion[0] + info);
+            bas.Agregar(dir_temp, hora_min_seg + G_caracter_separacion[0] + info);
         }
 
 
@@ -302,10 +302,10 @@ namespace tienda_todo_funciones.procesos
             for (int i = 0; i < codigosBarras.Length; i++)
             {
                 //nombre_promocion|codigo_barras_1¬cantidad_del_producto¬nombre_producto_1°codigo_barras_2¬cantidad_del_producto¬nombre_productp_2|precio_anterior|precio_pagar
-                concatenado_info = concatenado_info + codigosBarras[i] + variables_glob_conf.GG_caracter_separacion[2] + nombre_producto[i] + variables_glob_conf.GG_caracter_separacion[2] + cantidades[i] + precio_anterior + cantidades[i] + variables_glob_conf.GG_caracter_separacion[1];
+                concatenado_info = concatenado_info + codigosBarras[i] + G_caracter_separacion[2] + nombre_producto[i] + G_caracter_separacion[2] + cantidades[i] + precio_anterior + cantidades[i] + G_caracter_separacion[1];
             }
-            concatenado_info=bas.Trimend_paresido(concatenado_info,Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-            string promo = nombrePromo + variables_glob_conf.GG_caracter_separacion[0] + concatenado_info + variables_glob_conf.GG_caracter_separacion[0] + total;
+            concatenado_info=bas.Trimend_paresido(concatenado_info,Convert.ToChar(G_caracter_separacion[0]));
+            string promo = nombrePromo + G_caracter_separacion[0] + concatenado_info + G_caracter_separacion[0] + total;
             string resultado = bas.si_no_existe_agega_comparacion(direccion_promo, promo);
             return "";
         }
@@ -325,8 +325,8 @@ namespace tienda_todo_funciones.procesos
             for (int i = 0; i < info_promos.Length; i++)
             {
                 // Se separa la información de la promoción en sus componentes
-                string[] promo_1_nom_produc_precio = info_promos[i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
-                string[] promo_produc = promo_1_nom_produc_precio[1].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[1]));
+                string[] promo_1_nom_produc_precio = info_promos[i].Split(Convert.ToChar(G_caracter_separacion[0]));
+                string[] promo_produc = promo_1_nom_produc_precio[1].Split(Convert.ToChar(G_caracter_separacion[1]));
 
                 // Se crea un arreglo de cadenas de texto para indicar si cada producto de la promoción ha sido encontrado en la lista de ventas
                 string[] si_cumple_cantidad_pa_promo = new string[promo_produc.Length];
@@ -335,13 +335,13 @@ namespace tienda_todo_funciones.procesos
                 for (int j = 0; j < promo_produc.Length; j++)
                 {
                     // Se separa la información del producto en sus componentes
-                    string[] datos_producto_promo = promo_produc[j].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[2]));
+                    string[] datos_producto_promo = promo_produc[j].Split(Convert.ToChar(G_caracter_separacion[2]));
 
                     // Se recorre la lista de ventas para buscar el producto correspondiente
                     for (int k = 0; k < codigo.Length; k++)
                     {
                         // Se separa la información del producto en la lista de ventas en sus componentes
-                        string[] produc_list_split = codigo[k].ToString().Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                        string[] produc_list_split = codigo[k].ToString().Split(Convert.ToChar(G_caracter_separacion[0]));
 
                         // Se compara el código del producto en la lista de ventas con el código del producto en la promoción
                         if (produc_list_split[0] == datos_producto_promo[0])
@@ -376,7 +376,7 @@ namespace tienda_todo_funciones.procesos
                 if (estan_todos_produc == true)
                 {
                     promo_1_nom_produc_precio[3] = "1";
-                    info_promos[i] = string.Join(variables_glob_conf.GG_caracter_separacion[0].ToString(), promo_1_nom_produc_precio);
+                    info_promos[i] = string.Join(G_caracter_separacion[0].ToString(), promo_1_nom_produc_precio);
                 }
             }
 
@@ -388,7 +388,7 @@ namespace tienda_todo_funciones.procesos
         {
             string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string info_produc =bas.Seleccionar(direccion_inventario, 3, codigo, null, variables_glob_conf.GG_caracter_separacion[0]);
+            string info_produc =bas.Seleccionar(direccion_inventario, 3, codigo, null, G_caracter_separacion[0]);
             return info_produc;
         }
         public void agregar_producto(string nom_produc,string precio_venta, string cod_bar, string cantidad, string costo_compra, string provedor, string grupo, string cantidad_productos_por_paquete, string ligar_productos_para_sabor, string impuesto, string tipo_producto_para_impuesto)
@@ -396,7 +396,7 @@ namespace tienda_todo_funciones.procesos
             string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
             string[] inf_inv = bas.Leer(direccion_inventario);
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string info_a_agregar = inf_inv.Length + variables_glob_conf.GG_caracter_separacion[0] + nom_produc + variables_glob_conf.GG_caracter_separacion[0] + precio_venta + variables_glob_conf.GG_caracter_separacion[0] + cod_bar + variables_glob_conf.GG_caracter_separacion[0] + cantidad + variables_glob_conf.GG_caracter_separacion[0] + costo_compra + variables_glob_conf.GG_caracter_separacion[0] + provedor + variables_glob_conf.GG_caracter_separacion[0] + grupo + variables_glob_conf.GG_caracter_separacion[0] + "" + variables_glob_conf.GG_caracter_separacion[0] + cantidad_productos_por_paquete + variables_glob_conf.GG_caracter_separacion[0] + ligar_productos_para_sabor + variables_glob_conf.GG_caracter_separacion[0] + impuesto + variables_glob_conf.GG_caracter_separacion[0] + tipo_producto_para_impuesto + variables_glob_conf.GG_caracter_separacion[0];
+            string info_a_agregar = inf_inv.Length + G_caracter_separacion[0] + nom_produc + G_caracter_separacion[0] + precio_venta + G_caracter_separacion[0] + cod_bar + G_caracter_separacion[0] + cantidad + G_caracter_separacion[0] + costo_compra + G_caracter_separacion[0] + provedor + G_caracter_separacion[0] + grupo + G_caracter_separacion[0] + "" + G_caracter_separacion[0] + cantidad_productos_por_paquete + G_caracter_separacion[0] + ligar_productos_para_sabor + G_caracter_separacion[0] + impuesto + G_caracter_separacion[0] + tipo_producto_para_impuesto + G_caracter_separacion[0];
             bas.Agregar(direccion_inventario, info_a_agregar);
         }
 
@@ -404,13 +404,13 @@ namespace tienda_todo_funciones.procesos
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
-            bas.Editar_espesifico(direccion_inventario, 3, codigo, columna_editar, info_editar, variables_glob_conf.GG_caracter_separacion[0]);
+            bas.Editar_espesifico(direccion_inventario, 3, codigo, columna_editar, info_editar, G_caracter_separacion[0]);
         }
 
         public void eliminar_producto(string codigo)
         {
             string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
-            bas.Eliminar(direccion_inventario, 3, codigo,variables_glob_conf.GG_caracter_separacion[0]);
+            bas.Eliminar(direccion_inventario, 3, codigo,G_caracter_separacion[0]);
         }
 
         //--------------------------------------------------------------------------------------------
@@ -419,12 +419,12 @@ namespace tienda_todo_funciones.procesos
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
-            string[] productos_info=bas.Leer(direccion_inventario, null, Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+            string[] productos_info=bas.Leer(direccion_inventario, null, Convert.ToChar(G_caracter_separacion[0]));
 
             double acum = 0;
             for (int i = 0; i < productos_info.Length; i++)
             {
-                string[] produc_espliteado = productos_info[i].Split(Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+                string[] produc_espliteado = productos_info[i].Split(Convert.ToChar(G_caracter_separacion[0]));
                 for (int j = 0; j < codigos.Length; j++)
                 {
                     if (produc_espliteado[3]==codigos[j])

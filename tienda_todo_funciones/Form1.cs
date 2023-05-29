@@ -30,7 +30,7 @@ namespace tienda_todo_funciones
                 "3|titulo_del_boton|4|0"
             };
             Ventana_emergente b = new Ventana_emergente();
-            string k =b.Proceso_ventana_emergente(a, 0, "prueba");
+            //string k =b.Proceso_ventana_emergente(a, 0, "prueba");
             ventas vent = new ventas();
             vent.Show();
         }

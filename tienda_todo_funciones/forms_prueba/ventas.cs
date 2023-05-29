@@ -19,6 +19,8 @@ namespace tienda_todo_funciones.forms_prueba
         Tex_base bas = new Tex_base();
         variables_glob_conf var_glob = new variables_glob_conf();
 
+        string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
+
         public ventas()
         {   
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace tienda_todo_funciones.forms_prueba
                 "grupo_9"
 
             };
-            string orden_1 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+            string orden_1 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
 
             orden_arr = new string[]
             {
@@ -47,7 +49,7 @@ namespace tienda_todo_funciones.forms_prueba
                 "precio_de_venta_4",
                 "grupo_9"
             };
-            string orden_2 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(variables_glob_conf.GG_caracter_separacion[0]));
+            string orden_2 = bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
 
 
             herr_form.fun_txt_prediccion_palabra(Txt_buscar_producto, orden_1);

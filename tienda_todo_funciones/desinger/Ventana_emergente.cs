@@ -16,8 +16,8 @@ namespace tienda_todo_funciones.desinger
     public partial class Ventana_emergente : Form
     {
 
-        //char[] G_parametros = { '|', '°', '¬', '^' };
-        string[] G_parametros = variables_glob_conf.GG_caracter_separacion;
+        
+        string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
         string G_datos_de_boton = "";
         int G_contador = 0;
         int G_control_a_ocultar;
@@ -124,6 +124,10 @@ namespace tienda_todo_funciones.desinger
                 //error_posicion_a_po = 0;
 
                 string[] espliteado = controles[numero_control_posicion].Split(caracter_spliteo);
+                if (numero_control_posicion==12)
+                {
+
+                }
 
                 int separacion_y = 15;
 
@@ -195,7 +199,7 @@ namespace tienda_todo_funciones.desinger
                     Btn_nuevoboton.Width = ancho;
                     Btn_nuevoboton.Height = alto;
                     this.Controls.Add(Btn_nuevoboton);
-                    string parametros = numero_control + "" + G_parametros[1] + espliteado[2] + G_parametros[1] + espliteado[3];
+                    string parametros = numero_control + "" + G_caracter_separacion[1] + espliteado[2] + G_caracter_separacion[1] + espliteado[3];
 
                     Btn_nuevoboton.Click += (sender1, e1) =>
                     {
@@ -364,7 +368,7 @@ namespace tienda_todo_funciones.desinger
                 combobox_a_agregar_predicciones.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 combobox_a_agregar_predicciones.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-                string[] elementros = espliteado[4].Split('|'); // Dividir el elemento espliteado[4] usando el carácter de separación
+                string[] elementros = espliteado[5].Split(Convert.ToChar(G_caracter_separacion[1])); // Dividir el elemento espliteado[4] usando el carácter de separación
 
                 for (int j = 0; j < elementros.Length; j++)
                 {
@@ -384,7 +388,7 @@ namespace tienda_todo_funciones.desinger
             Operaciones_archivos op = new Operaciones_archivos();
             string temp2 = "";
 
-            string[] info_detro_celda = G_datos_de_boton.Split(Convert.ToChar((G_parametros[0])));
+            string[] info_detro_celda = G_datos_de_boton.Split(Convert.ToChar((G_caracter_separacion[0])));
 
             for (int i = 0; i < info_detro_celda.Length; i++)
             {
@@ -426,10 +430,10 @@ namespace tienda_todo_funciones.desinger
 
             for (int i = 0; i < arraytextbox.Length; i++)
             {
-                temp2 = temp2 + arraytextbox[i] + G_parametros[0];
+                temp2 = temp2 + arraytextbox[i] + G_caracter_separacion[0];
             }
             Operaciones_textos op_tex = new Operaciones_textos();
-            temp2 = op_tex.Trimend_paresido(temp2, Convert.ToChar(G_parametros[0]));
+            temp2 = op_tex.Trimend_paresido(temp2, Convert.ToChar(G_caracter_separacion[0]));
 
 
 
@@ -448,7 +452,7 @@ namespace tienda_todo_funciones.desinger
         {
             if (esplieteo.Length > 3)
             {
-                string[] restricciones = esplieteo[3].Split(Convert.ToChar(G_parametros[3]));
+                string[] restricciones = esplieteo[3].Split(Convert.ToChar(G_caracter_separacion[2]));
                 for (int i = 0; i < restricciones.Length; i++)
                 {
                     string parametros = restricciones[i];
@@ -494,58 +498,85 @@ namespace tienda_todo_funciones.desinger
         {
             if (esplieteo.Length > 6)
             {
-                string[] restricciones = esplieteo[6].Split(Convert.ToChar(G_parametros[1]));
-                for (int i = 0; i < restricciones.Length; i++)
+                string[] funcion_a_realisar = esplieteo[6].Split(Convert.ToChar(G_caracter_separacion[1]));
+                for (int i = 0; i < funcion_a_realisar.Length; i++)
                 {
-                    string parametros = restricciones[i];
-
-                    if (parametros == "ingredientes_primarios")
+                    string parametros = funcion_a_realisar[i];
+                    string[] detalle_parametro= parametros.Split(Convert.ToChar(G_caracter_separacion[2]));
+                    //"ocultar_control¬producto_elaborado¬21"
+                    if (detalle_parametro[0] == "ocultar_control")
                     {
-                        //error_ingredientesprimarios = 0;
-                        G_contador++;
-
-                        if (G_contador != 1)
+                        cont_txt_cmb.TextChanged += new EventHandler((sender, e) =>
                         {
-                            string[] enviar = new string[] { "1|cantidad_ingrediente|1|2" };
-                            Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
-                            string mensaje = cantidad_ingrediente.Proceso_ventana_emergente(enviar);
-                            string[] mensaje_espliteado = mensaje.Split('|');
+                            if (cont_txt_cmb.Text == detalle_parametro[2])
+                            {
+                                this.Controls[Convert.ToInt32(detalle_parametro[1])].Visible = true;
+                            }
 
-                            string temp = this.ActiveControl.Text;
-                            this.ActiveControl.Text = temp + G_parametros[3] + mensaje_espliteado[0] + "|";
+                            else
+                            {
+                                this.Controls[Convert.ToInt32(detalle_parametro[1])].Visible = false;
+                            }
 
-                            //e.KeyChar = '|';
-                            G_contador = 0;
-                        }
-                        else
-                        {
-                            G_contador = 0;
-                        }
+                        });
+                    }
+
+                    else if (detalle_parametro[0] == "reyeno_textbox_ventana")
+                    {
 
                     }
+
+                    else if (detalle_parametro[0] == "ingredientes_primarios")
+                    {
+                        ingredientes_primarios(cont_txt_cmb, esplieteo);
+                    }
+
+                    else if (detalle_parametro[0] == "no_visible")
+                    {
+                        cont_txt_cmb.Visible = false;
+                    }
+
                 }
             }
         }
 
-        public void mod_txt_cmd(Control cont_txt_cmb, string[] espliteado)
+        private void ingredientes_primarios(Control cont_txt_cmb, string[] esplieteo)
         {
 
-            if (cont_txt_cmb is TextBox)
+                    string[] enviar = new string[] { "1|cantidad_ingrediente|1|2" };
+                    Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
+                    string mensaje = cantidad_ingrediente.Proceso_ventana_emergente(enviar);
+                    string[] mensaje_espliteado = mensaje.Split(Convert.ToChar(G_caracter_separacion[0]));
+
+                    string temp = this.ActiveControl.Text;
+                    this.ActiveControl.Text = temp + G_caracter_separacion[3] + mensaje_espliteado[0] + G_caracter_separacion[0];
+
+        }
+        public void mod_txt_cmd(Control cont_txt_cmb, string[] espliteado)
+        {
+            if (espliteado.Length > 2)
             {
-                TextBox cont_a_pasar = cont_txt_cmb as TextBox;
-                predicciones_txt(cont_a_pasar, espliteado);
+
+
+                cont_txt_cmb.Text = espliteado[2];
+                if (cont_txt_cmb is TextBox)
+                {
+                    TextBox cont_a_pasar = cont_txt_cmb as TextBox;
+                    predicciones_txt(cont_a_pasar, espliteado);
+                }
+                else if (cont_txt_cmb is ComboBox)
+                {
+                    ComboBox cont_a_pasar = cont_txt_cmb as ComboBox;
+
+                    predicciones_cmb(cont_a_pasar, espliteado);
+
+                }
+
+                restriccion_txt_cmb(cont_txt_cmb, espliteado);
+
+                funciones_txt_cmb(cont_txt_cmb, espliteado);
             }
-            else if (cont_txt_cmb is ComboBox)
-            {
-                ComboBox cont_a_pasar = cont_txt_cmb as ComboBox;
-
-                predicciones_cmb(cont_a_pasar, espliteado);
-
-            }
-
-            restriccion_txt_cmb(cont_txt_cmb, espliteado);
-
-            funciones_txt_cmb(cont_txt_cmb, espliteado);
+            
 
         }
 
@@ -583,7 +614,7 @@ namespace tienda_todo_funciones.desinger
             if (e.KeyCode == Keys.Enter)
             {
 
-                string[] dato_espliteado = contenido_contol.Text.Split(Convert.ToChar(G_parametros[1]));
+                string[] dato_espliteado = contenido_contol.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
                 this.Controls[25].Text = dato_espliteado[0];
                 //destino.Items.Add(origen.Text);
 
@@ -597,7 +628,7 @@ namespace tienda_todo_funciones.desinger
 
         public void tipo_producto(Object sender, KeyPressEventArgs e, string[] espliteado)
         {
-            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(Convert.ToChar(G_parametros[3]));
+            string[] restriccion_de_caracteres_a_usar = espliteado[3].Split(Convert.ToChar(G_caracter_separacion[3]));
             for (int j = 0; j < restriccion_de_caracteres_a_usar.Length; j++)
             {
                 string parametros = "";
@@ -624,7 +655,7 @@ namespace tienda_todo_funciones.desinger
                             string[] mensaje_espliteado = mensaje.Split('|');
 
                             string temp = this.ActiveControl.Text;
-                            this.ActiveControl.Text = temp + G_parametros[3] + mensaje_espliteado[0] + "|";
+                            this.ActiveControl.Text = temp + G_caracter_separacion[3] + mensaje_espliteado[0] + "|";
 
                             //e.KeyChar = '|';
                             G_contador = 0;
