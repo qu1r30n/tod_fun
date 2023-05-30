@@ -542,16 +542,41 @@ namespace tienda_todo_funciones.desinger
 
         private void ingredientes_primarios(Control cont_txt_cmb, string[] esplieteo)
         {
+            cont_txt_cmb.TextChanged += new EventHandler((sender, e) =>
+            {
+                if (true)
+                {
+                    string[] enviar = new string[] { "1" + G_caracter_separacion[1] + "codigo_producto" };
+                    Ventana_emergente cod_prod = new Ventana_emergente();
+                    string cod_bar = cod_prod.Proceso_ventana_emergente(enviar);
+                    if (cod_bar!="")
+                    {
 
-                    string[] enviar = new string[] { "1|cantidad_ingrediente|1|2" };
-                    Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
-                    string mensaje = cantidad_ingrediente.Proceso_ventana_emergente(enviar);
-                    string[] mensaje_espliteado = mensaje.Split(Convert.ToChar(G_caracter_separacion[0]));
+                        for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+                        {
+                            bool esta_producto = false;
+                            string[] inf_produc = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(G_caracter_separacion[0]));
+                            if (inf_produc[5] == cod_bar)
+                            {
+                                esta_producto = true;
+
+                                string[] enviar_cant = new string[] { "1" + G_caracter_separacion[1] + "cantidad" + G_caracter_separacion[1] + "0" + G_caracter_separacion[1] + "2" };
+                                Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
+                                string cantidad = cantidad_ingrediente.Proceso_ventana_emergente(enviar_cant);
+                                
+                                cont_txt_cmb.Text = cod_bar + G_caracter_separacion[0] + cantidad;
+                                break;
+                            }
+                        }
+                    }
+                    string[] mensaje_espliteado = cod_bar.Split(Convert.ToChar(G_caracter_separacion[0]));
 
                     string temp = this.ActiveControl.Text;
                     this.ActiveControl.Text = temp + G_caracter_separacion[3] + mensaje_espliteado[0] + G_caracter_separacion[0];
-
+                }
+            });
         }
+
         public void mod_txt_cmd(Control cont_txt_cmb, string[] espliteado)
         {
             if (espliteado.Length > 2)
@@ -579,8 +604,6 @@ namespace tienda_todo_funciones.desinger
             
 
         }
-
-        
 
         public void tex_change_y_oculta_control_21(Object sender, EventArgs e, string parametros)
         {
@@ -620,11 +643,6 @@ namespace tienda_todo_funciones.desinger
 
             }
         }
-
-        
-
-        
-
 
         public void tipo_producto(Object sender, KeyPressEventArgs e, string[] espliteado)
         {
