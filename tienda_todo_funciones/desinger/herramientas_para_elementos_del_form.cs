@@ -101,7 +101,7 @@ namespace tienda_todo_funciones.desinger
 
                         if (datos_introducidos!=G_caracter_separacion[0])
                         {
-                            //registro_nuevo_producto(txt_a_configurar, datos_introducidos);
+                            //error_registro_nuevo_producto(txt_a_configurar, datos_introducidos);
                         }
                         
                     }

@@ -1,1 +1,1 @@
-nombre_impuesto°porcentage
+nombre_impuesto|porcentage
