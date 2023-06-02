@@ -15,13 +15,50 @@ namespace tienda_todo_funciones.modelos
         procesamientos pr = new procesamientos();
 
         //-------------------------------------------------------------------------------
-        public void modelo_crear_archivos_inicio()
+
+        public void modelo_unico(string operacion, string[] descripcion_arreglo_opcional = null, string[][] arreglos_de_entrada = null, string[] informacion_de_variables = null)
         {
-            pr.crear_archivos_inicio_programa();
+            //funciones a hacer
+            //"crear_archivos_inicio"
+            //-------------------------------------------------------------------
+            //"modelo_venta"
+            //arreglos_de_entrada[0]=string[] codigo,
+            //arreglos_de_entrada[1]=string[] cantidad,
+            //informacion_de_variables[0]=string indices_descuento = "",
+            //informacion_de_variables[1]=string caracter_separacion_indices = "|"
+            //------------------------------------------------------------------------
+            //crear_archivos_inicio----------------------------------------------------------------------------------------------------------
+            if (operacion == "crear_archivos_inicio") 
+            {
+                pr.crear_archivos_inicio_programa();
+            }
+            //fin-crear_archivos_inicio----------------------------------------------------------------------------------------
+
+            //model_venta-----------------------------------------------------------------------------------------------------------------
+            else if (operacion=="modelo_venta")
+            {
+                modelo_venta(arreglos_de_entrada[0],arreglos_de_entrada[1],informacion_de_variables[0],informacion_de_variables[1]);
+            }
+            //fin-modelo_venta------------------------------------------------------------------------------------------------------------
+            //model_compra-----------------------------------------------------------------------------------------------------------------
+            else if (operacion == "modelo_compra")
+            {
+                modelo_compra(arreglos_de_entrada[0], arreglos_de_entrada[1], arreglos_de_entrada[2], arreglos_de_entrada[3]);
+            }
+            //fin-model_compra--------------------------------------------------------------------------------------------------------------
+            //agregar_string_al_archivo-----------------------------------------------------------------------------------------------------------------
+            else if (operacion == "agregar_string_al_archivo")
+            {
+                
+            }
+            //fin-model_compra--------------------------------------------------------------------------------------------------------------
+
         }
 
-        
-     
+
+
+
+
 
 
         public void modelo_venta(string[] codigo, string[] cantidad, string indices_descuento = "", string caracter_separacion_indices = "|")
@@ -80,16 +117,6 @@ namespace tienda_todo_funciones.modelos
 
 
         //-------------------------------------------------------------------------------
-
-        public void modelo_promociones_agregar(string nom_produc, string precio_venta, string cod_bar, string cantidad, string costo_compra, string provedor, string grupo, string cantidad_productos_por_paquete, string ligar_productos_para_sabor, string impuesto, string tipo_producto_para_impuesto)
-        {
-            procesamientos prc = new procesamientos();
-
-            prc.agregar_producto(nom_produc, precio_venta, cod_bar, cantidad, costo_compra, provedor, grupo, cantidad_productos_por_paquete, ligar_productos_para_sabor, impuesto, tipo_producto_para_impuesto);
-
-
-
-        }
 
 
 

@@ -56,6 +56,13 @@ namespace tienda_todo_funciones.procesos
 
         //-----------------------------------------------------------------------------------------------
 
+        public void agregar_string_archivo(string direccion, string texto)
+        {
+            bas.Agregar(direccion, texto);
+        }
+
+        //-----------------------------------------------------------------------------------------------
+
         public string proceso_venta(string[] codigos, string[] cantidades, double descuento = 0)
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|

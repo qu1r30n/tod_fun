@@ -17,7 +17,34 @@ namespace tienda_todo_funciones.clases
         char[] G_parametros = { '|', '°', '¬', '^' };
         string[] G_linea, G_buscar, G_remplasar;
 
-        
+        public string cambiar_archivo_con_arreglo(string direccion_archivo, string[] arreglo)
+        {
+            string exito_o_fallo = "";
+            string dir_tem = "tem.txt";
+            StreamWriter sw = new StreamWriter(dir_tem, true);
+            try
+            {
+                
+                for (int i = 0; i < arreglo.Length; i++)
+                {
+                    sw.WriteLine(arreglo[i]);
+                }
+                exito_o_fallo = "1|exito";
+            }
+            catch (Exception e)
+            {
+
+                exito_o_fallo = "2|fallo|" + e;
+                
+            }
+            
+            
+            sw.Close();
+            File.Delete(direccion_archivo);//borramos el archivo original
+            File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
+
+            return exito_o_fallo;
+        }
 
         public void Crear_archivo_y_directorio(string direccion_archivo, string valor_inicial = null, string[] columnas = null)//columnas: es para crearlas y se separan la columnas por un '|' valor_inicial: no se utilisa en este programa era para poner un tipo eslogan o un titulo  pero en este programa no lo nesesite
         {
@@ -118,7 +145,6 @@ namespace tienda_todo_funciones.clases
             sr.Close();
             return columna;
         }
-
 
 
         public string Seleccionar(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_extraer = null, string caracter_sep_string = "|")
@@ -824,7 +850,6 @@ namespace tienda_todo_funciones.clases
             return indices_columnas;
         }
 
-
         public string si_existe_suma_sino_agega_extra(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true)
         {
             Crear_archivo_y_directorio(direccion_archivo);
@@ -901,8 +926,6 @@ namespace tienda_todo_funciones.clases
             return exito_o_fallo;
         }
 
-
-
         public string si_no_existe_agega_comparacion(string direccion_archivo, string comparar, char caracter_separacion = '|')
         {
             Crear_archivo_y_directorio(direccion_archivo);
@@ -967,12 +990,7 @@ namespace tienda_todo_funciones.clases
         }
 
 
-
-
-
-
-
-
+        
         public string si_no_existe_agega_extra(string direccion_archivo, int columna_a_comparar, string comparar, string texto_a_agregar, char caracter_separacion = '|')
         {
             Crear_archivo_y_directorio(direccion_archivo);

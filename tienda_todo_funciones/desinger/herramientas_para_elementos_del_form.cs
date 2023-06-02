@@ -17,11 +17,12 @@ namespace tienda_todo_funciones.desinger
     public partial class herramientas_para_elementos_del_form : Form
     {
         
-        Tex_base bas = new Tex_base();
+        //Tex_base bas = new Tex_base();
         Operaciones_textos op_text = new Operaciones_textos();
 
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
 
+        procesamientos proc = new procesamientos();
 
         public herramientas_para_elementos_del_form()
         {
@@ -101,7 +102,7 @@ namespace tienda_todo_funciones.desinger
 
                         if (datos_introducidos!=G_caracter_separacion[0])
                         {
-                            //error_registro_nuevo_producto(txt_a_configurar, datos_introducidos);
+                            proc.agregar_producto();
                         }
                         
                     }
@@ -403,18 +404,7 @@ namespace tienda_todo_funciones.desinger
                     if (codigo== producto_invent[5])
                     {
                         //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|0_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|produc_elaborados_12|ligar_productos_para_sabo_13|impuesto_14|tipo_producto_para_impuesto_15
-                        string[] orden_arr =
-                        {
-                            "0_5",
-                            "producto_1",
-                            "cantidad_producto_2",
-                            "tipo_de_medida_3",
-                            "0_5",
-                            "precio_de_venta_4",
-                            "grupo_9",
-                            cantidad+""
-                        };
-                        bas.arr_str_conv_nom_a_indice(orden_arr, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+                                                
                        lstb_a_configurar.Items.Add(producto_invent[5] + G_caracter_separacion[0] + producto_invent[4] + G_caracter_separacion[0] + producto_invent[1] + G_caracter_separacion[0] + producto_invent[5] + G_caracter_separacion[0] + producto_invent[6] + G_caracter_separacion[0] + cantidad);
                     }
                 }

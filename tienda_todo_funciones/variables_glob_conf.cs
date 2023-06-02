@@ -18,7 +18,7 @@ namespace tienda_todo_funciones
             "°",
             "¬",
             "^",
-            "~"//este lo estoy usando para el area de registros de movimientos
+            "~"//este siempre esta al final lo estoy usando para el area de modelo_unico y para usarlo con el (GG_caracter_separacion.length-1)
         };
 
         //variables globales para configuracion-----------------------------------------------------------
@@ -137,11 +137,13 @@ namespace tienda_todo_funciones
            /*3*/ "",//impuesto anterior
            /*4*/ "", //impuestos_txt//todos_los_impuestos
            /*5*/ "",//tipo_medida_producto_anterior
-           /*6*/ "" //tipo_medida_producto_txt//todos_los_tipos_de_medida
+           /*6*/ ""//tipo_medida_producto_txt//todos_los_tipos_de_medida
+           
         };
         static public int[] GG_var_glob_int =
         {
             0,//este es donde va a empesar la lectura de los archivos y arreglos en 0 apareceran tambien los nombres de las columnas
+            0,//cantidad_total_de_productos_inventario//este servira para que si dentro de ventana emergente abre otra ventana emergente al momento de guardar el producto incremente la cantidad total para el otro producto 
         };
     }
 }
