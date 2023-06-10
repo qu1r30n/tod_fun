@@ -49,7 +49,6 @@
     <Compile Include="clases\arreglos_compuestos_y_simples.cs" />
     <Compile Include="clases\Operaciones_archivos.cs" />
     <Compile Include="clases\Operaciones_textos.cs" />
-    <Compile Include="clases\texto_ejec.cs" />
     <Compile Include="clases\Tex_base.cs" />
     <Compile Include="desinger\herramientas_para_elementos_del_form.cs">
       <SubType>Form</SubType>

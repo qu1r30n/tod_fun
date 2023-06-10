@@ -29,12 +29,12 @@ namespace tienda_todo_funciones.clases
                 {
                     sw.WriteLine(arreglo[i]);
                 }
-                exito_o_fallo = "1|exito";
+                exito_o_fallo = "1"+G_parametros[0]+"exito";
             }
             catch (Exception e)
             {
 
-                exito_o_fallo = "2|fallo|" + e;
+                exito_o_fallo = "2" + G_parametros[0] + "fallo" + G_parametros[0]  + e;
                 
             }
             

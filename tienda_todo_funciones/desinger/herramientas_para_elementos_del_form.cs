@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using tienda_todo_funciones.clases;
-using tienda_todo_funciones.procesos;
+using tienda_todo_funciones.modelos;
 
 namespace tienda_todo_funciones.desinger
 {
@@ -19,10 +19,11 @@ namespace tienda_todo_funciones.desinger
         
         //Tex_base bas = new Tex_base();
         Operaciones_textos op_text = new Operaciones_textos();
+        mod_comp_vent mod = new mod_comp_vent();
 
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
 
-        procesamientos proc = new procesamientos();
+        
 
         public herramientas_para_elementos_del_form()
         {
@@ -100,9 +101,9 @@ namespace tienda_todo_funciones.desinger
                         string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos,caracter_spliteo:Convert.ToChar(G_caracter_separacion[0]));
                         
 
-                        if (datos_introducidos!=G_caracter_separacion[0])
+                        if (datos_introducidos!="")
                         {
-                            proc.agregar_producto();
+                            mod.modelo_unico("agregar_string_al_inventario", texto_rapido: datos_introducidos);
                         }
                         
                     }
@@ -520,8 +521,8 @@ namespace tienda_todo_funciones.desinger
             }
             if (existe_provedor==false)
             {
-                
-                bas.Agregar(variables_glob_conf.GG_nom_archivos[1,0], nuevo_producto_espliteado[6] + G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[1].Length);
+                string informacion_agregar= nuevo_producto_espliteado[6] + G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[1].Length;
+                mod.modelo_unico("agregar_string_al_archivo", direccion_rapido: variables_glob_conf.GG_nom_archivos[1,0], texto_rapido: informacion_agregar);
                 variables_glob_conf.GG_arrays_carga_de_archivos[1] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[1], nuevo_producto_espliteado[6]);
                 variables_glob_conf.GG_variables_string[1] = nuevo_producto_espliteado[6];
 
@@ -533,9 +534,10 @@ namespace tienda_todo_funciones.desinger
             txt_a_configurar.AutoCompleteCustomSource.Add(reg_ordenado_para_txt+(G_caracter_separacion[0]+variables_glob_conf.GG_arrays_carga_de_archivos[0].Length+""));
 
             variables_glob_conf.GG_arrays_carga_de_archivos[0] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[0], reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
-            procesamientos prc = new procesamientos();
-            bas.Agregar(variables_glob_conf.GG_nom_archivos[1,0],registro_agregar);
             
+            
+            mod.modelo_unico("agregar_string_al_archivo", direccion_rapido: variables_glob_conf.GG_nom_archivos[0, 0], texto_rapido: registro_agregar);
+
 
         }
 

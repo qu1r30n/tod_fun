@@ -62,7 +62,7 @@ namespace tienda_todo_funciones
         //formato   {direccion_de_archivo,fila_inicial_archivo}
         static public string[,] GG_nom_archivos =
         {                                                                                                                                                 //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|                      
-            /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", "id_0" + GG_caracter_separacion[0] + "producto_1" + GG_caracter_separacion[0] + "cantidad_producto_2" + GG_caracter_separacion[0] + "tipo_de_medida_3" + GG_caracter_separacion[0] + "precio_de_venta_4" + GG_caracter_separacion[0] + "0_5" + GG_caracter_separacion[0] + "cantidad_6" + GG_caracter_separacion[0] + "costo_compra_7" + GG_caracter_separacion[0] + "provedor_8" + GG_caracter_separacion[0] + "grupo_9" + GG_caracter_separacion[0] + "multiusos_10" + GG_caracter_separacion[0] + "cantidad_productos_por_paquete_11" + GG_caracter_separacion[0] + "produc_elaborados_12" + GG_caracter_separacion[0] + "ligar_productos_para_sabo_13" + GG_caracter_separacion[0] + "impuesto_14" + GG_caracter_separacion[0] + "tipo_producto_para_impuesto_15"},
+            /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", "id_0" + GG_caracter_separacion[0] + "producto_1" + GG_caracter_separacion[0] + "cantidad_producto_2" + GG_caracter_separacion[0] + "tipo_de_medida_3" + GG_caracter_separacion[0] + "precio_de_venta_4" + GG_caracter_separacion[0] + "0_5" + GG_caracter_separacion[0] + "cantidad_6" + GG_caracter_separacion[0] + "costo_compra_7" + GG_caracter_separacion[0] + "provedor_8" + GG_caracter_separacion[0] + "grupo_9" + GG_caracter_separacion[0] + "multiusos_10" + GG_caracter_separacion[0] + "cantidad_productos_por_paquete_11" + GG_caracter_separacion[0] + "produc_elaborados_12" + GG_caracter_separacion[0] + "ligar_productos_para_sabo_13" + GG_caracter_separacion[0] + "impuesto_14" + GG_caracter_separacion[0] + "tipo_producto_para_impuesto_15" + GG_caracter_separacion[0] + "ingrediente_coigo_del_paquete_16_0"+ GG_caracter_separacion[1] +"cantidad_que_lleva_de_ingredientes_paquete_16_1"},
             /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor_0" },
             /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[0] + "codigo_barras" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "nombre_producto" + GG_caracter_separacion[1] + "codigo_barras_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "nombre_producto_2" + GG_caracter_separacion[0] + "precio_anterior " + GG_caracter_separacion[0] + "precio"},
             /*3*/{GG_direccion_base[0]+"inf\\ven\\vent.txt", "ventas" + GG_caracter_separacion[0] + "compras"},
@@ -120,13 +120,14 @@ namespace tienda_todo_funciones
              /*6*/"1|cantidad|1|2",
              /*7*/"1|costo_comp|0|2",
              /*8*/"4|provedor|nose||" + GG_variables_string[1] + '|' + GG_variables_string[2],
-             /*9*/"4|grupo|1|restricciones|1|1°2°producto_elaborado°4|ocultar_control¬25¬producto_elaborado",
+             /*9*/"4|grupo|1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬25¬producto_elaborado",
              /*10*/"2|no poner nada|",
              /*11*/"1|cant_produc_x_paquet|1|2",
-             /*12*/"1|produc_elab|||||no_visible°ingredientes_primarios",
+             /*12*/"1|produc_elab|||||no_visible°producto_elaborado",
              /*13*/"1|ligar_produc_sab",
              /*14*/"1|impuestos|||||reyeno_textbox_ventana_impu",
-             /*15*/"4|tipo_impuesto|nose|5|"+GG_variables_string[3] + '|' + GG_variables_string[4] /* + tipo_impuesto_anterior* +'|' + todos los impuestos anteriores */ 
+             /*15*/"4|tipo_impuesto|nose|5|"+GG_variables_string[3] + '|' + GG_variables_string[4], /* + tipo_impuesto_anterior* +'|' + todos los impuestos anteriores */ 
+             /*16*/"1|ingrediente_parte_de_que_producto|||||no_visible°ocultar_control¬25¬producto_elaborado°venta_ingrediente"
         };
 
         static public string[] GG_variables_string =

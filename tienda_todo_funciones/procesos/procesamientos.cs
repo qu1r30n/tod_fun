@@ -57,9 +57,26 @@ namespace tienda_todo_funciones.procesos
         //-----------------------------------------------------------------------------------------------
 
         public void agregar_string_archivo(string direccion, string texto)
-        {
+        { 
             bas.Agregar(direccion, texto);
+
+            for (int i = 0; i < variables_glob_conf.GG_nom_archivos.GetLength(0); i++)
+            {
+                if (direccion == variables_glob_conf.GG_nom_archivos[i, 0])
+                {
+                    // Agregar el nuevo registro al arreglo correspondiente
+                    variables_glob_conf.GG_arrays_carga_de_archivos[i] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[i], texto);
+                }
+
+            }
         }
+
+        //-----------------------------------------------------------------------------------------------
+        public void cambiar_archivo_por_arreglo(string direccion, string[] arreglo)
+        {
+            bas.cambiar_archivo_con_arreglo(direccion, arreglo);
+        }
+
 
         //-----------------------------------------------------------------------------------------------
 
@@ -444,6 +461,21 @@ namespace tienda_todo_funciones.procesos
         }
 
         //-------------------------------------------------------------------------------------------
+
+        public string[] agregar_registro_del_array(string[] arreglo, string registro)
+        {
+            string[] temp = new string[arreglo.Length + 1];
+
+            for (int i = 0; i < arreglo.Length; i++)
+            {
+                temp[i] = arreglo[i];
+            }
+
+            temp[arreglo.Length] = registro;
+
+            return temp;
+        }
+
 
     }
 }
