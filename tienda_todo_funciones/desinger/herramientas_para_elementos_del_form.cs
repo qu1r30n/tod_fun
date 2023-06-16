@@ -97,13 +97,14 @@ namespace tienda_todo_funciones.desinger
                         
                         variables_glob_conf var_glob = new variables_glob_conf();
                         Ventana_emergente emergente_vent = new Ventana_emergente();
-
-                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos,caracter_spliteo:Convert.ToChar(G_caracter_separacion[0]));
+                        
+                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos);
                         
 
                         if (datos_introducidos!="")
                         {
-                            mod.modelo_unico("agregar_string_al_inventario", texto_rapido: datos_introducidos);
+                            //error_falta_chequeo de informacion
+                            //mod.modelo_unico("agregar_string_al_inventario", texto_rapido: datos_introducidos);
                         }
                         
                     }

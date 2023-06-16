@@ -464,18 +464,107 @@ namespace tienda_todo_funciones.procesos
 
         public string[] agregar_registro_del_array(string[] arreglo, string registro)
         {
-            string[] temp = new string[arreglo.Length + 1];
+            string[] temp = { "" };
 
-            for (int i = 0; i < arreglo.Length; i++)
+            if (arreglo==null)
             {
-                temp[i] = arreglo[i];
+                arreglo = new string[] { "" };
+                temp = new string[arreglo.Length];
+
+                for (int i = 0; i < arreglo.Length; i++)
+                {
+                    temp[i] = arreglo[i];
+                }
+
+                temp[arreglo.Length-1] = registro;
+
             }
 
-            temp[arreglo.Length] = registro;
+            else
+            {
+                temp = new string[arreglo.Length + 1];
+                
+                for (int i = 0; i < arreglo.Length; i++)
+                {
+                    temp[i] = arreglo[i];
+                }
 
+                temp[arreglo.Length] = registro;
+            }
+            
             return temp;
         }
 
+        public string[] chequeo_datos_esten_en_archivo(string info_texto, string columna_a_recorer_del_string, int id_columna_a_comparar_del_string, int id_arreglo_archivo, string columna_a_recorer_del_archivo, int id_columna_a_comparar_archivo, string[] caracter_separacion_del_string = null, string[] caracter_separacion_del_archivo = null)
+        {
 
+            if (caracter_separacion_del_string == null)
+            {
+                caracter_separacion_del_string = G_caracter_separacion;
+            }
+            if (caracter_separacion_del_archivo == null)
+            {
+                caracter_separacion_del_archivo = G_caracter_separacion;
+            }
+
+            string[] info_spliteado_del_string = info_texto.Split(Convert.ToChar(caracter_separacion_del_string[0]));
+            string[] columnas_del_string = columna_a_recorer_del_string.Split(Convert.ToChar(caracter_separacion_del_string[0]));
+
+            int id_columna_recorrida_string = 1;
+            //aqui se extrae la info del striing
+            for (id_columna_recorrida_string = 1; id_columna_recorrida_string < columna_a_recorer_del_string.Split(Convert.ToChar(caracter_separacion_del_string[0])).Length; id_columna_recorrida_string++)
+            {
+                info_spliteado_del_string = info_spliteado_del_string[Convert.ToInt32(columnas_del_string[id_columna_recorrida_string])].Split(Convert.ToChar(caracter_separacion_del_string[id_columna_recorrida_string]));
+
+            }
+
+            string[] faltantes_a_retornar = null;
+            for (int id_resul_del_string = 0; id_resul_del_string < info_spliteado_del_string.Length; id_resul_del_string++)
+            {
+                string[] info_a_comparar_string = info_spliteado_del_string[id_resul_del_string].Split(Convert.ToChar(caracter_separacion_del_string[id_columna_recorrida_string]));
+                bool se_encontro_el_producto = false;
+                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo].Length; i++)
+                {
+
+                    string[] info_spliteado_del_archivo = null;
+
+                    string[] columnas_del_archivo = columna_a_recorer_del_archivo.Split(Convert.ToChar(caracter_separacion_del_string[0]));
+                    int id_columna_recorrida_archivo = 0;
+                    for (id_columna_recorrida_archivo = 0; id_columna_recorrida_archivo < columna_a_recorer_del_archivo.Split(Convert.ToChar(caracter_separacion_del_archivo[0])).Length; id_columna_recorrida_archivo++)
+                    {
+                        if (id_columna_recorrida_archivo == 0)
+                        {
+                            info_spliteado_del_archivo = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo][i].Split(Convert.ToChar(caracter_separacion_del_archivo[0]));
+                            id_columna_recorrida_archivo++;
+
+                            if (info_spliteado_del_archivo[id_columna_a_comparar_archivo] == info_a_comparar_string[id_columna_a_comparar_del_string])
+                            {
+                                se_encontro_el_producto = true;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            info_spliteado_del_archivo = info_spliteado_del_archivo[Convert.ToInt32(columnas_del_archivo[id_columna_recorrida_archivo])].Split(Convert.ToChar(caracter_separacion_del_archivo[id_columna_recorrida_archivo]));
+
+                            if (info_spliteado_del_archivo[id_columna_a_comparar_archivo] == info_a_comparar_string[id_columna_a_comparar_del_string])
+                            {
+                                se_encontro_el_producto = true;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+                if (se_encontro_el_producto == false)
+                {
+                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_a_comparar_string[id_columna_a_comparar_del_string]);
+                }
+
+            }
+
+            return faltantes_a_retornar;
+        }
     }
 }

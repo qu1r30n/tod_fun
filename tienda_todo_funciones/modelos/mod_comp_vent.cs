@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using tienda_todo_funciones.procesos;
 
@@ -118,8 +114,7 @@ namespace tienda_todo_funciones.modelos
         }
 
 
-
-
+        
 
 
 

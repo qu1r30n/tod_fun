@@ -1,1 +1,1 @@
-unidad_medida_0|cantidad|tipo_medida_comparada_ya_debe_estar_antes
+unidad_medida_0¬cantidad¬tipo_medida_comparada_ya_debe_estar_antes

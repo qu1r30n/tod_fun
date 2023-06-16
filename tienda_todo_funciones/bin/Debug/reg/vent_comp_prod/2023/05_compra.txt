@@ -1,1 +1,0 @@
-mes|total_venta|total_compra|

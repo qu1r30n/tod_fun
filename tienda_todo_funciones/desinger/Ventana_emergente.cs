@@ -26,7 +26,7 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        public string Proceso_ventana_emergente(string[] nom_datos_recolectados, string titulo_ventana = "ventana_emergente", string[] infoextra = null, char caracter_spliteo = '|')
+        public string Proceso_ventana_emergente(string[] nom_datos_recolectados, string titulo_ventana = "ventana_emergente", string[] infoextra = null, string []caracter_spliteo = null)
         {
             //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato      ejemplo "1|precio venta|0|2" //el 2 es la restriccion que solo resivira numeros y punto decimal         
             //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
@@ -40,6 +40,10 @@ namespace tienda_todo_funciones.desinger
             //
             //            ejemplo "4|grupo|2|4|1|1|2|3|4"
 
+            if (caracter_spliteo==null)
+            {
+                caracter_spliteo = G_caracter_separacion;
+            }
 
 
             this.Text = titulo_ventana;
@@ -56,18 +60,25 @@ namespace tienda_todo_funciones.desinger
             return G_devolver_informacion;//se uso la informacion de la variable global G_devolver_informacion que obtubo en funcion posicion a poner
         }
 
-        public void posicion_a_poner(string[] controles, char caracter_spliteo = '|')
+        public void posicion_a_poner(string[] controles, string[] caracter_spliteo = null)
         {
+            if (caracter_spliteo==null)
+            {
+                caracter_spliteo= G_caracter_separacion;
+
+            }
+
             string info = "";
             string bandera1 = "0", bandera2 = "0", bandera3 = "0", bandera4 = "0";
-
+            
             string[] arraytextbox = new string[controles.Length];
             G_devolver_informacion = "";
 
             //para checar si solo se usan botones o tambien hay textbox o combobox---------------------------------------
             for (int i = 0; i < controles.Length; i++)
             {
-                string[] tipo_de_datos = controles[i].Split(caracter_spliteo);
+                
+                string[] tipo_de_datos = controles[i].Split(Convert.ToChar(caracter_spliteo[0]));
 
                 if (tipo_de_datos[0] == "1")
                 {
@@ -95,6 +106,7 @@ namespace tienda_todo_funciones.desinger
             //posicion objeto---------------------------------------------------------------------------
             for (int numero_control = 0; numero_control < controles.Length; numero_control++)
             {
+                
                 int x = 120;
                 int y__ = 40;
 
@@ -116,7 +128,7 @@ namespace tienda_todo_funciones.desinger
 
                 //error_posicion_a_po = 0;
 
-                string[] espliteado = controles[numero_control_posicion].Split(caracter_spliteo);
+                string[] espliteado = controles[numero_control_posicion].Split(Convert.ToChar(caracter_spliteo[0]));
 
                 int separacion_y = 15;
 
@@ -140,7 +152,7 @@ namespace tienda_todo_funciones.desinger
                         Txt.Text = espliteado[2];
                     }
 
-                    mod_txt_cmd(Txt, espliteado);
+                    mod_txt_cmd(Txt, espliteado,caracter_spliteo);
 
 
                     lb.Text = espliteado[1];
@@ -188,7 +200,7 @@ namespace tienda_todo_funciones.desinger
                     Btn_nuevoboton.Width = ancho;
                     Btn_nuevoboton.Height = alto;
                     this.Controls.Add(Btn_nuevoboton);
-                    string parametros = numero_control + "" + G_caracter_separacion[1] + espliteado[2] + G_caracter_separacion[1] + espliteado[3];
+                    string parametros = numero_control + "" + caracter_spliteo[1] + espliteado[2] + caracter_spliteo[1] + espliteado[3];
 
                     Btn_nuevoboton.Click += (sender1, e1) =>
                     {
@@ -221,7 +233,8 @@ namespace tienda_todo_funciones.desinger
 
                     cmb.Width = ancho;
                     cmb.Height = alto;
-
+                    
+                    //error_falta caracter de espliteo
                     mod_txt_cmd(cmb, espliteado);
 
                     //cmb.KeyPress += new KeyPressEventHandler((sender1, e1) => restriccion_caracteres(sender1, e1, parametros));////llama funcion al precionar un carcter envia imformacion extra y parametros 
@@ -275,7 +288,7 @@ namespace tienda_todo_funciones.desinger
                 {
                     if (Btn_aceptar.DialogResult == DialogResult.OK)
                     {
-                        G_devolver_informacion = Boton_aceptar(arraytextbox, null, caracter_spliteo);
+                        G_devolver_informacion = Boton_aceptar(arraytextbox, null, Convert.ToChar(caracter_spliteo[0]));
                         // Cerrar la ventana emergente después de hacer clic en "aceptar"
                         this.Close();
                     }
@@ -331,14 +344,19 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        public void predicciones_txt(TextBox txt_a_agregar_predicciones, string[] espliteado)
+        public void predicciones_txt(TextBox txt_a_agregar_predicciones, string[] espliteado,string[] caracter_spliteo=null)
         {
+            if (caracter_spliteo == null)
+            {
+                caracter_spliteo = G_caracter_separacion;
+            }
+
             if (espliteado.Length > 4)
             {
                 txt_a_agregar_predicciones.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 txt_a_agregar_predicciones.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-                string[] elementros = espliteado[4].Split('|'); // Dividir el elemento espliteado[4] usando el carácter de separación
+                string[] elementros = espliteado[4].Split(Convert.ToChar(caracter_spliteo[1])); // Dividir el elemento espliteado[4] usando el carácter de separación
 
                 for (int j = 0; j < elementros.Length; j++)
                 {
@@ -349,15 +367,19 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        public void predicciones_cmb(ComboBox combobox_a_agregar_predicciones, string[] espliteado)
+        public void predicciones_cmb(ComboBox combobox_a_agregar_predicciones, string[] espliteado,string[] caracter_spliteo=null)
         {
+            if (caracter_spliteo==null)
+            {
+                caracter_spliteo = G_caracter_separacion;
+            }
             if (espliteado.Length > 3)//para el predictor de palabras y agregar elementos combobox
             {
 
                 combobox_a_agregar_predicciones.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 combobox_a_agregar_predicciones.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-                string[] elementros = espliteado[5].Split(Convert.ToChar(G_caracter_separacion[1])); // Dividir el elemento espliteado[4] usando el carácter de separación
+                string[] elementros = espliteado[5].Split(Convert.ToChar(caracter_spliteo[1])); // Dividir el elemento espliteado[4] usando el carácter de separación
 
                 for (int j = 0; j < elementros.Length; j++)
                 {
@@ -485,7 +507,8 @@ namespace tienda_todo_funciones.desinger
 
         public void funciones_txt_cmb(Control cont_txt_cmb, string[] esplieteo)
         {
-            if (esplieteo.Length > 6)
+
+            if (esplieteo.Length > 6) 
             {
                 string[] funcion_a_realisar = esplieteo[6].Split(Convert.ToChar(G_caracter_separacion[1]));
                 for (int i = 0; i < funcion_a_realisar.Length; i++)
@@ -494,7 +517,7 @@ namespace tienda_todo_funciones.desinger
                     string[] detalle_parametro = parametros.Split(Convert.ToChar(G_caracter_separacion[2]));
 
 
-                    //"ocultar_control¬producto_elaborado¬25¬producto_elaborado"
+                    //funciones y restricciones txt y cmb ventana_emergente cod:poison
                     if (detalle_parametro[0] == "ocultar_control")
                     {
                         cont_txt_cmb.TextChanged += new EventHandler((sender, e) =>
@@ -576,84 +599,70 @@ namespace tienda_todo_funciones.desinger
                         };
                     }
 
+
+
                 }
             }
         }
 
-        private void producto_elaborado(Control cont_txt_cmb, string[] esplieteo)
+        private void producto_elaborado(Control cont_txt_cmb, string[] esplieteo,string[] caracter_separacion=null)
         {
+            if (caracter_separacion==null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
 
             bool otro_producto = true;
             while (otro_producto)
             {
 
-                string[] enviar = new string[] { "1" + G_caracter_separacion[1] + "codigo_producto" };
+                string[] enviar = new string[] { "1" + caracter_separacion[0] + "codigo_producto" };
                 Ventana_emergente cod_prod = new Ventana_emergente();
-                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: Convert.ToChar(G_caracter_separacion[1]));
+                
+                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar);
                 if (cod_bar != "")
                 {
-                    bool esta_producto = false;
-                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+                    //asdfg
+
+
+                    
+
+
+
+                    string[] enviar_cant = new string[] { "1" + caracter_separacion[1] + "cantidad" + caracter_separacion[1] + "0" + caracter_separacion[1] + "2" };
+                    Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
+                    string[] arr_car_separacion = new string[] { caracter_separacion[1] };
+                    string cantidad = cantidad_ingrediente.Proceso_ventana_emergente(enviar_cant, caracter_spliteo: arr_car_separacion);
+                    string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(caracter_separacion[1]));
+
+                    bool esta_el_ingrediente_previo = false;
+                    for (int j = 0; j < productos_puestos.Length; j++)
                     {
-
-                        string[] inf_produc = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(G_caracter_separacion[0]));
-
-                        if (inf_produc[5] == cod_bar)
+                        string[] detalles_ing_prim = productos_puestos[j].Split(Convert.ToChar(caracter_separacion[2]));
+                        if (cod_bar == detalles_ing_prim[0])
                         {
-                            esta_producto = true;
-
-                            string[] enviar_cant = new string[] { "1" + G_caracter_separacion[1] + "cantidad" + G_caracter_separacion[1] + "0" + G_caracter_separacion[1] + "2" };
-                            Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
-                            string cantidad = cantidad_ingrediente.Proceso_ventana_emergente(enviar_cant, caracter_spliteo: Convert.ToChar(G_caracter_separacion[1]));
-                            string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
-
-                            bool esta_el_ingrediente_previo = false;
-                            for (int j = 0; j < productos_puestos.Length; j++)
-                            {
-                                string[] detalles_ing_prim = productos_puestos[j].Split(Convert.ToChar(G_caracter_separacion[2]));
-                                if (cod_bar == detalles_ing_prim[0])
-                                {
-                                    esta_el_ingrediente_previo = true;
-                                    MessageBox.Show("ya pusiste este codigo previamente");
-                                    break;
-                                }
-                            }
-                            if (esta_el_ingrediente_previo == false)
-                            {
-                                if (cont_txt_cmb.Text == "")
-                                {
-                                    cont_txt_cmb.Text = cod_bar + G_caracter_separacion[2] + cantidad;
-                                }
-
-                                else
-                                {
-                                    cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar + G_caracter_separacion[2] + cantidad;
-                                }
-
-                            }
-
+                            esta_el_ingrediente_previo = true;
+                            MessageBox.Show("ya pusiste este codigo previamente");
                             break;
                         }
                     }
-
-                    if (esta_producto == false)
+                    if (esta_el_ingrediente_previo == false)
                     {
-
-                        DialogResult result = MessageBox.Show("no se encontro el producto en el inventario\n¿Deseas agregar el producto?", "Confirmación", MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes)
+                        if (cont_txt_cmb.Text == "")
                         {
-                            variables_glob_conf var_glob = new variables_glob_conf();
-                            Ventana_emergente emergente_vent = new Ventana_emergente();
-                            string datos_introducidos = emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos, caracter_spliteo: Convert.ToChar(G_caracter_separacion[0]));
-
-                            //error_falta_agregar_a_la_base_de_datos = 0;
+                            cont_txt_cmb.Text = cod_bar + caracter_separacion[2] + cantidad;
                         }
 
-
+                        else
+                        {
+                            cont_txt_cmb.Text = cont_txt_cmb.Text + caracter_separacion[1] + cod_bar + caracter_separacion[2] + cantidad;
+                        }
 
                     }
 
+                    //asdfg
+
+                
                     DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
                     if (result2 == DialogResult.No)
                     {
@@ -667,77 +676,54 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        private void parte_de_un_producto(Control cont_txt_cmb, string[] esplieteo)
+        private void parte_de_un_producto(Control cont_txt_cmb, string[] esplieteo, string[] caracter_separacion = null)
         {
-            
+            if (caracter_separacion == null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
+
             bool otro_producto = true;
             while (otro_producto)
             {
 
-                string[] enviar = new string[] { "1" + G_caracter_separacion[1] + "codigo_producto" };
+                string[] enviar = new string[] { "1" + caracter_separacion[1] + "codigo_producto" };
                 Ventana_emergente cod_prod = new Ventana_emergente();
-                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: Convert.ToChar(G_caracter_separacion[1]));
+                string[] arr_car_separacion = new string[] { caracter_separacion[1] };
+                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: arr_car_separacion);
                 if (cod_bar != "")
                 {
-                    bool esta_producto = false;
-                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+
+                    string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(caracter_separacion[1]));
+
+                    bool esta_el_ingrediente_previo = false;
+                    for (int j = 0; j < productos_puestos.Length; j++)
                     {
-
-                        string[] inf_produc = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(G_caracter_separacion[0]));
-
-                        if (inf_produc[5] == cod_bar)
+                        string[] detalles_ing_prim = productos_puestos[j].Split(Convert.ToChar(caracter_separacion[2]));
+                        if (cod_bar == detalles_ing_prim[0])
                         {
-                            esta_producto = true;
-
-                            
-                            string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
-
-                            bool esta_el_ingrediente_previo = false;
-                            for (int j = 0; j < productos_puestos.Length; j++)
-                            {
-                                string[] detalles_ing_prim = productos_puestos[j].Split(Convert.ToChar(G_caracter_separacion[2]));
-                                if (cod_bar == detalles_ing_prim[0])
-                                {
-                                    esta_el_ingrediente_previo = true;
-                                    MessageBox.Show("ya pusiste este codigo previamente");
-                                    break;
-                                }
-                            }
-                            if (esta_el_ingrediente_previo == false)
-                            {
-                                if (cont_txt_cmb.Text == "")
-                                {
-                                    cont_txt_cmb.Text = cod_bar + G_caracter_separacion[2] + "0";
-                                }
-
-                                else
-                                {
-                                    cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar + G_caracter_separacion[2] + "0";
-                                }
-
-                            }
-
+                            esta_el_ingrediente_previo = true;
+                            MessageBox.Show("ya pusiste este codigo previamente");
                             break;
                         }
                     }
-
-                    if (esta_producto == false)
+                    if (esta_el_ingrediente_previo == false)
                     {
-
-                        DialogResult result = MessageBox.Show("no se encontro el producto en el inventario\n¿Deseas agregar el producto?", "Confirmación", MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes)
+                        if (cont_txt_cmb.Text == "")
                         {
-                            variables_glob_conf var_glob = new variables_glob_conf();
-                            Ventana_emergente emergente_vent = new Ventana_emergente();
-                            string datos_introducidos = emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos, caracter_spliteo: Convert.ToChar(G_caracter_separacion[0]));
-
-                            //error_falta_agregar_a_la_base_de_datos = 0;
+                            cont_txt_cmb.Text = cod_bar + caracter_separacion[2] + "0";
                         }
 
-
+                        else
+                        {
+                            cont_txt_cmb.Text = cont_txt_cmb.Text + caracter_separacion[1] + cod_bar + caracter_separacion[2] + "0";
+                        }
 
                     }
+
+                    
+
+
 
                     DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
                     if (result2 == DialogResult.No)
@@ -748,21 +734,22 @@ namespace tienda_todo_funciones.desinger
                 }
             }
 
-
-
         }
 
-
-        private void reyeno_textbox_ventana(Control cont_txt_cmb, string[] esplieteo)
+        private void reyeno_textbox_ventana(Control cont_txt_cmb, string[] esplieteo, string[] caracter_separacion = null)
         {
-
+            if (caracter_separacion==null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
             bool otro_producto = true;
             while (otro_producto)
             {
 
-                string[] enviar = new string[] { "1" + G_caracter_separacion[1] + "codigo_producto" };
+                string[] enviar = new string[] { "1" + caracter_separacion[1] + "codigo_producto" };
                 Ventana_emergente cod_prod = new Ventana_emergente();
-                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: Convert.ToChar(G_caracter_separacion[1]));
+                string[] arr_car_separacion = new string[] { caracter_separacion[1] };
+                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: arr_car_separacion);
                 if (cod_bar != "")
                 {
                     if (cont_txt_cmb.Text == "")
@@ -772,7 +759,7 @@ namespace tienda_todo_funciones.desinger
 
                     else
                     {
-                        cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar;
+                        cont_txt_cmb.Text = cont_txt_cmb.Text + caracter_separacion[1] + cod_bar;
                     }
 
                     DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
@@ -792,78 +779,78 @@ namespace tienda_todo_funciones.desinger
             bool otro_producto = true;
             while (otro_producto)
             {
+                string nom_imp = "";
+                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
+                {
+                    string[]temp=variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo][i].Split(Convert.ToChar(G_caracter_separacion[2]));
+                    if (i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length-1) 
+                    {
+                        nom_imp = nom_imp + temp[0] + G_caracter_separacion[1];
+                    }
+                    else
+                    {
+                        nom_imp = nom_imp + temp[0];
+                    }
+                    
+                }
 
-                string[] enviar = new string[] { "1" + G_caracter_separacion[1] + "codigo_producto" };
+                string[] enviar = new string[] { "4" + G_caracter_separacion[0] + esplieteo[0] + G_caracter_separacion[0] + "nose" + G_caracter_separacion[0] + G_caracter_separacion[0] + "nose" + G_caracter_separacion[0] + nom_imp};
                 Ventana_emergente cod_prod = new Ventana_emergente();
-                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: Convert.ToChar(G_caracter_separacion[1]));
+                
+                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar);
                 if (cod_bar != "")
                 {
-                    bool esta_producto = false;
-                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[i].Length; i++)
+                    
+                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
                     {
 
                         string[] inf_produc = variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo][i].Split(Convert.ToChar(G_caracter_separacion[0]));
 
-                        if (inf_produc[id_colum_comp] == cod_bar)
+
+
+                        string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
+
+                        bool esta_el_ingrediente_previo = false;
+
+                        for (int j = 0; j < productos_puestos.Length; j++)
                         {
-                            esta_producto = true;
 
-                            
-                            string[] productos_puestos = cont_txt_cmb.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
-
-                            bool esta_el_ingrediente_previo = false;
-                            for (int j = 0; j < productos_puestos.Length; j++)
+                            if (cod_bar == productos_puestos[j])
                             {
-                                
-                                if (cod_bar == productos_puestos[j])
-                                {
-                                    esta_el_ingrediente_previo = true;
-                                    MessageBox.Show("ya pusiste este codigo previamente");
-                                    break;
-                                }
+                                esta_el_ingrediente_previo = true;
+                                MessageBox.Show("ya pusiste este codigo previamente");
+                                break;
                             }
-                            if (esta_el_ingrediente_previo == false)
-                            {
-                                if (cont_txt_cmb.Text == "")
-                                {
-                                    cont_txt_cmb.Text = cod_bar;
-                                }
-
-                                else
-                                {
-                                    cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar;
-                                }
-
-                            }
-
-                            break;
-                        }
-                    }
-
-                    if (esta_producto == false)
-                    {
-
-                        DialogResult result = MessageBox.Show("no se encontro quieres \n¿Deseas agregar el producto?", "Confirmación", MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            variables_glob_conf var_glob = new variables_glob_conf();
-                            Ventana_emergente emergente_vent = new Ventana_emergente();
-                            string datos_introducidos = emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos, caracter_spliteo: Convert.ToChar(G_caracter_separacion[0]));
-
-                            //error_falta_agregar_a_la_base_de_datos = 0;
                         }
 
+                        if (esta_el_ingrediente_previo == false)
+                        {
+                            if (cont_txt_cmb.Text == "")
+                            {
+                                cont_txt_cmb.Text = cod_bar;
+                            }
 
+                            else
+                            {
+                                cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar;
+                            }
+
+                        }
+
+                        break;
 
                     }
+                    DialogResult result = MessageBox.Show("deseas agregar otra informacion?", "Confirmación", MessageBoxButtons.YesNo);
 
-                    DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
-                    if (result2 == DialogResult.No)
+                    if (result == DialogResult.No || result == null) 
                     {
-                        otro_producto = false;
+                        break;
                     }
 
+                }
+                if (cod_bar=="")
+                {
+                    break;
                 }
             }
 
@@ -871,36 +858,40 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-
-        public void mod_txt_cmd(Control cont_txt_cmb, string[] espliteado)
+        public void mod_txt_cmd(Control cont_txt_cmb, string[] espliteado,string[] caracter_spliteo=null)
         {
+            if (caracter_spliteo==null)
+            {
+                caracter_spliteo = G_caracter_separacion;
+            }
+
             if (espliteado.Length > 2)
             {
 
 
                 cont_txt_cmb.Text = espliteado[2];
+                
                 if (cont_txt_cmb is TextBox)
                 {
                     TextBox cont_a_pasar = cont_txt_cmb as TextBox;
-                    predicciones_txt(cont_a_pasar, espliteado);
+                    predicciones_txt(cont_a_pasar, espliteado,caracter_spliteo);
                 }
                 else if (cont_txt_cmb is ComboBox)
                 {
                     ComboBox cont_a_pasar = cont_txt_cmb as ComboBox;
 
-                    predicciones_cmb(cont_a_pasar, espliteado);
+                    predicciones_cmb(cont_a_pasar, espliteado,caracter_spliteo);
 
                 }
 
+                //funciones y restricciones txt y cmb ventana_emergente cod:poison
                 restriccion_txt_cmb(cont_txt_cmb, espliteado);
-
+                
                 funciones_txt_cmb(cont_txt_cmb, espliteado);
             }
             
 
         }
-
-        
 
         public void pasar_datos_impuestos_si_da_enter(Object sender, KeyEventArgs e, string parametros)
         {
@@ -909,7 +900,7 @@ namespace tienda_todo_funciones.desinger
             {
 
                 string[] dato_espliteado = contenido_contol.Text.Split(Convert.ToChar(G_caracter_separacion[1]));
-                this.Controls[25].Text = dato_espliteado[0];
+                this.Controls[33].Text = dato_espliteado[0];
                 //destino.Items.Add(origen.Text);
 
             }
