@@ -58,7 +58,7 @@ namespace tienda_todo_funciones.desinger
             {
                 if (e.KeyValue == (char)Keys.Enter)
                 {
-                    
+                    mod.modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "form_chequeo_y_agregar_codbar_si_no_esta", texto_rapido: "1|1|2|nose|4|njadfs|6|7|nose|1||11||12|nose°nombre_impuesto|");
                     string[] tex_esplit = txt_a_configurar.Text.Split(Convert.ToChar(G_caracter_separacion[0]));
                     variables_glob_conf.GG_variables_string[0] = tex_esplit[0];
                     string indice_producto = "";
@@ -75,6 +75,7 @@ namespace tienda_todo_funciones.desinger
                     if (indice_producto!="")
                     {
                         fun_lstb_agregar_elim(lstb_a_configurar, txt_a_configurar, "agregar_producto", 1);
+                        
                     }
 
                     else
@@ -103,8 +104,8 @@ namespace tienda_todo_funciones.desinger
 
                         if (datos_introducidos!="")
                         {
-                            //error_falta_chequeo de informacion
-                            //mod.modelo_unico("agregar_string_al_inventario", texto_rapido: datos_introducidos);
+                            mod.modelo_unico("mod_chequeo_info_arch",ubicacion_rapida: "form_chequeo_y_agregar_codbar_si_no_esta", texto_rapido: datos_introducidos);
+
                         }
                         
                     }
@@ -523,7 +524,7 @@ namespace tienda_todo_funciones.desinger
             if (existe_provedor==false)
             {
                 string informacion_agregar= nuevo_producto_espliteado[6] + G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[1].Length;
-                mod.modelo_unico("agregar_string_al_archivo", direccion_rapido: variables_glob_conf.GG_nom_archivos[1,0], texto_rapido: informacion_agregar);
+                mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[1,0], texto_rapido: informacion_agregar);
                 variables_glob_conf.GG_arrays_carga_de_archivos[1] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[1], nuevo_producto_espliteado[6]);
                 variables_glob_conf.GG_variables_string[1] = nuevo_producto_espliteado[6];
 
@@ -537,7 +538,7 @@ namespace tienda_todo_funciones.desinger
             variables_glob_conf.GG_arrays_carga_de_archivos[0] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[0], reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
             
             
-            mod.modelo_unico("agregar_string_al_archivo", direccion_rapido: variables_glob_conf.GG_nom_archivos[0, 0], texto_rapido: registro_agregar);
+            mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[0, 0], texto_rapido: registro_agregar);
 
 
         }
