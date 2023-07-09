@@ -58,7 +58,7 @@ namespace tienda_todo_funciones.desinger
             {
                 if (e.KeyValue == (char)Keys.Enter)
                 {
-                    mod.modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "form_chequeo_y_agregar_codbar_si_no_esta", texto_rapido: "1|1|2|nose|4|njadfs|6|7|nose|1||11||12|nose°nombre_impuesto|");
+                    
                     string[] tex_esplit = txt_a_configurar.Text.Split(Convert.ToChar(G_caracter_separacion[0]));
                     variables_glob_conf.GG_variables_string[0] = tex_esplit[0];
                     string indice_producto = "";

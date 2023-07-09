@@ -124,12 +124,12 @@ namespace tienda_todo_funciones.modelos
             //pr.chequeo_datos_esten_en_archivo("1|1|2|3|4|5|6|7|8|venta_ingrediente||11|12¬0°0_5¬1|13|14°14|15", "0|12", 0, 0, "0",5);
             if (operacion =="chequeo_info_en_archivo")
             {
-                arreglo_a_retornar=pr.chequeo_datos_esten_en_archivo(texto, "0|12", 0, 0, "0", 5);
+                arreglo_a_retornar=pr.chequeo_datos_esten_en_archivo(texto, "0|12", 0, "0");
             }
             else if (operacion == "form_chequeo_y_agregar_codbar_si_no_esta")
             {
                 
-                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo(texto, "0|14", 1, 0, "0", 5);
+                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo(texto, "0|5", 0, "0|5");
                 variables_glob_conf.GG_variables_string[0]= arreglo_a_retornar[0];
                 variables_glob_conf var_glob = new variables_glob_conf();
 
@@ -148,11 +148,11 @@ namespace tienda_todo_funciones.modelos
                 {
                     if (caracter_separacion_string_archivos==null)
                     {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[1]), Convert.ToInt32(info_extra[2]), info_extra[3], Convert.ToInt32(info_extra[4]));
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
                     }
                     else
                     {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[1]), Convert.ToInt32(info_extra[2]), info_extra[3], Convert.ToInt32(info_extra[4]),caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3],caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
                     }
                 }
                 
