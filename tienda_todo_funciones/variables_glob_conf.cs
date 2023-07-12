@@ -67,7 +67,7 @@ namespace tienda_todo_funciones
             /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[2] + "codigo_barras" + GG_caracter_separacion[4] + "cantidad" + GG_caracter_separacion[4] + "nombre_producto" + GG_caracter_separacion[3] + "codigo_barras_2" + GG_caracter_separacion[4] + "cantidad_2" + GG_caracter_separacion[4] + "nombre_producto_2" + GG_caracter_separacion[2] + "precio_anterior " + GG_caracter_separacion[2] + "precio"},
             /*3*/{GG_direccion_base[0]+"inf\\ven\\vent.txt", "ventas" + GG_caracter_separacion[2] + "compras"},
             /*4*/{GG_direccion_base[0]+"inf\\ven\\impuestos.txt", "nombre_impuesto" + GG_caracter_separacion[2] + "porcentage"},
-            /*5*/{ GG_direccion_base[0]+"inf\\inventario\\herramientas\\tipos_de_medida.txt", "unidad_medida_0" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "tipo_medida_comparada_ya_debe_estar_antes" }
+            /*5*/{ GG_direccion_base[0]+"inf\\inventario\\herramientas\\tipos_de_medida.txt", "unidad_medida_0"}
 
         };//solo modificar en esta clase y si se modifica tendras que pasar los directorios a la nueva direccion
 

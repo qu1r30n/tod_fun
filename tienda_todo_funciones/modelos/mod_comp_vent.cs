@@ -21,21 +21,7 @@ namespace tienda_todo_funciones.modelos
             //--------------------------------------------------------------------------------------------------------------
             //"crear_archivos_inicio"
             //----------------------------------------------------------------------------------------------------------------
-            //"modelo_venta"
-            //arreglos_de_entrada[0]=string[] codigo,
-            //arreglos_de_entrada[1]=string[] cantidad,
-            //informacion_de_variables[0]=string indices_descuento = "",
-            //informacion_de_variables[1]=string caracter_separacion_indices = "|"
-            //------------------------------------------------------------------------------------------------------
-            //"modelo_compra"
-            //arreglos_de_entrada[0] = string[] codigo
-            //arreglos_de_entrada[1] = string[] cantidad
-            //arreglos_de_entrada[2] = string[] precio
-            //arreglos_de_entrada[3] = string[] impuesto_porcentage
-            //informacion_de_variables[0] = bool aplicar_impuesto_a_la_compra = false
-            //informacion_de_variables[1] = string descuento = "0"
-            //informacion_de_variables[2] = double minimo_porcentaje_ganancia = 15
-            //informacion_de_variables[3] =  double porcentaje_elevar = 20
+
             //-----------------------------------------------------------------------------------------------------------
             //"pasar_arreglo_a_archivo"
             //direccion_rapido
@@ -89,13 +75,17 @@ namespace tienda_todo_funciones.modelos
                 }
             }
 
+            else if (operacion == "mod_form_chequeo_info_producto_nuevo")
+            {
+                mod_form_chequeo_dat_nuevo_produc(texto_rapido);
+            }
 
             else if (operacion == "mod_chequeo_info_arch")
             {
-                
+
                 if (texto_rapido != null)
                 {
-                    objeto_a_retornar = mod_chequeo_info_arch(ubicacion_rapida,texto_rapido);
+                    objeto_a_retornar = mod_chequeo_info_arch(ubicacion_rapida, texto_rapido);
                 }
                 else
                 {
@@ -104,32 +94,74 @@ namespace tienda_todo_funciones.modelos
             }
 
 
-
-
-
             else
             {
                 // Manejar el caso cuando se proporciona una operación no válida
             }
-            
-            
+
+
             return objeto_a_retornar;
 
         }
 
 
-        private string[] mod_chequeo_info_arch(string operacion, string texto, string[] info_extra = null,string[][] caracter_separacion_string_archivos =null)
+        public void mod_form_chequeo_dat_nuevo_produc(string datos_introducidos)
+        {
+            modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "chequeo_provedor_sino_agrega", texto_rapido: datos_introducidos);
+            modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "chequeo_tipo_medida_sino_agrega", texto_rapido: datos_introducidos);
+            modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "form_chequeo_impuesto_sino_agrega", texto_rapido: datos_introducidos);
+        }
+
+        private string[] mod_chequeo_info_arch(string operacion, string texto, string[] info_extra = null, string[][] caracter_separacion_string_archivos = null)
         {
             string[] arreglo_a_retornar = null;
             //pr.chequeo_datos_esten_en_archivo("1|1|2|3|4|5|6|7|8|venta_ingrediente||11|12¬0°0_5¬1|13|14°14|15", "0|12", 0, 0, "0",5);
-            if (operacion =="chequeo_info_en_archivo")
+            if (operacion == "chequeo_info_en_archivo")
             {
-                arreglo_a_retornar=pr.chequeo_datos_esten_en_archivo(texto, "0|12", 0, "0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, "0|12", 0, "0");
             }
+
+
+            else if (operacion == "chequeo_provedor_sino_agrega")
+            {
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|8", 1, "0");
+                if (arreglo_a_retornar != null)
+                {
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
+
+                }
+            }
+
+            else if (operacion == "chequeo_tipo_medida_sino_agrega")
+            {
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|3", 5, "0|0");
+                if (arreglo_a_retornar != null)
+                {
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[5, 0], texto_rapido: arreglo_a_retornar[0]);
+
+                }
+            }
+
+            else if (operacion == "chequeo_informacion_abierto")
+            {
+                if (info_extra != null)
+                {
+                    if (caracter_separacion_string_archivos == null)
+                    {
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
+                    }
+                    else
+                    {
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3], caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
+                    }
+                }
+
+            }
+
             else if (operacion == "form_chequeo_y_agregar_codbar_si_no_esta")
             {
                 
-                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo(texto, "0|5", 0, "0|5");
+                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, "0|5", 0, "0|5");
                 variables_glob_conf.GG_variables_string[0]= arreglo_a_retornar[0];
                 variables_glob_conf var_glob = new variables_glob_conf();
 
@@ -142,22 +174,21 @@ namespace tienda_todo_funciones.modelos
                 
             }
 
-            else if (operacion == "chequeo_informacion_abierto")
+            else if (operacion == "form_chequeo_impuesto_sino_agrega")
             {
-                if (info_extra != null) 
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|8",4, "0|0");
+                if (arreglo_a_retornar != null)
                 {
-                    if (caracter_separacion_string_archivos==null)
-                    {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
-                    }
-                    else
-                    {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3],caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
-                    }
-                }
-                
-            }
+                    Ventana_emergente vent_emer = new Ventana_emergente();
+                    string[] enviar = { "1" + G_caracter_separacion[0] + "porsentaje_impuesto" + G_caracter_separacion[0] + "0" };
+                    string porcentaje=vent_emer.Proceso_ventana_emergente(enviar, "impuesto: " + arreglo_a_retornar[0]);
+                    string impuesto_y_porcentaje = arreglo_a_retornar[0] + G_caracter_separacion[0] + porcentaje;
 
+
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
+
+                }
+            }
 
 
 

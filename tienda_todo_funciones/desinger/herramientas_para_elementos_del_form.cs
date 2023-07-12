@@ -93,7 +93,7 @@ namespace tienda_todo_funciones.desinger
                         }
                         variables_glob_conf.GG_variables_string[2] = op_text.join_paresido(Convert.ToChar(G_caracter_separacion[1]), variables_glob_conf.GG_arrays_carga_de_archivos[1]);
                         //fin_provedores
-                        variables_glob_conf.GG_variables_string[6] = op_text.join_paresido(Convert.ToChar(G_caracter_separacion[0]), variables_glob_conf.GG_arrays_carga_de_archivos[5]);
+                        variables_glob_conf.GG_variables_string[6] = op_text.join_paresido(Convert.ToChar(G_caracter_separacion[1]), variables_glob_conf.GG_arrays_carga_de_archivos[5]);
 
                         
                         variables_glob_conf var_glob = new variables_glob_conf();
@@ -104,10 +104,13 @@ namespace tienda_todo_funciones.desinger
 
                         if (datos_introducidos!="")
                         {
-                            mod.modelo_unico("mod_chequeo_info_arch",ubicacion_rapida: "form_chequeo_y_agregar_codbar_si_no_esta", texto_rapido: datos_introducidos);
+                            mod.modelo_unico("mod_form_chequeo_info_producto_nuevo",texto_rapido: datos_introducidos);
 
                         }
-                        
+                        else
+                        {
+                            return;
+                        }
                     }
                 }
 

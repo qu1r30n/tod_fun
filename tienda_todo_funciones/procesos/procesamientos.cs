@@ -66,6 +66,7 @@ namespace tienda_todo_funciones.procesos
                 {
                     // Agregar el nuevo registro al arreglo correspondiente
                     variables_glob_conf.GG_arrays_carga_de_archivos[i] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[i], texto);
+                    break;
                 }
 
             }
@@ -495,7 +496,7 @@ namespace tienda_todo_funciones.procesos
             return temp;
         }
 
-        public string[] chequeo_datos_esten_en_archivo(string info_texto, string columna_a_recorer_del_string, int id_arreglo_archivo, string columna_a_recorer_del_archivo, string[] caracter_separacion_del_string = null, string[] caracter_separacion_del_archivo = null)
+        public string[] chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(string info_texto, string columna_a_recorer_del_string, int id_arreglo_archivo, string columna_a_recorer_del_archivo, string[] caracter_separacion_del_string = null, string[] caracter_separacion_del_archivo = null)
         {
 
             if (caracter_separacion_del_string == null)
@@ -555,12 +556,82 @@ namespace tienda_todo_funciones.procesos
 
                 if (se_encontro_el_producto == false)
                 {
-                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_spliteado_del_string[id_resul_del_string]);
+                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_texto);
                 }
 
             }
 
             return faltantes_a_retornar;
         }
+
+
+        public string[] chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(string info_texto, string columna_a_recorer_del_string, int id_arreglo_archivo, string columna_a_recorer_del_archivo, string[] caracter_separacion_del_string = null, string[] caracter_separacion_del_archivo = null)
+        {
+
+            if (caracter_separacion_del_string == null)
+            {
+                caracter_separacion_del_string = G_caracter_separacion;
+            }
+            if (caracter_separacion_del_archivo == null)
+            {
+                caracter_separacion_del_archivo = G_caracter_separacion;
+            }
+
+            string[] info_spliteado_del_string = info_texto.Split(Convert.ToChar(caracter_separacion_del_string[0]));
+            //aqui se extrae el arreglo de la info del las columnas recorridas
+            string[] columnas_del_string = columna_a_recorer_del_string.Split(Convert.ToChar(caracter_separacion_del_string[0]));
+
+            int id_columna_recorrida_string = 1; //esta es la inicialisasion del for se hace arriba para poder usar la variable despues 
+            for (; id_columna_recorrida_string < columnas_del_string.Length; id_columna_recorrida_string++)
+            {
+                info_spliteado_del_string = info_spliteado_del_string[Convert.ToInt32(columnas_del_string[id_columna_recorrida_string])].Split(Convert.ToChar(caracter_separacion_del_string[id_columna_recorrida_string]));
+
+            }
+
+
+
+            //este es el de extraccion informacion del archivo
+            string[] faltantes_a_retornar = null;
+            for (int id_resul_del_string = 0; id_resul_del_string < info_spliteado_del_string.Length; id_resul_del_string++)
+            {
+
+
+                bool se_encontro_el_producto = false;
+
+                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo].Length; i++)
+                {
+                    string[] info_spliteado_del_archivo = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo][i].Split(Convert.ToChar(caracter_separacion_del_archivo[0]));
+
+                    //aqui se extrae el arreglo de la info del las columnas recorridas
+                    string[] columnas_del_archivo = columna_a_recorer_del_archivo.Split(Convert.ToChar(caracter_separacion_del_archivo[0]));
+
+                    int id_columna_recorrida_archivo = 1; //esta es la inicialisasion del for se hace arriba para poder usar la variable despues 
+                    for (; id_columna_recorrida_archivo < columnas_del_archivo.Length; id_columna_recorrida_archivo++)
+                    {
+                        info_spliteado_del_archivo = info_spliteado_del_archivo[Convert.ToInt32(columnas_del_archivo[id_columna_recorrida_archivo])].Split(Convert.ToChar(caracter_separacion_del_archivo[id_columna_recorrida_archivo]));
+
+                    }
+
+
+                    //aqui la comparacion para ver si existe o no
+                    if (info_spliteado_del_archivo[0] == info_spliteado_del_string[0])
+                    {
+                        se_encontro_el_producto = true;
+                        break;
+                    }
+
+                }
+
+
+                if (se_encontro_el_producto == false)
+                {
+                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_spliteado_del_string[0]);
+                }
+
+            }
+
+            return faltantes_a_retornar;
+        }
+
     }
 }
