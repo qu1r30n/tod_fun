@@ -834,15 +834,13 @@ namespace tienda_todo_funciones.desinger
                             {
                                 cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar;
                             }
-
+                            break;
                         }
-
-                        break;
 
                     }
                     DialogResult result = MessageBox.Show("deseas agregar otra informacion?", "Confirmación", MessageBoxButtons.YesNo);
 
-                    if (result == DialogResult.No || result == null) 
+                    if (result == DialogResult.No) 
                     {
                         break;
                     }

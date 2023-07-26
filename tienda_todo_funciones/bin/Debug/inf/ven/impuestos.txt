@@ -1,2 +1,2 @@
 nombre_impuesto¬porcentage
-nose|0
+coca|0

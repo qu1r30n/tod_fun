@@ -6,7 +6,7 @@ using tienda_todo_funciones.procesos;
 
 namespace tienda_todo_funciones.modelos
 {
-    class mod_comp_vent
+    class model
     {
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
 
@@ -67,7 +67,7 @@ namespace tienda_todo_funciones.modelos
             {
                 if (texto_rapido != null)
                 {
-                    pr.agregar_string_archivo(variables_glob_conf.GG_direccion_base[0], texto_rapido);
+                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[0,0], texto_rapido);
                 }
                 else
                 {
@@ -93,8 +93,43 @@ namespace tienda_todo_funciones.modelos
                 }
             }
 
+            else if (operacion == "cantidad_venta_compra_resultado")
+            {
 
-            else
+                int cantidad = variables_glob_conf.GG_arrays_carga_de_archivos[3].Length - 1;
+                string[] inf_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[3][cantidad].Split(Convert.ToChar(G_caracter_separacion[1]));
+                if (inf_espliteado[0] == DateTime.Now.ToString("yyyyMMdd")) 
+                {
+                    objeto_a_retornar = variables_glob_conf.GG_arrays_carga_de_archivos[3][cantidad];
+                }
+                else
+                {
+                    string datos = DateTime.Now.ToString("yyyyMMdd") + G_caracter_separacion[1] + "0" + G_caracter_separacion[1] + "0";
+                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[3, 0], datos);
+                    objeto_a_retornar = datos;
+
+                }
+
+            }
+            //mod_comp_vent------------------------------------------------------------------------------------------
+
+            else if (operacion == "mod_venta")
+            {
+                if (informacion_de_variables != null)
+                {
+                    pr.procesar_venta(informacion_de_variables);
+                }
+                else
+                {
+                    // Manejar el caso cuando falta el parámetro requerido para la operación "agregar_string_al_inventario"
+                }
+                
+            }
+
+            //fin mod_comp_vent--------------------------------------------------------------------------------------
+
+
+                    else
             {
                 // Manejar el caso cuando se proporciona una operación no válida
             }
@@ -127,7 +162,7 @@ namespace tienda_todo_funciones.modelos
                 arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|8", 1, "0");
                 if (arreglo_a_retornar != null)
                 {
-                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
 
                 }
             }
@@ -137,7 +172,7 @@ namespace tienda_todo_funciones.modelos
                 arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|3", 5, "0|0");
                 if (arreglo_a_retornar != null)
                 {
-                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[5, 0], texto_rapido: arreglo_a_retornar[0]);
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[5, 0], texto_rapido: arreglo_a_retornar[0]);
 
                 }
             }
@@ -185,7 +220,7 @@ namespace tienda_todo_funciones.modelos
                     string impuesto_y_porcentaje = arreglo_a_retornar[0] + G_caracter_separacion[0] + porcentaje;
 
 
-                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
 
                 }
             }

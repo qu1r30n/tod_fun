@@ -1,1 +1,2 @@
 id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|0_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|produc_elaborados_12|ligar_productos_para_sabo_13|impuesto_14|tipo_producto_para_impuesto_15|ingrediente_coigo_del_paquete_16_0°cantidad_que_lleva_de_ingredientes_paquete_16_1
+1|coca cola|1|lt|23|7501055302451|1|20|coca|1||1|||nose|

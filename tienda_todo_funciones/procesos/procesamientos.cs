@@ -11,20 +11,21 @@ namespace tienda_todo_funciones.procesos
     class procesamientos
     {
         //string direccion_inventario = G_dir_base + variables_glob_conf.GG_nom_archivos[0,0];//direccion_inventario
-        
+
         
         Tex_base bas = new Tex_base();
 
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
-
+        
         //----------------------------------------------------------------------------------------------
         public void crear_archivos_inicio_programa()
         {
+
             
             //archivos del programa
-            for (int i = 0; i < variables_glob_conf.GG_nom_archivos.GetLength(0); i++)
+            for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
-                bas.Crear_archivo_y_directorio(variables_glob_conf.GG_nom_archivos[i,0], variables_glob_conf.GG_nom_archivos[i, 1]);
+                bas.Crear_archivo_y_directorio(variables_glob_conf.GG_dir_nom_archivos[i,0], variables_glob_conf.GG_dir_nom_archivos[i, 1]);
             }
 
             //archivos de registro
@@ -32,19 +33,43 @@ namespace tienda_todo_funciones.procesos
             {
                 bas.Crear_archivo_y_directorio(variables_glob_conf.GG_dir_reg[i, 0], variables_glob_conf.GG_dir_reg[i, 1]);
             }
-
-            for (int i = 0; i < variables_glob_conf.GG_nom_archivos.GetLength(0); i++)
+            //recarga informacion arreglos
+            for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
-               variables_glob_conf.GG_arrays_carga_de_archivos[i] = bas.Leer(variables_glob_conf.GG_nom_archivos[i, 0]);
+               variables_glob_conf.GG_arrays_carga_de_archivos[i] = bas.Leer(variables_glob_conf.GG_dir_nom_archivos[i, 0]);
             }
-    
+
+            variables_glob_conf var_glob = new variables_glob_conf();
+            string orden_venta = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_codbar_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+            string orden_venta_2 = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_nom_produc_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+
+            string orden_compra = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_codbar_compra, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+            string orden_compra_2 = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_nom_produc_compra, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+
+            //carga predicciones en la varable globar GG_autoCompleteCollection que sirve para las predicciones uno es para predictor codbar y el otro para nombre de producto
+            for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+            {    
+                Operaciones_textos op_tex = new Operaciones_textos();
+
+                string texto_a_agregar_venta = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_venta, G_caracter_separacion[0]);
+                string texto_a_agregar_nom_produc_venta = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_venta_2, G_caracter_separacion[0]);
+
+                string texto_a_agregar_compra = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_compra, G_caracter_separacion[0]);
+                string texto_a_agregar_nom_produc_compra = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_compra_2, G_caracter_separacion[0]);
+
+                variables_glob_conf.GG_autoCompleteCollection_codbar_venta.Add(texto_a_agregar_venta);
+                variables_glob_conf.GG_autoCompleteCollection_nom_produc_venta.Add(texto_a_agregar_nom_produc_venta);
+
+                variables_glob_conf.GG_autoCompleteCollection_codbar_compra.Add(texto_a_agregar_venta);
+                variables_glob_conf.GG_autoCompleteCollection_nom_produc_compra.Add(texto_a_agregar_nom_produc_venta);
+            }
             
         }
 
         public bool existe_info(int num_columna, string dato_a_comparar)
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             bool existe = false;
             string texto = bas.Seleccionar(direccion_inventario, num_columna, dato_a_comparar);
             if (texto != "")
@@ -57,12 +82,13 @@ namespace tienda_todo_funciones.procesos
         //-----------------------------------------------------------------------------------------------
 
         public void agregar_string_archivo(string direccion, string texto)
-        { 
+        {
+            bas.Crear_archivo_y_directorio(direccion);
             bas.Agregar(direccion, texto);
 
-            for (int i = 0; i < variables_glob_conf.GG_nom_archivos.GetLength(0); i++)
+            for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
-                if (direccion == variables_glob_conf.GG_nom_archivos[i, 0])
+                if (direccion == variables_glob_conf.GG_dir_nom_archivos[i, 0])
                 {
                     // Agregar el nuevo registro al arreglo correspondiente
                     variables_glob_conf.GG_arrays_carga_de_archivos[i] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[i], texto);
@@ -84,8 +110,8 @@ namespace tienda_todo_funciones.procesos
         public string proceso_venta(string[] codigos, string[] cantidades, double descuento = 0)
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
-            string direccion_ventas = variables_glob_conf.GG_nom_archivos[3,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
+            string direccion_ventas = variables_glob_conf.GG_dir_nom_archivos[3,0];
             
             DateTime fecha_hora = DateTime.Now;
             string año_mes_dia = fecha_hora.ToString("yyyyMMdd");
@@ -105,7 +131,7 @@ namespace tienda_todo_funciones.procesos
 
         public void registro_ventas(string[] codigo, string[] cantidad,string dinero_pagado="-0")
         {
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
 
             string[] inv = bas.Leer(direccion_inventario);
 
@@ -180,6 +206,14 @@ namespace tienda_todo_funciones.procesos
             return temp;
         }
 
+        public void procesar_venta(string[]info_lista_venta)
+        {
+            for (int i = 0; i < info_lista_venta.Length; i++)
+            {
+                informacion_de_variables[i];
+            }
+
+        }
 
         public string procesar_compra(string[] codigo, string[] cantidad, string[] precio, string[] impuesto_porcentage, bool aplicar_impuesto_a_la_compra = false, string descuento = "0", double minimo_porcentaje_ganancia = 15, double porcentaje_elevar = 20)
         {
@@ -191,7 +225,7 @@ namespace tienda_todo_funciones.procesos
             porcentaje_elevar = 1 + (porcentaje_elevar / 100);
             
 
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             string[] inv = bas.Leer(direccion_inventario);
             for (int i = 0; i < inv.Length; i++)
@@ -263,7 +297,7 @@ namespace tienda_todo_funciones.procesos
             variables_glob_conf var_glob = new variables_glob_conf();
 
             
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
 
             string[] inv = bas.Leer(direccion_inventario);
 
@@ -318,7 +352,7 @@ namespace tienda_todo_funciones.procesos
         public string agregar_promocion(string nombrePromo, string[] codigosBarras, string[] nombre_producto , string[] cantidades, string total)
         {
             Tex_base bas = new Tex_base();
-            string direccion_promo = variables_glob_conf.GG_nom_archivos[2,0];
+            string direccion_promo = variables_glob_conf.GG_dir_nom_archivos[2,0];
             string concatenado_info = "";
 
 
@@ -339,7 +373,7 @@ namespace tienda_todo_funciones.procesos
         public string[] promociones_ventas(string[] codigo, string[] cantidad)
         {
             // Se define la dirección del archivo que contiene la información sobre las promociones
-            string direccion_promo = variables_glob_conf.GG_nom_archivos[2,0];
+            string direccion_promo = variables_glob_conf.GG_dir_nom_archivos[2,0];
 
             // Se lee el contenido del archivo y se guarda en la variable "info_promos"
             string[] info_promos = bas.Leer(direccion_promo);
@@ -411,14 +445,14 @@ namespace tienda_todo_funciones.procesos
 
         public string leer_info_producto(string codigo)
         {
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             string info_produc =bas.Seleccionar(direccion_inventario, 3, codigo, null, G_caracter_separacion[0]);
             return info_produc;
         }
         public void agregar_producto(string nom_produc,string precio_venta, string cod_bar, string cantidad, string costo_compra, string provedor, string grupo, string cantidad_productos_por_paquete, string ligar_productos_para_sabor, string impuesto, string tipo_producto_para_impuesto)
         {
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             string[] inf_inv = bas.Leer(direccion_inventario);
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
             string info_a_agregar = inf_inv.Length + G_caracter_separacion[0] + nom_produc + G_caracter_separacion[0] + precio_venta + G_caracter_separacion[0] + cod_bar + G_caracter_separacion[0] + cantidad + G_caracter_separacion[0] + costo_compra + G_caracter_separacion[0] + provedor + G_caracter_separacion[0] + grupo + G_caracter_separacion[0] + "" + G_caracter_separacion[0] + cantidad_productos_por_paquete + G_caracter_separacion[0] + ligar_productos_para_sabor + G_caracter_separacion[0] + impuesto + G_caracter_separacion[0] + tipo_producto_para_impuesto + G_caracter_separacion[0];
@@ -428,13 +462,13 @@ namespace tienda_todo_funciones.procesos
         public void editar_producto(string codigo,string columna_editar,string info_editar)
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             bas.Editar_espesifico(direccion_inventario, 3, codigo, columna_editar, info_editar, G_caracter_separacion[0]);
         }
 
         public void eliminar_producto(string codigo)
         {
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             bas.Eliminar(direccion_inventario, 3, codigo,G_caracter_separacion[0]);
         }
 
@@ -443,7 +477,7 @@ namespace tienda_todo_funciones.procesos
         public double acumulador_de_precios(string[] codigos, string[] cantidad)
         {
             //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
-            string direccion_inventario = variables_glob_conf.GG_nom_archivos[0,0];
+            string direccion_inventario = variables_glob_conf.GG_dir_nom_archivos[0,0];
             string[] productos_info=bas.Leer(direccion_inventario, null, Convert.ToChar(G_caracter_separacion[0]));
 
             double acum = 0;
@@ -632,6 +666,8 @@ namespace tienda_todo_funciones.procesos
 
             return faltantes_a_retornar;
         }
+
+
 
     }
 }

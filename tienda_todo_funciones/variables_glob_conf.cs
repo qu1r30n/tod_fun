@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using tienda_todo_funciones.clases;
 
+using System.Windows.Forms;
+
 namespace tienda_todo_funciones
 {
     class variables_glob_conf
@@ -60,12 +62,12 @@ namespace tienda_todo_funciones
         };
 
         //formato   {direccion_de_archivo,fila_inicial_archivo}
-        static public string[,] GG_nom_archivos =
+        static public string[,] GG_dir_nom_archivos =
         {
             /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", "id_0" + GG_caracter_separacion[0] + "producto_1" + GG_caracter_separacion[0] + "cantidad_producto_2" + GG_caracter_separacion[0] + "tipo_de_medida_3" + GG_caracter_separacion[0] + "precio_de_venta_4" + GG_caracter_separacion[0] + "0_5" + GG_caracter_separacion[0] + "cantidad_6" + GG_caracter_separacion[0] + "costo_compra_7" + GG_caracter_separacion[0] + "provedor_8" + GG_caracter_separacion[0] + "grupo_9" + GG_caracter_separacion[0] + "multiusos_10" + GG_caracter_separacion[0] + "cantidad_productos_por_paquete_11" + GG_caracter_separacion[0] + "produc_elaborados_12" + GG_caracter_separacion[0] + "ligar_productos_para_sabo_13" + GG_caracter_separacion[0] + "impuesto_14" + GG_caracter_separacion[0] + "tipo_producto_para_impuesto_15" + GG_caracter_separacion[0] + "ingrediente_coigo_del_paquete_16_0"+ GG_caracter_separacion[1] +"cantidad_que_lleva_de_ingredientes_paquete_16_1"},
             /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor_0" },
             /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[2] + "codigo_barras" + GG_caracter_separacion[4] + "cantidad" + GG_caracter_separacion[4] + "nombre_producto" + GG_caracter_separacion[3] + "codigo_barras_2" + GG_caracter_separacion[4] + "cantidad_2" + GG_caracter_separacion[4] + "nombre_producto_2" + GG_caracter_separacion[2] + "precio_anterior " + GG_caracter_separacion[2] + "precio"},
-            /*3*/{GG_direccion_base[0]+"inf\\ven\\vent.txt", "ventas" + GG_caracter_separacion[2] + "compras"},
+            /*3*/{GG_direccion_base[0]+"inf\\ven\\"+DateTime.Now.ToString("yyyy") + "_vent.txt","fecha" + GG_caracter_separacion[1] +  "ventas" + GG_caracter_separacion[1] + "compras"},
             /*4*/{GG_direccion_base[0]+"inf\\ven\\impuestos.txt", "nombre_impuesto" + GG_caracter_separacion[2] + "porcentage"},
             /*5*/{ GG_direccion_base[0]+"inf\\inventario\\herramientas\\tipos_de_medida.txt", "unidad_medida_0"}
 
@@ -85,7 +87,7 @@ namespace tienda_todo_funciones
         //GG_arrays_carga_de_archivos[3][]//ventas
         //GG_arrays_carga_de_archivos[4][]//impuestos
         //GG_arrays_carga_de_archivos[5][]//tipos_de_medida
-        static public string[][] GG_arrays_carga_de_archivos=new string[GG_nom_archivos.GetLength(0)][];
+        static public string[][] GG_arrays_carga_de_archivos=new string[GG_dir_nom_archivos.GetLength(0)][];
 
 
 
@@ -93,7 +95,7 @@ namespace tienda_todo_funciones
 
 
 
-        //------------------------------------------------------------------------------------------------------
+        //comentarios ejemplo de introducir datos ventana emergente---------------------------------------------------------------------------------
         //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato|valor_inicial_si_se_modifico|todas_las_opciones_del_combobox_separadas_por_"°"|otras funciones      ejemplo "1|precio venta|0|2|0|prediccion1°prediccion2|no_visible" //el 2 es la restriccion que solo resivira numeros y punto decimal         
         //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
         //3=boton    3|titulo_del_boton|valor_del_boton|numero_de_Funcion            ejemplo "3|es_paquete|1|0" //cuando oprima el boton devolvera el valor 1 
@@ -112,6 +114,7 @@ namespace tienda_todo_funciones
 
 
         //funciones y restricciones txt y cmb ventana_emergente cod:poison
+        
         public string[] GG_ventana_emergente_productos =
         {
              /*0*/"2|id|" + (GG_arrays_carga_de_archivos[0].Length),
@@ -143,10 +146,62 @@ namespace tienda_todo_funciones
            /*6*/ ""//tipo_medida_producto_txt//todos_los_tipos_de_medida
            
         };
+
         static public int[] GG_var_glob_int =
         {
             0,//este es donde va a empesar la lectura de los archivos y arreglos en 0 apareceran tambien los nombres de las columnas
             0,//cantidad_total_de_productos_inventario//este servira para que si dentro de ventana emergente abre otra ventana emergente al momento de guardar el producto incremente la cantidad total para el otro producto 
         };
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------
+        public string[] GG_orden_codbar_venta =
+            {
+                "0_5",
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+            };
+
+        public string[] GG_orden_nom_produc_venta =
+            {
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+                "0_5",
+                
+            };
+
+
+        public string[] GG_orden_codbar_compra =
+    {
+                "0_5",
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+            };
+
+        public string[] GG_orden_nom_produc_compra =
+            {
+                "producto_1",
+                "cantidad_producto_2",
+                "tipo_de_medida_3",
+                "0_5",
+                "0_5",
+            };
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        public static AutoCompleteStringCollection GG_autoCompleteCollection_codbar_venta = new AutoCompleteStringCollection();
+        public static AutoCompleteStringCollection GG_autoCompleteCollection_nom_produc_venta = new AutoCompleteStringCollection();
+
+        public static AutoCompleteStringCollection GG_autoCompleteCollection_codbar_compra = new AutoCompleteStringCollection();
+        public static AutoCompleteStringCollection GG_autoCompleteCollection_nom_produc_compra = new AutoCompleteStringCollection();
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------
     }
 }

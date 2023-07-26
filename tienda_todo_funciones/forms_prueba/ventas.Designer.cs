@@ -132,6 +132,7 @@ namespace tienda_todo_funciones.forms_prueba
             this.chb_ventas_compras.Size = new System.Drawing.Size(15, 14);
             this.chb_ventas_compras.TabIndex = 63;
             this.chb_ventas_compras.UseVisualStyleBackColor = true;
+            this.chb_ventas_compras.CheckedChanged += new System.EventHandler(this.chb_ventas_compras_CheckedChanged);
             // 
             // Lbl_nom_product_list
             // 
@@ -344,6 +345,7 @@ namespace tienda_todo_funciones.forms_prueba
             this.Controls.Add(this.menuStrip1);
             this.Name = "ventas";
             this.Text = "ventas";
+            this.Activated += new System.EventHandler(this.ventas_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.pb_product)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

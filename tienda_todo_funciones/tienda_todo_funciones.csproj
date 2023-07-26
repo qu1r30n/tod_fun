@@ -74,7 +74,7 @@
     <Compile Include="forms_prueba\ventas.Designer.cs">
       <DependentUpon>ventas.cs</DependentUpon>
     </Compile>
-    <Compile Include="modelos\mod_comp_vent.cs" />
+    <Compile Include="modelos\model.cs" />
     <Compile Include="procesos\procesamientos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

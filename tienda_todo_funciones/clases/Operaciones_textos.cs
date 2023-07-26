@@ -10,7 +10,27 @@ namespace tienda_todo_funciones.clases
 {
     class Operaciones_textos
     {
-        
+
+        public string ordenar_string_con_caractere_separacion(string texto_a_ordenar,string orden,string caracter_separacion)
+        {
+            string[] orden_spliteado = orden.Split(Convert.ToChar(caracter_separacion));
+            string[] texto_spliteado = texto_a_ordenar.Split(Convert.ToChar(caracter_separacion));
+            string texto_a_devolver = "";
+            for (int i = 0; i < orden_spliteado.Length; i++)
+            {
+                if (i < (orden_spliteado.Length-1))
+                {
+                    texto_a_devolver = texto_a_devolver + texto_spliteado[Convert.ToInt32(orden_spliteado[i])] + caracter_separacion;
+                }
+                else
+                {
+                    texto_a_devolver = texto_a_devolver + texto_spliteado[Convert.ToInt32(orden_spliteado[i])];
+                }
+                
+            }
+
+            return texto_a_devolver;
+        }
         
         public string cambiar_caracter(string texto, char caracter_a_buscar, char caracter_a_cambiar)
         {
