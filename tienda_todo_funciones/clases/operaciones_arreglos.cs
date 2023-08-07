@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tienda_todo_funciones.clases
 {
-    class arreglos_compuestos_y_simples
+    class operaciones_arreglos
     {
         public string[] extraer_ultimo_arreglo_dentro_de_arreglo(string[] arreglo_de_arreglos, int colum_comp_string, string comparacion, string columna_donde_esta_arreglo_string, char[] caracteres_separacion)
         {
@@ -102,5 +102,37 @@ namespace tienda_todo_funciones.clases
 
             return arreglo;
         }
+
+        public string[] agregar_registro_del_array(string[] arreglo, string registro)
+        {
+            string[] temp = new string[arreglo.Length + 1];
+
+            for (int i = 0; i < arreglo.Length; i++)
+            {
+                temp[i] = arreglo[i];
+            }
+
+            temp[arreglo.Length] = registro;
+
+            return temp;
+        }
+
+        public string[] eliminar_registro_del_array(string[] arreglo, int num_registro)
+        {
+            string[] temp = new string[arreglo.Length - 1];
+            int j = 0;
+            for (int i = 0; i < arreglo.Length; i++)
+            {
+                if (i != num_registro)
+                {
+                    temp[j] = arreglo[i];
+                    j++;
+                }
+            }
+
+            return temp;
+        }
+
+
     }
 }

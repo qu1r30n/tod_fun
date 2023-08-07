@@ -198,12 +198,13 @@ namespace tienda_todo_funciones.modelos
                 
                 arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, "0|5", 0, "0|5");
                 variables_glob_conf.GG_variables_string[0]= arreglo_a_retornar[0];
-                variables_glob_conf var_glob = new variables_glob_conf();
+                
 
                 if (arreglo_a_retornar[0] != "" && arreglo_a_retornar.Length < 1) 
                 {
                     Ventana_emergente emergent_ventana = new Ventana_emergente();
-                    string info_a_agregar = emergent_ventana.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos);
+
+                    string info_a_agregar = emergent_ventana.Proceso_ventana_emergente(variables_glob_conf.GG_ventana_emergente_productos);
                     modelo_unico("agregar_string_al_inventario", texto_rapido: info_a_agregar);
                 }
                 

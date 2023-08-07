@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clases\arreglos_compuestos_y_simples.cs" />
+    <Compile Include="clases\operaciones_arreglos.cs" />
     <Compile Include="clases\Operaciones_archivos.cs" />
     <Compile Include="clases\Operaciones_textos.cs" />
     <Compile Include="clases\Tex_base.cs" />

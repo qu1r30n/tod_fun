@@ -61,10 +61,153 @@ namespace tienda_todo_funciones
              /*15*/{ Directory.GetCurrentDirectory() + "\\inf\\ranking\\" + DateTime.Now.ToString("yyyy") + "_ranking.txt" ,""}
         };
 
+
+        
+        //---------------------------------------------------------------------------------------------
+
+        static public string[] GG_variables_string =
+        {
+           /*0*/ "",//tex_esplit[0]//codbar
+           /*1*/ "",//prov_anterior
+           /*2*/ "", //provedores_txt//todos_los_provedores
+           /*3*/ "",//impuesto anterior
+           /*4*/ "", //impuestos_txt//todos_los_impuestos
+           /*5*/ "",//tipo_medida_producto_anterior
+           /*6*/ ""//tipo_medida_producto_txt//todos_los_tipos_de_medida
+           
+        };
+
+
+        //creando info archivo inicio inventario por si hay modificacion
+
+        //comentarios ejemplo de introducir datos ventana emergente---------------------------------------------------------------------------------
+        //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato|valor_inicial_si_se_modifico|todas_las_opciones_del_combobox_separadas_por_"°"|otras funciones      ejemplo "1|precio venta|0|2|0|prediccion1°prediccion2|no_visible" //el 2 es la restriccion que solo resivira numeros y punto decimal         
+        //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
+        //3=boton    3|titulo_del_boton|valor_del_boton|numero_de_Funcion            ejemplo "3|es_paquete|1|0" //cuando oprima el boton devolvera el valor 1 
+
+        //4=combobox "
+        //           /*0*/ 4|
+        //           /*1*/ titulo_combobox|
+        //           /*2*/ valor_inicial_si anteriormente_no_se_a_modificado|
+        //           /*3*/ restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion|
+        //           /*4*/ " + valor_inicial_si_se_modifico + '|'
+        //           /*5*/ + todas_las_opciones_del_combobox_separadas_por_"°"
+        //           /*6*/ + otras funciones
+
+        //            ejemplo "4|grupo|1|restricciones|1|1°2°producto_elaborado°4|ocultar_control¬25¬producto_elaborado°reyeno_textbox_ventana"
+
+
+
+        //funciones y restricciones txt y cmb ventana_emergente cod:poison
+        ////////////////////////////////////////////////////////////////////////
+        //                                SI EDITAS                           //
+        //                      [,] GG_ventana_emergente_productos            //
+        //                             TIENES QUE EDITAR                      //
+        //                      RecargarVentanaEmergenteProductos             //
+        //                          ES EL DE ABAJITO A ESTE                   //
+        ////////////////////////////////////////////////////////////////////////
+        static public string[,] GG_ventana_emergente_productos = new string[,]
+        {
+            /*0*/ { "1", "producto", "" },
+            /*1*/ { "1", "cant_produc", "0|2" },
+            /*2*/ { "4", "tipo_medida", "nose||" + GG_variables_string[5] + '|' + GG_variables_string[6] },
+            /*3*/ { "1", "precio_venta", "0|2" },
+            /*4*/ { "2", "cod_barras", GG_variables_string[0] },
+            /*5*/ { "1", "cantidad", "1|2" },
+            /*6*/ { "1", "costo_comp", "0|2" },
+            /*7*/ { "4", "provedor", "nose||" + GG_variables_string[1] + '|' + GG_variables_string[2] },
+            /*8*/ { "4", "grupo", "1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
+            /*9*/ { "2", "no poner nada", "" },
+            /*10*/ { "1", "cant_produc_x_paquet", "1|2" },
+            /*11*/ { "1", "tipo_de_producto", "||||no_visible°producto_elaborado" },
+            /*12*/ { "1", "ligar_produc_sab", "" },
+            /*13*/ { "1", "impuestos", "|||||reyeno_textbox_ventana_impu" },
+            /*14*/ { "1", "parte_de_que_producto", "||||no_visible°venta_ingrediente" }
+        };
+        public static void RecargarVentanaEmergenteProductos(string al_finalizar_que_borrar_para_proxima_ventana="")
+        {
+            GG_ventana_emergente_productos = new string[,]
+            {
+                /*0*/ { "1", "producto", "" },
+                /*1*/ { "1", "cant_produc", "0|2" },
+                /*2*/ { "4", "tipo_medida", "nose||" + GG_variables_string[5] + '|' + GG_variables_string[6] },
+                /*3*/ { "1", "precio_venta", "0|2" },
+                /*4*/ { "2", "cod_barras", GG_variables_string[0] },
+                /*5*/ { "1", "cantidad", "1|2" },
+                /*6*/ { "1", "costo_comp", "0|2" },
+                /*7*/ { "4", "provedor", "nose||" + GG_variables_string[1] + '|' + GG_variables_string[2] },
+                /*8*/ { "4", "grupo", "1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
+                /*9*/ { "2", "no poner nada", "" },
+                /*10*/ { "1", "cant_produc_x_paquet", "1|2" },
+                /*11*/ { "1", "tipo_de_producto", "||||no_visible°producto_elaborado" },
+                /*12*/ { "1", "ligar_produc_sab", "" },
+                /*13*/ { "1", "impuestos", "|||||reyeno_textbox_ventana_impu" },
+                /*14*/ { "1", "parte_de_que_producto", "||||no_visible°venta_ingrediente" }
+            };
+
+
+
+
+
+            if (al_finalizar_que_borrar_para_proxima_ventana != null)
+            {
+
+
+                string[] datos_a_borrar = al_finalizar_que_borrar_para_proxima_ventana.ToString().Split(Convert.ToChar(GG_caracter_separacion[0]));
+
+                for (int i = 0; i < datos_a_borrar.Length; i++)
+                {
+
+                    if (datos_a_borrar[i] == "todo")
+                    {
+                        GG_variables_string = new[]
+                        {
+                            /*0*/ "",//tex_esplit[0]//codbar
+                            /*1*/ "",//prov_anterior
+                            /*2*/ "", //provedores_txt//todos_los_provedores
+                            /*3*/ "",//impuesto anterior
+                            /*4*/ "", //impuestos_txt//todos_los_impuestos
+                            /*5*/ "",//tipo_medida_producto_anterior
+                            /*6*/ ""//tipo_medida_producto_txt//todos_los_tipos_de_medida
+           
+                        };
+                    }
+
+                    else if (datos_a_borrar[i] == "") { }
+
+                    else
+                    {
+                        GG_variables_string[Convert.ToInt32(datos_a_borrar[i])] = "";
+                    }
+
+                }
+            }
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------
+        public static string columnas_concatenadas()
+        {
+            string nombresConcatenados = "";
+
+            for (int i = 0; i < GG_ventana_emergente_productos.GetLength(0); i++)
+            {
+                string nombre = GG_ventana_emergente_productos[i, 1];
+                nombresConcatenados += nombre + GG_caracter_separacion[0];
+            }
+
+            if (!string.IsNullOrEmpty(nombresConcatenados))
+            {
+                nombresConcatenados = nombresConcatenados.TrimEnd(Convert.ToChar(GG_caracter_separacion[0]));
+            }
+
+            return nombresConcatenados;
+        }
+
+
         //formato   {direccion_de_archivo,fila_inicial_archivo}
         static public string[,] GG_dir_nom_archivos =
         {
-            /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", "id_0" + GG_caracter_separacion[0] + "producto_1" + GG_caracter_separacion[0] + "cantidad_producto_2" + GG_caracter_separacion[0] + "tipo_de_medida_3" + GG_caracter_separacion[0] + "precio_de_venta_4" + GG_caracter_separacion[0] + "0_5" + GG_caracter_separacion[0] + "cantidad_6" + GG_caracter_separacion[0] + "costo_compra_7" + GG_caracter_separacion[0] + "provedor_8" + GG_caracter_separacion[0] + "grupo_9" + GG_caracter_separacion[0] + "multiusos_10" + GG_caracter_separacion[0] + "cantidad_productos_por_paquete_11" + GG_caracter_separacion[0] + "produc_elaborados_12" + GG_caracter_separacion[0] + "ligar_productos_para_sabo_13" + GG_caracter_separacion[0] + "impuesto_14" + GG_caracter_separacion[0] + "tipo_producto_para_impuesto_15" + GG_caracter_separacion[0] + "ingrediente_coigo_del_paquete_16_0"+ GG_caracter_separacion[1] +"cantidad_que_lleva_de_ingredientes_paquete_16_1"},
+            /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", columnas_concatenadas()},
             /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor_0" },
             /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[2] + "codigo_barras" + GG_caracter_separacion[4] + "cantidad" + GG_caracter_separacion[4] + "nombre_producto" + GG_caracter_separacion[3] + "codigo_barras_2" + GG_caracter_separacion[4] + "cantidad_2" + GG_caracter_separacion[4] + "nombre_producto_2" + GG_caracter_separacion[2] + "precio_anterior " + GG_caracter_separacion[2] + "precio"},
             /*3*/{GG_direccion_base[0]+"inf\\ven\\"+DateTime.Now.ToString("yyyy") + "_vent.txt","fecha" + GG_caracter_separacion[1] +  "ventas" + GG_caracter_separacion[1] + "compras"},
@@ -87,65 +230,10 @@ namespace tienda_todo_funciones
         //GG_arrays_carga_de_archivos[3][]//ventas
         //GG_arrays_carga_de_archivos[4][]//impuestos
         //GG_arrays_carga_de_archivos[5][]//tipos_de_medida
-        static public string[][] GG_arrays_carga_de_archivos=new string[GG_dir_nom_archivos.GetLength(0)][];
+        static public string[][] GG_arrays_carga_de_archivos = new string[GG_dir_nom_archivos.GetLength(0)][];
 
 
-
-
-
-
-
-        //comentarios ejemplo de introducir datos ventana emergente---------------------------------------------------------------------------------
-        //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato|valor_inicial_si_se_modifico|todas_las_opciones_del_combobox_separadas_por_"°"|otras funciones      ejemplo "1|precio venta|0|2|0|prediccion1°prediccion2|no_visible" //el 2 es la restriccion que solo resivira numeros y punto decimal         
-        //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
-        //3=boton    3|titulo_del_boton|valor_del_boton|numero_de_Funcion            ejemplo "3|es_paquete|1|0" //cuando oprima el boton devolvera el valor 1 
-
-        //4=combobox "
-        //           /*0*/ 4|
-        //           /*1*/ titulo_combobox|
-        //           /*2*/ valor_inicial_si anteriormente_no_se_a_modificado|
-        //           /*3*/ restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion|
-        //           /*4*/ " + valor_inicial_si_se_modifico + '|'
-        //           /*5*/ + todas_las_opciones_del_combobox_separadas_por_"°"
-        //           /*6*/ + otras funciones
-
-        //            ejemplo "4|grupo|1|restricciones|1|1°2°producto_elaborado°4|ocultar_control¬25¬producto_elaborado°reyeno_textbox_ventana"
-
-
-
-        //funciones y restricciones txt y cmb ventana_emergente cod:poison
-        
-        public string[] GG_ventana_emergente_productos =
-        {
-             /*0*/"2|id|" + (GG_arrays_carga_de_archivos[0].Length),
-             /*1*/"1|producto",
-             /*2*/"1|cant_produc|0|2",
-             /*3*/"4|tipo_medida|nose||" + GG_variables_string[5] + '|' + GG_variables_string[6],
-             /*4*/"1|precio_vent|0|2",
-             /*5*/"2|cod_barras|" + GG_variables_string[0],
-             /*6*/"1|cantidad|1|2",
-             /*7*/"1|costo_comp|0|2",
-             /*8*/"4|provedor|nose||" + GG_variables_string[1] + '|' + GG_variables_string[2],
-             /*9*/"4|grupo|1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬25¬producto_elaborado°ocultar_control¬31¬venta_ingrediente",
-             /*10*/"2|no poner nada|",
-             /*11*/"1|cant_produc_x_paquet|1|2",
-             /*12*/"1|produc_elab|||||no_visible°producto_elaborado",
-             /*13*/"1|ligar_produc_sab",
-             /*14*/"1|impuestos|||||reyeno_textbox_ventana_impu",
-             /*16*/"1|ingrediente_parte_de_que_producto|||||no_visible°venta_ingrediente"
-        };
-
-        static public string[] GG_variables_string =
-        {
-           /*0*/ "",//tex_esplit[0]//codbar
-           /*1*/ "",//prov_anterior
-           /*2*/ "", //provedores_txt//todos_los_provedores
-           /*3*/ "",//impuesto anterior
-           /*4*/ "", //impuestos_txt//todos_los_impuestos
-           /*5*/ "",//tipo_medida_producto_anterior
-           /*6*/ ""//tipo_medida_producto_txt//todos_los_tipos_de_medida
-           
-        };
+        //-----------------------------------------------------------------------------------------
 
         static public int[] GG_var_glob_int =
         {
@@ -153,43 +241,46 @@ namespace tienda_todo_funciones
             0,//cantidad_total_de_productos_inventario//este servira para que si dentro de ventana emergente abre otra ventana emergente al momento de guardar el producto incremente la cantidad total para el otro producto 
         };
 
-        //----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
         public string[] GG_orden_codbar_venta =
             {
-                "0_5",
-                "producto_1",
-                "cantidad_producto_2",
-                "tipo_de_medida_3",
-                "0_5",
+                "cod_barras",
+                "producto",
+                "cant_produc",
+                "tipo_medida",
+                "cod_barras",
             };
 
         public string[] GG_orden_nom_produc_venta =
             {
-                "producto_1",
-                "cantidad_producto_2",
-                "tipo_de_medida_3",
-                "0_5",
-                "0_5",
+                "producto",
+                "cant_produc",
+                "tipo_medida",
+                "cod_barras",
+                "cod_barras",
                 
             };
 
 
         public string[] GG_orden_codbar_compra =
     {
-                "0_5",
-                "producto_1",
-                "cantidad_producto_2",
-                "tipo_de_medida_3",
-                "0_5",
+                "cod_barras",
+                "producto",
+                "cant_produc",
+                "tipo_medida",
+                "cod_barras",
             };
 
         public string[] GG_orden_nom_produc_compra =
             {
-                "producto_1",
-                "cantidad_producto_2",
-                "tipo_de_medida_3",
-                "0_5",
-                "0_5",
+                "producto",
+                "cant_produc",
+                "tipo_medida",
+                "cod_barras",
+                "cod_barras",
             };
 
 
@@ -203,5 +294,6 @@ namespace tienda_todo_funciones
         public static AutoCompleteStringCollection GG_autoCompleteCollection_nom_produc_compra = new AutoCompleteStringCollection();
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------
+
     }
 }

@@ -17,7 +17,7 @@ namespace tienda_todo_funciones.forms_prueba
         public ventas()
         {   
             InitializeComponent();
-            //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
+            //producto_0|cantidad_producto_1|tipo_de_medida_2|precio_de_venta_3|cod_bar_4|cantidad_5|costo_compra_6|provedor_7|grupo_8|multiusos_9|cantidad_productos_por_paquete_10|productos_elaborados_11|ligar_productos_para_sabor_12|impuesto_13|tipo_producto_para_impuesto_14|
             herramientas_para_elementos_del_form herr_form = new herramientas_para_elementos_del_form();
             
             
@@ -66,5 +66,7 @@ namespace tienda_todo_funciones.forms_prueba
 
             Txt_buscar_producto.Focus();
         }
+
+        
     }
 }

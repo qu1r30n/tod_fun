@@ -16,10 +16,12 @@ namespace tienda_todo_funciones.desinger
     
     public partial class herramientas_para_elementos_del_form : Form
     {
-        
+
         //Tex_base bas = new Tex_base();
+        operaciones_arreglos op_arr = new operaciones_arreglos();
         Operaciones_textos op_text = new Operaciones_textos();
         model mod = new model();
+
         
 
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
@@ -61,6 +63,7 @@ namespace tienda_todo_funciones.desinger
                     
                     string[] tex_esplit = txt_a_configurar.Text.Split(Convert.ToChar(G_caracter_separacion[0]));
                     variables_glob_conf.GG_variables_string[0] = tex_esplit[0];
+
                     string indice_producto = "";
                     for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
                     {
@@ -98,8 +101,8 @@ namespace tienda_todo_funciones.desinger
                         
                         
                         Ventana_emergente emergente_vent = new Ventana_emergente();
-                        variables_glob_conf var_glob = new variables_glob_conf();
-                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(var_glob.GG_ventana_emergente_productos);
+                        variables_glob_conf.RecargarVentanaEmergenteProductos();
+                        string datos_introducidos=emergente_vent.Proceso_ventana_emergente(variables_glob_conf.GG_ventana_emergente_productos);
 
 
                         if (datos_introducidos != "")
@@ -576,19 +579,7 @@ namespace tienda_todo_funciones.desinger
             return temp;
         }
 
-        public string[] agregar_registro_del_array(string[] arreglo, string registro)
-        {
-            string[] temp = new string[arreglo.Length + 1];
-
-            for (int i = 0; i < arreglo.Length; i++)
-            {
-                temp[i] = arreglo[i];
-            }
-
-            temp[arreglo.Length] = registro;
-
-            return temp;
-        }
+        
 
         public void funciones_de_botones(ListBox lstb_a_configurar, string proceso,string info_extra="")
         {
@@ -798,9 +789,11 @@ namespace tienda_todo_funciones.desinger
             }
             if (existe_provedor==false)
             {
+                
+
                 string informacion_agregar= nuevo_producto_espliteado[6] + G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[1].Length;
                 mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1,0], texto_rapido: informacion_agregar);
-                variables_glob_conf.GG_arrays_carga_de_archivos[1] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[1], nuevo_producto_espliteado[6]);
+                variables_glob_conf.GG_arrays_carga_de_archivos[1] = op_arr.agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[1], nuevo_producto_espliteado[6]);
                 variables_glob_conf.GG_variables_string[1] = nuevo_producto_espliteado[6];
 
             }
@@ -810,7 +803,7 @@ namespace tienda_todo_funciones.desinger
             string reg_ordenado_para_txt = OrdenarColumnas_string(registro_agregar, orden_1);
             txt_a_configurar.AutoCompleteCustomSource.Add(reg_ordenado_para_txt+(G_caracter_separacion[0]+variables_glob_conf.GG_arrays_carga_de_archivos[0].Length+""));
 
-            variables_glob_conf.GG_arrays_carga_de_archivos[0] = agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[0], reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
+            variables_glob_conf.GG_arrays_carga_de_archivos[0] = op_arr.agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[0], reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
             
             
             mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido: registro_agregar);
@@ -845,8 +838,6 @@ namespace tienda_todo_funciones.desinger
 
             return informacionProducto;
         }
-
-
 
     }
 

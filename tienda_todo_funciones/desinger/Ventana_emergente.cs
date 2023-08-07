@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using tienda_todo_funciones.clases;
 
+using System.Linq;
 
 namespace tienda_todo_funciones.desinger
 {
@@ -12,7 +13,8 @@ namespace tienda_todo_funciones.desinger
 
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
         string G_datos_de_boton = "";
-        
+
+        operaciones_arreglos op_arr = new operaciones_arreglos();
         
         
 
@@ -26,7 +28,7 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        public string Proceso_ventana_emergente(string[] nom_datos_recolectados, string titulo_ventana = "ventana_emergente", string[] infoextra = null, string []caracter_spliteo = null)
+        public string Proceso_ventana_emergente(object arreglo_string_uni_y_bidimencional , string titulo_ventana = "ventana_emergente", string[] infoextra = null, string []caracter_spliteo = null)
         {
             //1=textbox  1|titulo_texbox|contenido_text_box|restriccion_de_dato      ejemplo "1|precio venta|0|2" //el 2 es la restriccion que solo resivira numeros y punto decimal         
             //2=labels   2|titulo_label|abajo_pondra_otro_label_con_el_contenido    ejemplo "2|id|9999"
@@ -36,14 +38,60 @@ namespace tienda_todo_funciones.desinger
             //            valor_inicial_si anteriormente_no_se_a_modificado|
             //            restriccion_de_dato_con_aparte_opcion_4_que_es_proyecto_quetiene_otra_funcion|
             //            " + valor_inicial_si_se_modifico + '|'
-            //            + todas_las_opciones_del_combobox_separadas_por_"|"
+            //            + todas_las_opciones_del_combobox_separadas_por_"°"
             //
             //            ejemplo "4|grupo|2|4|1|1|2|3|4"
 
-            if (caracter_spliteo==null)
+            if (caracter_spliteo == null)
             {
                 caracter_spliteo = G_caracter_separacion;
             }
+
+            string[] nom_datos_recolectados;
+
+
+            // Verificar si el objeto es un string o arreglo unidimensional o bidimensional de strings-----------------------------
+            
+
+            if (arreglo_string_uni_y_bidimencional is string[] arregloUnidimensional)
+            {
+                nom_datos_recolectados = arregloUnidimensional; // Ya es un arreglo de strings
+            }
+
+            else if (arreglo_string_uni_y_bidimencional is string[,] arregloBidimensional)
+            {
+                nom_datos_recolectados = new string[arregloBidimensional.GetLength(0)];
+
+                for (int i = 0; i < arregloBidimensional.GetLength(0); i++)
+                {
+
+                    string[] resultadoArray = Enumerable.Range(0
+                        ,arregloBidimensional.GetLength(1))
+                                    .Select(j => arregloBidimensional[i, j])
+                                    .ToArray();
+
+                    
+                    nom_datos_recolectados[i] = string.Join(caracter_spliteo[0], resultadoArray);
+                }
+            }
+
+            else if (arreglo_string_uni_y_bidimencional is string)
+            {
+                // Aquí coloca el código que deseas ejecutar si el objeto es un string
+                string texto = (string)arreglo_string_uni_y_bidimencional;
+                // Por ejemplo, puedes hacer algo como:
+                nom_datos_recolectados = new string[] { texto };
+            }
+
+            else
+            {
+                throw new ArgumentException("El objeto no es un arreglo unidimensional ni bidimensional de strings.");
+            }
+
+            //fin Verificar si el objeto es un string o arreglo unidimensional o bidimensional de strings-------------------------
+
+
+
 
 
             this.Text = titulo_ventana;
@@ -294,6 +342,7 @@ namespace tienda_todo_funciones.desinger
                     }
                 };
             }
+
             //fin agrega el boton aceptar si hay un textbox o un combobox
 
             //no tiene return por que se usa la varable global G_devolver_informacion
@@ -556,13 +605,12 @@ namespace tienda_todo_funciones.desinger
 
                     else if (detalle_parametro[0] == "producto_elaborado")
                     {
-
+                        
                         cont_txt_cmb.Enter += (sender, e) =>
                         {
                             MessageBox.Show("da doble click en este texbox si quieres volver abrir la ventana");
                             if (cont_txt_cmb.Text == "")
                             {
-
                                 producto_elaborado(cont_txt_cmb, esplieteo);
                             }
 
@@ -616,20 +664,33 @@ namespace tienda_todo_funciones.desinger
             while (otro_producto)
             {
 
-                string[] enviar = new string[] { "1" + caracter_separacion[0] + "codigo_producto" };
+
+                string todos_los_codbar = "";
+                for (int j = 0; j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; j++)
+                {
+                    string[] info_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][j].Split(Convert.ToChar(G_caracter_separacion[0]));
+                    if (j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length - 1)
+                    {
+                        todos_los_codbar = todos_los_codbar + info_espliteado[5] + G_caracter_separacion[0];
+                    }
+                    else
+                    {
+                        todos_los_codbar = todos_los_codbar + info_espliteado[5];
+                    }
+
+
+                }
+
+
+                string[] enviar = new string[] { "1" + caracter_separacion[0] + "codigo_producto" + caracter_separacion[0] + "" + caracter_separacion[0] + todos_los_codbar };
                 Ventana_emergente cod_prod = new Ventana_emergente();
                 
                 string cod_bar = cod_prod.Proceso_ventana_emergente(enviar);
                 if (cod_bar != "")
                 {
-                    //asdfg
-
-
                     
 
-
-
-                    string[] enviar_cant = new string[] { "1" + caracter_separacion[1] + "cantidad" + caracter_separacion[1] + "0" + caracter_separacion[1] + "2" };
+                    string[] enviar_cant = new string[] { "1" + caracter_separacion[1] + "cantidad" + caracter_separacion[1] + "0" + caracter_separacion[1] + "2"};
                     Ventana_emergente cantidad_ingrediente = new Ventana_emergente();
                     string[] arr_car_separacion = new string[] { caracter_separacion[1] };
                     string cantidad = cantidad_ingrediente.Proceso_ventana_emergente(enviar_cant, caracter_spliteo: arr_car_separacion);
@@ -660,7 +721,7 @@ namespace tienda_todo_funciones.desinger
 
                     }
 
-                    //asdfg
+                    
 
                 
                     DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
@@ -724,43 +785,6 @@ namespace tienda_todo_funciones.desinger
                     
 
 
-
-                    DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
-                    if (result2 == DialogResult.No)
-                    {
-                        otro_producto = false;
-                    }
-
-                }
-            }
-
-        }
-
-        private void reyeno_textbox_ventana(Control cont_txt_cmb, string[] esplieteo, string[] caracter_separacion = null)
-        {
-            if (caracter_separacion==null)
-            {
-                caracter_separacion = G_caracter_separacion;
-            }
-            bool otro_producto = true;
-            while (otro_producto)
-            {
-
-                string[] enviar = new string[] { "1" + caracter_separacion[1] + "codigo_producto" };
-                Ventana_emergente cod_prod = new Ventana_emergente();
-                string[] arr_car_separacion = new string[] { caracter_separacion[1] };
-                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: arr_car_separacion);
-                if (cod_bar != "")
-                {
-                    if (cont_txt_cmb.Text == "")
-                    {
-                        cont_txt_cmb.Text = cod_bar;
-                    }
-
-                    else
-                    {
-                        cont_txt_cmb.Text = cont_txt_cmb.Text + caracter_separacion[1] + cod_bar;
-                    }
 
                     DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
                     if (result2 == DialogResult.No)
@@ -891,6 +915,9 @@ namespace tienda_todo_funciones.desinger
 
         }
 
+        
+        
+        
         public void pasar_datos_impuestos_si_da_enter(Object sender, KeyEventArgs e, string parametros)
         {
             ComboBox contenido_contol = sender as ComboBox;
@@ -902,6 +929,43 @@ namespace tienda_todo_funciones.desinger
                 //destino.Items.Add(origen.Text);
 
             }
+        }
+
+        private void reyeno_textbox_ventana(Control cont_txt_cmb, string[] esplieteo, string[] caracter_separacion = null)
+        {
+            if (caracter_separacion == null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
+            bool otro_producto = true;
+            while (otro_producto)
+            {
+
+                string[] enviar = new string[] { "1" + caracter_separacion[1] + "codigo_producto" };
+                Ventana_emergente cod_prod = new Ventana_emergente();
+                string[] arr_car_separacion = new string[] { caracter_separacion[1] };
+                string cod_bar = cod_prod.Proceso_ventana_emergente(enviar, caracter_spliteo: arr_car_separacion);
+                if (cod_bar != "")
+                {
+                    if (cont_txt_cmb.Text == "")
+                    {
+                        cont_txt_cmb.Text = cod_bar;
+                    }
+
+                    else
+                    {
+                        cont_txt_cmb.Text = cont_txt_cmb.Text + caracter_separacion[1] + cod_bar;
+                    }
+
+                    DialogResult result2 = MessageBox.Show("¿Deseas agregar otro producto?", "Confirmación", MessageBoxButtons.YesNo);
+                    if (result2 == DialogResult.No)
+                    {
+                        otro_producto = false;
+                    }
+
+                }
+            }
+
         }
 
     }

@@ -1,1 +1,0 @@
-codigo|total_venta|total_compra|

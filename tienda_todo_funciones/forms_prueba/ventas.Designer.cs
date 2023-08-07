@@ -217,6 +217,7 @@ namespace tienda_todo_funciones.forms_prueba
             this.Btn_procesar_venta.TabIndex = 47;
             this.Btn_procesar_venta.Text = "procesar venta";
             this.Btn_procesar_venta.UseVisualStyleBackColor = true;
+            
             // 
             // Btn_eliminar_todo
             // 
