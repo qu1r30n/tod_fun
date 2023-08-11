@@ -109,19 +109,19 @@ namespace tienda_todo_funciones
         static public string[,] GG_ventana_emergente_productos = new string[,]
         {
             /*0*/ { "1", "producto", "" },
-            /*1*/ { "1", "cant_produc", "0|2" },
-            /*2*/ { "4", "tipo_medida", "nose||" + GG_variables_string[5] + '|' + GG_variables_string[6] },
-            /*3*/ { "1", "precio_venta", "0|2" },
+            /*1*/ { "1", "cant_produc", "0|solo_numeros" },
+            /*2*/ { "4", "tipo_medida", "NOSE|todas_mayusculas|" + GG_variables_string[5] + '|' + GG_variables_string[6] },
+            /*3*/ { "1", "precio_venta", "0|solo_numeros" },
             /*4*/ { "2", "cod_barras", GG_variables_string[0] },
-            /*5*/ { "1", "cantidad", "1|2" },
-            /*6*/ { "1", "costo_comp", "0|2" },
-            /*7*/ { "4", "provedor", "nose||" + GG_variables_string[1] + '|' + GG_variables_string[2] },
-            /*8*/ { "4", "grupo", "1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
+            /*5*/ { "1", "cantidad", "1|solo_numeros" },
+            /*6*/ { "1", "costo_comp", "0|solo_numeros" },
+            /*7*/ { "4", "provedor", "NOSE|todas_mayusculas|" + GG_variables_string[1] + '|' + GG_variables_string[2] },
+            /*8*/ { "4", "grupo", "1||1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
             /*9*/ { "2", "no poner nada", "" },
-            /*10*/ { "1", "cant_produc_x_paquet", "1|2" },
+            /*10*/ { "1", "cant_produc_x_paquet", "1|solo_numeros" },
             /*11*/ { "1", "tipo_de_producto", "||||no_visible°producto_elaborado" },
             /*12*/ { "1", "ligar_produc_sab", "" },
-            /*13*/ { "1", "impuestos", "|||||reyeno_textbox_ventana_impu" },
+            /*13*/ { "1", "impuestos", "|todas_mayusculas|||reyeno_textbox_ventana_impu" },
             /*14*/ { "1", "parte_de_que_producto", "||||no_visible°venta_ingrediente" }
         };
         public static void RecargarVentanaEmergenteProductos(string al_finalizar_que_borrar_para_proxima_ventana="")
@@ -129,19 +129,19 @@ namespace tienda_todo_funciones
             GG_ventana_emergente_productos = new string[,]
             {
                 /*0*/ { "1", "producto", "" },
-                /*1*/ { "1", "cant_produc", "0|2" },
-                /*2*/ { "4", "tipo_medida", "nose||" + GG_variables_string[5] + '|' + GG_variables_string[6] },
-                /*3*/ { "1", "precio_venta", "0|2" },
+                /*1*/ { "1", "cant_produc", "0|solo_numeros" },
+                /*2*/ { "4", "tipo_medida", "NOSE|todas_mayusculas|" + GG_variables_string[5] + '|' + GG_variables_string[6] },
+                /*3*/ { "1", "precio_venta", "0|solo_numeros" },
                 /*4*/ { "2", "cod_barras", GG_variables_string[0] },
-                /*5*/ { "1", "cantidad", "1|2" },
-                /*6*/ { "1", "costo_comp", "0|2" },
-                /*7*/ { "4", "provedor", "nose||" + GG_variables_string[1] + '|' + GG_variables_string[2] },
-                /*8*/ { "4", "grupo", "1|restricciones|1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
+                /*5*/ { "1", "cantidad", "1|solo_numeros" },
+                /*6*/ { "1", "costo_comp", "0|solo_numeros" },
+                /*7*/ { "4", "provedor", "NOSE|todas_mayusculas|" + GG_variables_string[1] + '|' + GG_variables_string[2] },
+                /*8*/ { "4", "grupo", "1||1|1°2°producto_elaborado°venta_ingrediente|ocultar_control¬23¬producto_elaborado°ocultar_control¬29¬venta_ingrediente" },
                 /*9*/ { "2", "no poner nada", "" },
-                /*10*/ { "1", "cant_produc_x_paquet", "1|2" },
+                /*10*/ { "1", "cant_produc_x_paquet", "1|solo_numeros" },
                 /*11*/ { "1", "tipo_de_producto", "||||no_visible°producto_elaborado" },
                 /*12*/ { "1", "ligar_produc_sab", "" },
-                /*13*/ { "1", "impuestos", "|||||reyeno_textbox_ventana_impu" },
+                /*13*/ { "1", "impuestos", "|todas_mayusculas|||reyeno_textbox_ventana_impu" },
                 /*14*/ { "1", "parte_de_que_producto", "||||no_visible°venta_ingrediente" }
             };
 
@@ -182,6 +182,7 @@ namespace tienda_todo_funciones
 
                 }
             }
+
         }
 
         //----------------------------------------------------------------------------------------------------------------------------------------------
@@ -208,10 +209,10 @@ namespace tienda_todo_funciones
         static public string[,] GG_dir_nom_archivos =
         {
             /*0*/{ GG_direccion_base[0]+"inf\\inventario\\inventario.txt", columnas_concatenadas()},
-            /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor_0" },
+            /*1*/{ GG_direccion_base[0]+"inf\\inventario\\provedores.txt", "provedor" },
             /*2*/{ GG_direccion_base[0]+"inf\\inventario\\promociones.txt","nombre_promocion" + GG_caracter_separacion[2] + "codigo_barras" + GG_caracter_separacion[4] + "cantidad" + GG_caracter_separacion[4] + "nombre_producto" + GG_caracter_separacion[3] + "codigo_barras_2" + GG_caracter_separacion[4] + "cantidad_2" + GG_caracter_separacion[4] + "nombre_producto_2" + GG_caracter_separacion[2] + "precio_anterior " + GG_caracter_separacion[2] + "precio"},
             /*3*/{GG_direccion_base[0]+"inf\\ven\\"+DateTime.Now.ToString("yyyy") + "_vent.txt","fecha" + GG_caracter_separacion[1] +  "ventas" + GG_caracter_separacion[1] + "compras"},
-            /*4*/{GG_direccion_base[0]+"inf\\ven\\impuestos.txt", "nombre_impuesto" + GG_caracter_separacion[2] + "porcentage"},
+            /*4*/{GG_direccion_base[0]+"inf\\inventario\\impuestos.txt", "nombre_impuesto" + GG_caracter_separacion[2] + "porcentage"},
             /*5*/{ GG_direccion_base[0]+"inf\\inventario\\herramientas\\tipos_de_medida.txt", "unidad_medida_0"}
 
         };//solo modificar en esta clase y si se modifica tendras que pasar los directorios a la nueva direccion

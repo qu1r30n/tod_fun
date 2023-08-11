@@ -12,7 +12,7 @@ namespace tienda_todo_funciones.modelos
 
         procesamientos pr = new procesamientos();
 
-        //-------------------------------------------------------------------------------
+        //----------------------------  ---------------------------------------------------
 
         public object modelo_unico(string operacion, string[] descripcion_arreglo_opcional = null, string[][] arreglos_de_entrada = null, string[] informacion_de_variables = null, string ubicacion_rapida = null, string texto_rapido = null)
         {
@@ -67,7 +67,7 @@ namespace tienda_todo_funciones.modelos
             {
                 if (texto_rapido != null)
                 {
-                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[0,0], texto_rapido);
+                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido);
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace tienda_todo_funciones.modelos
 
                 int cantidad = variables_glob_conf.GG_arrays_carga_de_archivos[3].Length - 1;
                 string[] inf_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[3][cantidad].Split(Convert.ToChar(G_caracter_separacion[1]));
-                if (inf_espliteado[0] == DateTime.Now.ToString("yyyyMMdd")) 
+                if (inf_espliteado[0] == DateTime.Now.ToString("yyyyMMdd"))
                 {
                     objeto_a_retornar = variables_glob_conf.GG_arrays_carga_de_archivos[3][cantidad];
                 }
@@ -123,13 +123,26 @@ namespace tienda_todo_funciones.modelos
                 {
                     // Manejar el caso cuando falta el parámetro requerido para la operación "agregar_string_al_inventario"
                 }
-                
+
+            }
+
+            else if (operacion == "mod_compra")
+            {
+                if (informacion_de_variables != null)
+                {
+                    pr.procesar_compra(informacion_de_variables);
+                }
+                else
+                {
+                    // Manejar el caso cuando falta el parámetro requerido para la operación "agregar_string_al_inventario"
+                }
+
             }
 
             //fin mod_comp_vent--------------------------------------------------------------------------------------
 
 
-                    else
+            else
             {
                 // Manejar el caso cuando se proporciona una operación no válida
             }
@@ -159,7 +172,7 @@ namespace tienda_todo_funciones.modelos
 
             else if (operacion == "chequeo_provedor_sino_agrega")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|8", 1, "0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|7", 1, "0");
                 if (arreglo_a_retornar != null)
                 {
                     modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
@@ -169,7 +182,7 @@ namespace tienda_todo_funciones.modelos
 
             else if (operacion == "chequeo_tipo_medida_sino_agrega")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|3", 5, "0|0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|2", 5, "0|0");
                 if (arreglo_a_retornar != null)
                 {
                     modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[5, 0], texto_rapido: arreglo_a_retornar[0]);
@@ -212,18 +225,26 @@ namespace tienda_todo_funciones.modelos
 
             else if (operacion == "form_chequeo_impuesto_sino_agrega")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|8",4, "0|0");
-                if (arreglo_a_retornar != null)
+                string[] caracter_sep_impuestos = { "¬" };
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|13",4, "0|0",caracter_separacion_del_archivo: caracter_sep_impuestos);
+                if (arreglo_a_retornar!=null)
                 {
-                    Ventana_emergente vent_emer = new Ventana_emergente();
-                    string[] enviar = { "1" + G_caracter_separacion[0] + "porsentaje_impuesto" + G_caracter_separacion[0] + "0" };
-                    string porcentaje=vent_emer.Proceso_ventana_emergente(enviar, "impuesto: " + arreglo_a_retornar[0]);
-                    string impuesto_y_porcentaje = arreglo_a_retornar[0] + G_caracter_separacion[0] + porcentaje;
+                    for (int j = 0; j < arreglo_a_retornar.Length; j++)
+                    {
+                        
+                            Ventana_emergente vent_emer = new Ventana_emergente();
+                            string[] enviar = { "1" + G_caracter_separacion[0] + "porsentaje_impuesto" + G_caracter_separacion[0] + "0" };
+                            string porcentaje = vent_emer.Proceso_ventana_emergente(enviar, "impuesto: " + arreglo_a_retornar[j]);
+                            string impuesto_y_porcentaje = arreglo_a_retornar[j] + G_caracter_separacion[2] + porcentaje;
 
 
-                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
+                            modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
 
+                        
+                    }
                 }
+                
+                
             }
 
 

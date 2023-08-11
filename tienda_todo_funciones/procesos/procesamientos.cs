@@ -114,7 +114,7 @@ namespace tienda_todo_funciones.procesos
                     {
                         return;
                     }
-                    //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|0_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|produc_elaborados_12|ligar_productos_para_sabo_13|impuesto_14|tipo_producto_para_impuesto_15|ingrediente_coigo_del_paquete_16_0°cantidad_que_lleva_de_ingredientes_paquete_16_1
+                    //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
                     produ_invent = produ_invent[0].Split(Convert.ToChar(G_caracter_separacion[0]));
 
 
@@ -122,13 +122,48 @@ namespace tienda_todo_funciones.procesos
 
 
 
-                //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|0_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|produc_elaborados_12|ligar_productos_para_sabo_13|impuesto_14|tipo_producto_para_impuesto_15|ingrediente_coigo_del_paquete_16_0°cantidad_que_lleva_de_ingredientes_paquete_16_1
+                //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
 
 
             }
 
         }
-        
+
+        public void procesar_compra(string[] info_lista_venta, string caracter_separacion = null)
+        {
+            if (caracter_separacion == null)
+            {
+                caracter_separacion = G_caracter_separacion[0];
+            }
+            for (int i = 0; i < info_lista_venta.Length; i++)
+            {
+                string[] detalles_del_producto_lista = info_lista_venta[i].Split(Convert.ToChar(caracter_separacion));
+                int indice_producto = Convert.ToInt32(detalles_del_producto_lista[detalles_del_producto_lista.Length - 1]);
+                string[] produ_invent = variables_glob_conf.GG_arrays_carga_de_archivos[0][indice_producto].Split(Convert.ToChar(G_caracter_separacion[0]));
+
+                if (produ_invent[5] != detalles_del_producto_lista[0])
+                {
+                    produ_invent = extraer_info_e_indise(detalles_del_producto_lista[0]);
+
+                    if (produ_invent[0] == null)
+                    {
+                        return;
+                    }
+                    //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
+                    produ_invent = produ_invent[0].Split(Convert.ToChar(G_caracter_separacion[0]));
+
+
+                }
+
+
+
+                //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
+
+
+            }
+
+        }
+
         public string[] agregar_registro_del_array(string[] arreglo, string registro)
         {
             string[] temp = { "" };
@@ -262,25 +297,20 @@ namespace tienda_todo_funciones.procesos
             {
 
 
-                bool se_encontro_el_producto = false;
+                    bool se_encontro_el_producto = false;
 
-                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo].Length; i++)
+                for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo].Length; i++)
                 {
                     string[] info_spliteado_del_archivo = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo_archivo][i].Split(Convert.ToChar(caracter_separacion_del_archivo[0]));
 
                     //aqui se extrae el arreglo de la info del las columnas recorridas
                     string[] columnas_del_archivo = columna_a_recorer_del_archivo.Split(Convert.ToChar(caracter_separacion_del_archivo[0]));
 
-                    int id_columna_recorrida_archivo = 1; //esta es la inicialisasion del for se hace arriba para poder usar la variable despues 
-                    for (; id_columna_recorrida_archivo < columnas_del_archivo.Length; id_columna_recorrida_archivo++)
-                    {
-                        info_spliteado_del_archivo = info_spliteado_del_archivo[Convert.ToInt32(columnas_del_archivo[id_columna_recorrida_archivo])].Split(Convert.ToChar(caracter_separacion_del_archivo[id_columna_recorrida_archivo]));
-
-                    }
+                    
 
 
                     //aqui la comparacion para ver si existe o no
-                    if (info_spliteado_del_archivo[0] == info_spliteado_del_string[0])
+                    if (info_spliteado_del_archivo[0] == info_spliteado_del_string[id_resul_del_string])
                     {
                         se_encontro_el_producto = true;
                         break;
@@ -291,7 +321,7 @@ namespace tienda_todo_funciones.procesos
 
                 if (se_encontro_el_producto == false)
                 {
-                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_spliteado_del_string[0]);
+                    faltantes_a_retornar = agregar_registro_del_array(faltantes_a_retornar, info_spliteado_del_string[id_resul_del_string]);
                 }
 
             }

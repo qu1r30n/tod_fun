@@ -154,7 +154,10 @@ namespace tienda_todo_funciones.desinger
             //posicion objeto---------------------------------------------------------------------------
             for (int numero_control = 0; numero_control < controles.Length; numero_control++)
             {
-                
+                if (numero_control==13)
+                {
+
+                }
                 int x = 120;
                 int y__ = 40;
 
@@ -517,7 +520,7 @@ namespace tienda_todo_funciones.desinger
                 {
                     string parametros = restricciones[i];
 
-                    if (parametros == "1")//restriccion solo letras
+                    if (parametros == "solo_letras")//restriccion solo letras
                     {
                         cont_txt_cmb.KeyPress += (sender, e) =>
                         {
@@ -533,7 +536,7 @@ namespace tienda_todo_funciones.desinger
                         };
                     }
 
-                    else if (parametros == "2")//restriccion solo numeros
+                    else if (parametros == "solo_numeros")//restriccion solo numeros
                     {
                         cont_txt_cmb.KeyPress += (sender, e) =>
                         {
@@ -547,6 +550,22 @@ namespace tienda_todo_funciones.desinger
                                 // Cancelar la pulsación si no cumple las restricciones
                                 e.Handled = true;
                             }
+                        };
+                    }
+
+                    else if (parametros == "todas_mayusculas")
+                    {
+                        cont_txt_cmb.Leave += (sender, e) =>
+                        {
+                            cont_txt_cmb.Text = cont_txt_cmb.Text.ToUpper();
+                        };
+                    }
+
+                    else if (parametros == "todas_minusculas")
+                    {
+                        cont_txt_cmb.Leave += (sender, e) =>
+                        {
+                            cont_txt_cmb.Text = cont_txt_cmb.Text.ToLower();
                         };
                     }
                 }
@@ -592,14 +611,14 @@ namespace tienda_todo_funciones.desinger
                             if (cont_txt_cmb.Text == "")
                             {
 
-                                reyeno_textbox_ventana_y_comprobacion_array_id_archivo(cont_txt_cmb, esplieteo,4,0);
+                                reyeno_textbox_ventana_y_comprobacion_array_id_archivo(cont_txt_cmb, esplieteo, 4, 0, mayusculas_o_minusculas: "mayusculas");
                             }
 
 
                         };
                         cont_txt_cmb.MouseDoubleClick += (sender, e) =>
                         {
-                            reyeno_textbox_ventana_y_comprobacion_array_id_archivo(cont_txt_cmb, esplieteo,4,0);
+                            reyeno_textbox_ventana_y_comprobacion_array_id_archivo(cont_txt_cmb, esplieteo, 4, 0, mayusculas_o_minusculas: "mayusculas");
                         };
                     }
 
@@ -646,8 +665,6 @@ namespace tienda_todo_funciones.desinger
                             parte_de_un_producto(cont_txt_cmb, esplieteo);
                         };
                     }
-
-
 
                 }
             }
@@ -797,7 +814,7 @@ namespace tienda_todo_funciones.desinger
 
         }
 
-        private void reyeno_textbox_ventana_y_comprobacion_array_id_archivo(Control cont_txt_cmb, string[] esplieteo,int id_array_archivo,int id_colum_comp,string id_extraer=null)
+        private void reyeno_textbox_ventana_y_comprobacion_array_id_archivo(Control cont_txt_cmb, string[] esplieteo,int id_array_archivo,int id_colum_comp,string id_extraer=null,string mayusculas_o_minusculas=null)
         {
 
             bool otro_producto = true;
@@ -818,10 +835,18 @@ namespace tienda_todo_funciones.desinger
                     
                 }
 
-                string[] enviar = new string[] { "4" + G_caracter_separacion[0] + esplieteo[0] + G_caracter_separacion[0] + "nose" + G_caracter_separacion[0] + G_caracter_separacion[0] + "nose" + G_caracter_separacion[0] + nom_imp};
+                string[] enviar = new string[] { "4" + G_caracter_separacion[0] + esplieteo[0] + G_caracter_separacion[0] + "NOSE" + G_caracter_separacion[0] + G_caracter_separacion[0] + "NOSE" + G_caracter_separacion[0] + nom_imp};
                 Ventana_emergente cod_prod = new Ventana_emergente();
                 
                 string cod_bar = cod_prod.Proceso_ventana_emergente(enviar);
+                if (mayusculas_o_minusculas=="mayusculas")
+                {
+                    cod_bar = cod_bar.ToUpper();
+                }
+                else if (mayusculas_o_minusculas == "minusculas")
+                {
+                    cod_bar = cod_bar.ToLower();
+                }
                 if (cod_bar != "")
                 {
                     
@@ -858,9 +883,10 @@ namespace tienda_todo_funciones.desinger
                             {
                                 cont_txt_cmb.Text = cont_txt_cmb.Text + G_caracter_separacion[1] + cod_bar;
                             }
+
                             break;
                         }
-
+                        
                     }
                     DialogResult result = MessageBox.Show("deseas agregar otra informacion?", "Confirmación", MessageBoxButtons.YesNo);
 

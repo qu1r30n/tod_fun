@@ -1,0 +1,13 @@
+buscar resolver en un futuro (opcional pero porfavor)
+
+*importante* que de la ventana emergente de nuevo productos la ventana emergente que sale al ponerte en produc_elab y ingrediente_parte_de_que_producto tambien se pueda buscar por nombre del producto
+
+primera tarea resolver problema de suma de productos y precios que deveria estar en una funcion todo eso por que estamos copipasteando el mismo codigo ademas de que si se cambia la columna tenemos que cambiarla en todos los codigos
+
+segunda tarea ver tambien una variable para comparar el tipo de producto porque ahorita el tipo de producto es 2 pero en un futuro lo cambiaremos para sea mas descriptivo como producto_por_cantidad
+
+que todos los modelos dirijan a procesos porque cantidad_venta_compra_resultado solo hace una parte
+
+checar que chequeo_provedor_sino_agrega funcione si es un arreglo para los datos del provedor como direccion telefono info del supervisor entre otros
+
+

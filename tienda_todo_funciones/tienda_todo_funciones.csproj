@@ -50,6 +50,7 @@
     <Compile Include="clases\Operaciones_archivos.cs" />
     <Compile Include="clases\Operaciones_textos.cs" />
     <Compile Include="clases\Tex_base.cs" />
+    <Compile Include="clases_para_info_windows\info_de_windows.cs" />
     <Compile Include="desinger\herramientas_para_elementos_del_form.cs">
       <SubType>Form</SubType>
     </Compile>

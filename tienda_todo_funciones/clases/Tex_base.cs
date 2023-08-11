@@ -1306,7 +1306,7 @@ namespace tienda_todo_funciones.clases
                 }
                 if (bandera == false)
                 {
-                    //id_0|producto_1|cantidad_producto_2|tipo_de_medida_3|precio_de_venta_4|cod_bar_5|cantidad_6|costo_compra_7|provedor_8|grupo_9|multiusos_10|cantidad_productos_por_paquete_11|productos_elaborados_12|ligar_productos_para_sabor_13|impuesto_14|tipo_producto_para_impuesto_15|
+                    //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
                     bas.Editar_espesifico(direccion_archivo_1, columna_1, info_1[columna_1], "4", "0");
                 }
 
