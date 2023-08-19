@@ -30,7 +30,7 @@ namespace tienda_todo_funciones.forms_prueba
 
             herr_form.fun_lstb_procesar_tecleos(Lst_ventas, Lbl_nom_product_list, Lbl_costo_product_list, Lbl_cuenta);
             herr_form.fun_promociones_procesar_tecleos(Txt_buscar_producto, Lst_ventas,lstb_promociones,lstb_descripcion_promo);
-
+            herr_form.fun_lstb_procesar_clikeo_item(Lst_ventas, Lbl_nom_product_list, Lbl_costo_product_list);
 
 
             herr_form.fun_botones(Lst_ventas,Btn_eliminar_seleccionado, "eliminar_seleccionado", Lbl_nom_product_list, Lbl_costo_product_list, Lbl_cuenta);
@@ -63,6 +63,22 @@ namespace tienda_todo_funciones.forms_prueba
             double cant_compra = Convert.ToDouble(cantidad_venta_compra[2]);
             double resultado = cant_vent - cant_compra;
             lbl_ventas_compras_resultado.Text = cant_vent + "-" + cant_compra + "=" + resultado;
+
+            /*
+            Txt_buscar_producto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            Txt_buscar_producto.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            Txt_nom_producto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            Txt_nom_producto.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+
+            
+            
+            */
+            Txt_buscar_producto.AutoCompleteCustomSource = variables_glob_conf.GG_autoCompleteCollection_codbar_venta;
+            Txt_nom_producto.AutoCompleteCustomSource = variables_glob_conf.GG_autoCompleteCollection_nom_produc_venta;
+            //Txt_buscar_producto.Text = "";
+            //Txt_nom_producto.Text = "";
 
             Txt_buscar_producto.Focus();
         }

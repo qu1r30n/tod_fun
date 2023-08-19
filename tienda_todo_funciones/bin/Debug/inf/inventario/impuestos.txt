@@ -1,1 +1,3 @@
 nombre_impuesto¬porcentage
+IVA¬16
+NOSE¬0

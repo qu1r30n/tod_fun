@@ -166,13 +166,13 @@ namespace tienda_todo_funciones.modelos
             //pr.chequeo_datos_esten_en_archivo("1|1|2|3|4|5|6|7|8|venta_ingrediente||11|12¬0°0_5¬1|13|14°14|15", "0|12", 0, 0, "0",5);
             if (operacion == "chequeo_info_en_archivo")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, "0|12", 0, "0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, "0|12", 0, "0");
             }
 
 
             else if (operacion == "chequeo_provedor_sino_agrega")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|7", 1, "0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|7", 1, "0");
                 if (arreglo_a_retornar != null)
                 {
                     modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
@@ -182,7 +182,7 @@ namespace tienda_todo_funciones.modelos
 
             else if (operacion == "chequeo_tipo_medida_sino_agrega")
             {
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|2", 5, "0|0");
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|2", 5, "0|0");
                 if (arreglo_a_retornar != null)
                 {
                     modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[5, 0], texto_rapido: arreglo_a_retornar[0]);
@@ -196,11 +196,11 @@ namespace tienda_todo_funciones.modelos
                 {
                     if (caracter_separacion_string_archivos == null)
                     {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
                     }
                     else
                     {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3], caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
+                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3], caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
                     }
                 }
 
@@ -209,7 +209,7 @@ namespace tienda_todo_funciones.modelos
             else if (operacion == "form_chequeo_y_agregar_codbar_si_no_esta")
             {
                 
-                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste(texto, "0|5", 0, "0|5");
+                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, "0|5", 0, "0|5");
                 variables_glob_conf.GG_variables_string[0]= arreglo_a_retornar[0];
                 
 
@@ -226,7 +226,7 @@ namespace tienda_todo_funciones.modelos
             else if (operacion == "form_chequeo_impuesto_sino_agrega")
             {
                 string[] caracter_sep_impuestos = { "¬" };
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado(texto, "0|13",4, "0|0",caracter_separacion_del_archivo: caracter_sep_impuestos);
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|13",4, "0|0",caracter_separacion_del_archivo: caracter_sep_impuestos);
                 if (arreglo_a_retornar!=null)
                 {
                     for (int j = 0; j < arreglo_a_retornar.Length; j++)

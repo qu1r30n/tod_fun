@@ -58,6 +58,7 @@ namespace tienda_todo_funciones.desinger
         {
             txt_a_configurar.KeyDown += (sender, e) =>
             {
+                
                 if (e.KeyValue == (char)Keys.Enter)
                 {
                     
@@ -159,8 +160,8 @@ namespace tienda_todo_funciones.desinger
                         {
 
 
-                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:" + info_split_produc_inv[3]; }
-                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
+                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:$" + info_split_produc_inv[3]; }
+                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " $" + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
                             sumar_precio_columna_lstbox(lstb_a_configurar, 4, 5, lbl_configurar_total);
 
                         }
@@ -208,8 +209,8 @@ namespace tienda_todo_funciones.desinger
                         {
 
 
-                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:" + info_split_produc_inv[3]; }
-                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
+                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:$" + info_split_produc_inv[3]; }
+                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " $" + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
                             sumar_precio_columna_lstbox(lstb_a_configurar, 4, 5, lbl_configurar_total);
 
                         }
@@ -290,8 +291,8 @@ namespace tienda_todo_funciones.desinger
                         {
 
 
-                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:" + info_split_produc_inv[4]; }
-                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[4])); }
+                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:$" + info_split_produc_inv[3]; }
+                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " $" + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
                             sumar_precio_columna_lstbox(lstb_a_configurar, 4, 5, lbl_configurar_total);
 
                         }
@@ -340,8 +341,8 @@ namespace tienda_todo_funciones.desinger
                         {
 
 
-                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:" + info_split_produc_inv[4]; }
-                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[4])); }
+                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = elemento_espliteado[1] + " " + elemento_espliteado[2] + " " + elemento_espliteado[3] + " precio:$" + info_split_produc_inv[3]; }
+                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + elemento_espliteado[1] + " " + elemento_espliteado[2] + "" + elemento_espliteado[3] + " $" + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
                             sumar_precio_columna_lstbox(lstb_a_configurar, 4, 5, lbl_configurar_total);
 
                         }
@@ -401,8 +402,8 @@ namespace tienda_todo_funciones.desinger
                         {
                             
                             
-                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = info_pa_comparar[1] + " " + info_pa_comparar[2] + " " + info_pa_comparar[3] + " precio:" + info_split_produc_inv[3]; }
-                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + info_pa_comparar[1] + " " + info_pa_comparar[2] + "" + info_pa_comparar[3] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
+                            if (lbl_configurar_desc_produc != null) { lbl_configurar_desc_produc.Text = info_split_produc_inv[0] + " " + info_split_produc_inv[1] + " " + info_split_produc_inv[2] + " precio:" + info_split_produc_inv[3]; }
+                            if (lbl_configurar_cantidad_costo != null) { lbl_configurar_cantidad_costo.Text = cantidad_sumada_o_restada + " " + info_split_produc_inv[0] + " " + info_split_produc_inv[1] + " " + info_split_produc_inv[2] + " " + (Convert.ToDouble(cantidad_sumada_o_restada) * Convert.ToDouble(info_split_produc_inv[3])); }
                             sumar_precio_columna_lstbox(lstb_a_configurar, 4, 5, lbl_configurar_total);
 
                         }
@@ -433,6 +434,31 @@ namespace tienda_todo_funciones.desinger
 
 
         }
+
+        public void fun_lstb_procesar_clikeo_item(ListBox lstb_a_configurar, Label lbl_configurar_desc_produc, Label lbl_configurar_cantidad_costo)
+        {
+            lstb_a_configurar.Click += (sender, e) =>
+            {
+                if (lstb_a_configurar.SelectedItem != null)
+                {
+
+                    string elemento_seleccionado = lstb_a_configurar.SelectedItem.ToString();
+                    string[] info_de_elemento = elemento_seleccionado.Split(Convert.ToChar(G_caracter_separacion[0]));
+
+                    if (info_de_elemento.Length >= 6)
+                    {
+                        lbl_configurar_desc_produc.Text = info_de_elemento[1] + " " + info_de_elemento[2] + " " + info_de_elemento[3] + " $" + info_de_elemento[4];
+
+                        double precioVenta = Convert.ToDouble(info_de_elemento[4]);
+                        int cantidad = Convert.ToInt32(info_de_elemento[5]);
+                        double costoTotal = precioVenta * cantidad;
+
+                        lbl_configurar_cantidad_costo.Text = info_de_elemento[5] + " " + info_de_elemento[1] + " " + info_de_elemento[2] + " " + info_de_elemento[3] + " $" + costoTotal;
+                    }
+                }
+            };
+        }
+
         //fin listbox-----------------------------------------------------------------------------
         //extras---------------------------------------------------
         public void fun_promociones_procesar_tecleos(TextBox txt_a_configurar, ListBox lstb_a_configurar, ListBox lstb_promociones, ListBox lstb_descripcion_promo)
@@ -540,45 +566,7 @@ namespace tienda_todo_funciones.desinger
             return resultado;
         }
 
-        public string[] OrdenarColumnas_arreglo(string[] columnasArr, string orden, string caracter_separacion = "|")
-        {
-            char caracter = Convert.ToChar(caracter_separacion);
-            string[] ordenArr = orden.Split(caracter);
-
-            string[] columnasOrdenadas = new string[columnasArr.Length];
-
-            for (int j = 0; j < columnasArr.Length; j++)
-            {
-                string[] columnas = columnasArr[j].Split(caracter);
-
-                string resultado = "";
-                for (int i = 0; i < ordenArr.Length; i++)
-                {
-                    int indice = Convert.ToInt32(ordenArr[i]);
-
-                    resultado = resultado + columnas[indice] + caracter;
-                }
-                columnasOrdenadas[j] = resultado.TrimEnd(caracter);
-            }
-            return columnasOrdenadas;
-        }
-
-        public string[] eliminar_registro_del_array(string[] arreglo, int num_registro)
-        {
-            string[] temp = new string[arreglo.Length - 1];
-            int j = 0;
-            for (int i = 0; i < arreglo.Length; i++)
-            {
-                if (i != num_registro)
-                {
-                    temp[j] = arreglo[i];
-                    j++;
-                }
-            }
-
-            return temp;
-        }
-
+        
         
 
         public void funciones_de_botones(ListBox lstb_a_configurar, string proceso,string info_extra="")
@@ -680,6 +668,117 @@ namespace tienda_todo_funciones.desinger
             return total;
         }
 
+        
+
+        public void registro_nuevo_producto(TextBox txt_a_configurar, string registro_agregar)
+        {
+
+            
+
+            //mod__
+            //se supone que no debe usar ni variables_glob_conf var_glob = new variables_glob_conf();
+            //ni tex_base por que eso
+            //lo deberia hacer en los modelos pero modificar despues
+            //y checar si se puede usar la
+            //public static AutoCompleteStringCollection GG_autoCompleteCollection_codbar_venta = new AutoCompleteStringCollection();
+
+            Tex_base bas = new Tex_base();
+            variables_glob_conf var_glob = new variables_glob_conf();
+            string orden_venta = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_codbar_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+            string orden_venta_2 = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_nom_produc_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
+
+
+
+            string reg_ordenado_para_txt = OrdenarColumnas_string(registro_agregar, orden_venta);
+            string reg_ordenado_para_txt2 = OrdenarColumnas_string(registro_agregar, orden_venta);
+
+
+            variables_glob_conf.GG_autoCompleteCollection_codbar_venta.Add(reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
+            variables_glob_conf.GG_autoCompleteCollection_nom_produc_venta.Add(reg_ordenado_para_txt2 + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
+
+            
+            
+
+
+            //fin mod__ --------------------------------------------------------------------------------------------------------
+
+            mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido: registro_agregar);
+
+
+        }
+
+        public string[] extraer_info_e_indise(string cod_bar,string caracter_separacion = null)
+        {
+
+            if (caracter_separacion==null)
+            {
+                caracter_separacion = G_caracter_separacion[0];
+            }
+
+            string[] informacionProducto = { null, null };
+
+            bool encontrado = false;
+            for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+            {
+                string[] producto_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(caracter_separacion));
+                if (producto_espliteado[4] == cod_bar)
+                {
+                    informacionProducto[0] = variables_glob_conf.GG_arrays_carga_de_archivos[0][i];
+                    informacionProducto[1] = ""+i;
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (encontrado==false){/*hacer algo si no lo encuentra*/}
+
+            return informacionProducto;
+        }
+
+
+
+
+        public string[] OrdenarColumnas_arreglo(string[] columnasArr, string orden, string caracter_separacion = "|")
+        {
+            char caracter = Convert.ToChar(caracter_separacion);
+            string[] ordenArr = orden.Split(caracter);
+
+            string[] columnasOrdenadas = new string[columnasArr.Length];
+
+            for (int j = 0; j < columnasArr.Length; j++)
+            {
+                string[] columnas = columnasArr[j].Split(caracter);
+
+                string resultado = "";
+                for (int i = 0; i < ordenArr.Length; i++)
+                {
+                    int indice = Convert.ToInt32(ordenArr[i]);
+
+                    resultado = resultado + columnas[indice] + caracter;
+                }
+                columnasOrdenadas[j] = resultado.TrimEnd(caracter);
+            }
+            return columnasOrdenadas;
+        }
+
+        public string[] eliminar_registro_del_array(string[] arreglo, int num_registro)
+        {
+            string[] temp = new string[arreglo.Length - 1];
+            int j = 0;
+            for (int i = 0; i < arreglo.Length; i++)
+            {
+                if (i != num_registro)
+                {
+                    temp[j] = arreglo[i];
+                    j++;
+                }
+            }
+
+            return temp;
+        }
+
+
+
         public string indice_producto(string cod_bar)
         {
             string existe = "";
@@ -687,9 +786,9 @@ namespace tienda_todo_funciones.desinger
             for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
             {
                 string[] produc_inv_esplit = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(G_caracter_separacion[0]));
-                if (produc_inv_esplit[3]==cod_bar)
+                if (produc_inv_esplit[3] == cod_bar)
                 {
-                    existe = i+"";
+                    existe = i + "";
                     break;
                 }
             }
@@ -772,48 +871,6 @@ namespace tienda_todo_funciones.desinger
 
 
             //promociones fin-----------------------------------------------------------------------------------------------------------
-        }
-
-        public void registro_nuevo_producto(TextBox txt_a_configurar, string registro_agregar)
-        {
-            string orden_1 = "3" + G_caracter_separacion[0] + "2" + G_caracter_separacion[0] + "1" + G_caracter_separacion[0] + "3" + G_caracter_separacion[0] + "7";//se repite el 3 en la [3] pocicion por que de hay se agarrara el codigo de barras para procesarlo
-            string reg_ordenado_para_txt = OrdenarColumnas_string(registro_agregar, orden_1);
-            txt_a_configurar.AutoCompleteCustomSource.Add(reg_ordenado_para_txt+(G_caracter_separacion[0]+variables_glob_conf.GG_arrays_carga_de_archivos[0].Length+""));
-
-            variables_glob_conf.GG_arrays_carga_de_archivos[0] = op_arr.agregar_registro_del_array(variables_glob_conf.GG_arrays_carga_de_archivos[0], reg_ordenado_para_txt + (G_caracter_separacion[0] + variables_glob_conf.GG_arrays_carga_de_archivos[0].Length + ""));
-            
-            
-            mod.modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido: registro_agregar);
-
-
-        }
-
-        public string[] extraer_info_e_indise(string cod_bar,string caracter_separacion = null)
-        {
-
-            if (caracter_separacion==null)
-            {
-                caracter_separacion = G_caracter_separacion[0];
-            }
-
-            string[] informacionProducto = { null, null };
-
-            bool encontrado = false;
-            for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
-            {
-                string[] producto_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(caracter_separacion));
-                if (producto_espliteado[4] == cod_bar)
-                {
-                    informacionProducto[0] = variables_glob_conf.GG_arrays_carga_de_archivos[0][i];
-                    informacionProducto[1] = ""+i;
-                    encontrado = true;
-                    break;
-                }
-            }
-
-            if (encontrado==false){/*hacer algo si no lo encuentra*/}
-
-            return informacionProducto;
         }
 
     }
