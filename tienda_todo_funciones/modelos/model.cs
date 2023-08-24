@@ -208,43 +208,43 @@ namespace tienda_todo_funciones.modelos
 
             else if (operacion == "form_chequeo_y_agregar_codbar_si_no_esta")
             {
-                
-                arreglo_a_retornar =pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, "0|5", 0, "0|5");
-                variables_glob_conf.GG_variables_string[0]= arreglo_a_retornar[0];
-                
 
-                if (arreglo_a_retornar[0] != "" && arreglo_a_retornar.Length < 1) 
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, "0|5", 0, "0|5");
+                variables_glob_conf.GG_variables_string[0] = arreglo_a_retornar[0];
+
+
+                if (arreglo_a_retornar[0] != "" && arreglo_a_retornar.Length < 1)
                 {
                     Ventana_emergente emergent_ventana = new Ventana_emergente();
 
                     string info_a_agregar = emergent_ventana.Proceso_ventana_emergente(variables_glob_conf.GG_ventana_emergente_productos);
                     modelo_unico("agregar_string_al_inventario", texto_rapido: info_a_agregar);
                 }
-                
+
             }
 
             else if (operacion == "form_chequeo_impuesto_sino_agrega")
             {
                 string[] caracter_sep_impuestos = { "¬" };
-                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|13",4, "0|0",caracter_separacion_del_archivo: caracter_sep_impuestos);
-                if (arreglo_a_retornar!=null)
+                arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|13", 4, "0|0", caracter_separacion_del_archivo: caracter_sep_impuestos);
+                if (arreglo_a_retornar != null)
                 {
                     for (int j = 0; j < arreglo_a_retornar.Length; j++)
                     {
-                        
-                            Ventana_emergente vent_emer = new Ventana_emergente();
-                            string[] enviar = { "1" + G_caracter_separacion[0] + "porsentaje_impuesto" + G_caracter_separacion[0] + "0" };
-                            string porcentaje = vent_emer.Proceso_ventana_emergente(enviar, "impuesto: " + arreglo_a_retornar[j]);
-                            string impuesto_y_porcentaje = arreglo_a_retornar[j] + G_caracter_separacion[2] + porcentaje;
+
+                        Ventana_emergente vent_emer = new Ventana_emergente();
+                        string[] enviar = { "1" + G_caracter_separacion[0] + "porsentaje_impuesto" + G_caracter_separacion[0] + "0" };
+                        string porcentaje = vent_emer.Proceso_ventana_emergente(enviar, "impuesto: " + arreglo_a_retornar[j]);
+                        string impuesto_y_porcentaje = arreglo_a_retornar[j] + G_caracter_separacion[2] + porcentaje;
 
 
-                            modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
+                        modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[4, 0], texto_rapido: impuesto_y_porcentaje);
 
-                        
+
                     }
                 }
-                
-                
+
+
             }
 
 

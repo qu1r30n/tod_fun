@@ -87,43 +87,12 @@ namespace tienda_todo_funciones.procesos
         }
 
 
-        public string editar_string_archivo_y_arreglo(string dir_arch, string id_elemento, string texto)
-        {
-            // Buscar el arreglo correspondiente al nombre del archivo
-            bool encontro_archivo = false;
-            int i;
-            for (i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
-            {
-                if (dir_arch == variables_glob_conf.GG_dir_nom_archivos[i, 0])
-                {
-                    encontro_archivo = true;
-                    break;
-                }
-            }
-            if (encontro_archivo == true)
-            {
-                variables_glob_conf.GG_arrays_carga_de_archivos[Convert.ToInt32(i)][Convert.ToInt32(id_elemento)] = texto;
-                bas.cambiar_archivo_con_arreglo(variables_glob_conf.GG_dir_nom_archivos[Convert.ToInt32(dir_arch), 0], variables_glob_conf.GG_arrays_carga_de_archivos[Convert.ToInt32(dir_arch)]);
-                return "1)" + texto;
-            }
-            else
-            {
-                return "2)no se encontro el archivo";
-            }
-
-        }
-
-        public void editar_string_archivo_y_arreglo2(string id_arreglo, string id_elemento, string texto)
-        {
-            variables_glob_conf.GG_arrays_carga_de_archivos[Convert.ToInt32(id_arreglo)][Convert.ToInt32(id_elemento)] = texto;
-            bas.cambiar_archivo_con_arreglo(variables_glob_conf.GG_dir_nom_archivos[Convert.ToInt32(id_arreglo), 0], variables_glob_conf.GG_arrays_carga_de_archivos[Convert.ToInt32(id_arreglo)]);
-        }
-
-        public void editar_string_archivo_y_arreglo_todo_conjunto(string operacion, object dir_arch_o_id, int id_fila = -1, object id_o_nom_columna = null, string comparacion = null, string[] caracter_separacion = null, string texto = null)
+        
+        public void editar_string_archivo_y_arreglo_todo_conjunto(string operacion, object dir_arch_o_id, int id_fila = -1, object id_o_nom_columna_comparar = null, string comparacion = null, string[] caracter_separacion = null, string texto = null, object id_o_nom_columna_editar = null)
         {
             int id_arreglo = -1;
-            int id_elemento = -1;
-            int id_columna = -1;
+            int id_columna_comparar = -1;
+            int id_columna_editar = -1;
 
             if (caracter_separacion == null)
             {
@@ -153,78 +122,147 @@ namespace tienda_todo_funciones.procesos
                 se_encontro_arreglo = true;
 
             }
-            //--------------------------------------------------------------------------
+            //sacamos id_fila--------------------------------------------------------------------------
 
 
             bool se_encontro_fila = false;
             if (id_fila >= 0)
             {
-                id_elemento = id_fila;
                 se_encontro_fila = true;
-
             }
+            //sacar id_fila con columna_comparar ------------------------------------------------------------------------------------
 
-
-            bool se_encontro_columna = false;
-
-            if (id_o_nom_columna is string)
+            bool se_encontro_columna_comparar = false;
+            if (id_o_nom_columna_comparar is string)
             {
                 string[] nom_columnas = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][0].Split(Convert.ToChar(caracter_separacion[0]));
                 for (int i = 0; i < nom_columnas.Length; i++)
                 {
-                    if (id_o_nom_columna == nom_columnas[i])
+
+                    if ((string)id_o_nom_columna_comparar == nom_columnas[i])
                     {
-                        id_columna = i;
-                        se_encontro_columna = true;
+                        id_columna_comparar = i;
+                        se_encontro_columna_comparar = true;
                         break;
                     }
                 }
-                if (se_encontro_columna == false)
+
+                if (se_encontro_fila == false)
                 {
+                    string[] columnas_a_recorrer;
 
-
-                    if (id_elemento < 0)
+                    if (se_encontro_columna_comparar==true)
                     {
-                        for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo].Length; i++)
+                        columnas_a_recorrer = new string[] { "0", ""+id_columna_comparar };
+                    }
+                    else
+                    {
+                        columnas_a_recorrer = id_o_nom_columna_comparar.ToString().Split(Convert.ToChar(G_caracter_separacion[0]));
+                    }
+                    
+
+                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo].Length; i++)
+                    {
+                        string[] columnas_de_la_fila_comp = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][i].Split(Convert.ToChar(caracter_separacion[0]));
+                        for (int j = 1; j < columnas_a_recorrer.Length; j++)
                         {
-                            string[] columnas_a_recorrer = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][i].Split(Convert.ToChar(caracter_separacion[0]));
-
-                            for (int j = 1; j < columnas_a_recorrer.Length; j++)
+                            columnas_de_la_fila_comp = columnas_de_la_fila_comp[Convert.ToInt32(columnas_a_recorrer[j])].Split(Convert.ToChar(G_caracter_separacion[j]));
+                            if (j == columnas_a_recorrer.Length - 1)
                             {
-                                if (true)
+                                if (comparacion == columnas_de_la_fila_comp[0])
                                 {
-
+                                    id_fila = i;
+                                    se_encontro_fila = true;
                                 }
                             }
                         }
                     }
 
-
                 }
 
 
+
             }
 
-            else if (id_o_nom_columna is int)
+            else if (id_o_nom_columna_comparar is int)
             {
-                id_elemento = Convert.ToInt32(id_o_nom_columna);
-                se_encontro_columna = true;
+                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo].Length; i++)
+                {
+                    string[] info_columnas = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][i].Split(Convert.ToChar(G_caracter_separacion[0]));
+                    if (comparacion == info_columnas[(int)id_o_nom_columna_comparar])
+                    {
+                        id_fila = i;
+                        se_encontro_fila = true;
+                    }
+                }
+
+                
             }
 
+            //sacar columna a editar-------------------------------------------------------------------------------------------------------------------------
+            bool se_encontro_columna_editar = false;
+            if (id_o_nom_columna_editar is string)
+            {
+                string[] nom_columnas = variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][0].Split(Convert.ToChar(caracter_separacion[0]));
+                for (int i = 0; i < nom_columnas.Length; i++)
+                {
 
+                    if ((string)id_o_nom_columna_editar == nom_columnas[i])
+                    {
+                        id_columna_editar = i;
+                        se_encontro_columna_editar = true;
+                        break;
+                    }
+                }
+
+
+                // mod__ talves falte columnas a recorrer  para checar y como se hace en la funcion incrementar_decrementar_stringElementoEnMultiArregloRecursivo
+                //por que si hay que cambiar de lugar el de editar tendremos que hacerlo desde la llamada a la funcion
+                //incrementar_decrementar_stringElementoEnMultiArregloRecursivo
+                //y
+                //EditarstringElementoEnMultiArregloRecursivo
+                string[] columnas_a_recorrer;
+
+                if (se_encontro_columna_editar == true)
+                {
+                    columnas_a_recorrer = new string[] { "0", "" + id_columna_editar };
+                }
+
+            }
+
+            else if (id_o_nom_columna_editar is int)
+            {
+                id_columna_editar = (int)id_o_nom_columna_editar;
+
+            }
+
+            //-------------------------------------------------------------------------------------------------------------------------
             if (operacion == "editar_celda")
             {
-                chequeo_datos_esten_en_archivo_retorna_toda_la_fila(comparacion, "" + id_o_nom_columna);
+                variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila] = EditarstringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
+                //chequeo_datos_esten_en_archivo_retorna_toda_la_fila(comparacion, "" + id_o_nom_columna,);
                 //nose_como_llamarlo(dir_arch_o_id,id_fila,id_o_nom_columna,comparacion,texto);
             }
             else if (operacion == "editar_fila")
             {
-                chequeo_datos_esten_en_archivo_retorna_toda_la_fila(comparacion, id_o_nom_columna);
+                //chequeo_datos_esten_en_archivo_retorna_toda_la_fila(comparacion, id_o_nom_columna);
+
+                variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila] = texto;
+
                 //nose_como_llamarlo(dir_arch_o_id, id_fila, id_o_nom_columna, comparacion, texto);
             }
 
+            else if (operacion == "incrementar_decrementar_celda")
+            {
+                variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila]= incrementar_decrementar_stringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
+                //EditarstringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
+            }
+
+            bas.cambiar_archivo_con_arreglo(variables_glob_conf.GG_dir_nom_archivos[id_arreglo, 0], variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo]);
 
         }
+
+
 
         public string EditarstringElementoEnMultiArregloRecursivo(string texto, object columnas_a_recorrer, string texto_a_sustituir, string[] caracterSeparacion = null)
         {
@@ -244,7 +282,7 @@ namespace tienda_todo_funciones.procesos
                 
                 espliteado_columnas_recorrer = temp;
             }
-
+            string[] espliteado_texto = texto.Split(Convert.ToChar(caracterSeparacion[0]));
 
             string texto_a_retornar = "";
             if (espliteado_columnas_recorrer.Length > 1)
@@ -257,14 +295,70 @@ namespace tienda_todo_funciones.procesos
                     tem_array_caracter_separacion[i - 1] = caracterSeparacion[i];
                 }
 
-                string[] espliteado_texto = texto.Split(Convert.ToChar(tem_array_caracter_separacion[0]));
+                //espliteado_texto = texto.Split(Convert.ToChar(tem_array_caracter_separacion[0]));
                 texto_a_retornar = espliteado_texto[Convert.ToInt32(tem_array_col_recorrer[0])];
 
-                EditarstringElementoEnMultiArregloRecursivo(texto_a_retornar,tem_array_col_recorrer,texto_a_sustituir); // Llamada recursiva
+                espliteado_texto[Convert.ToInt32(espliteado_columnas_recorrer[1])]=EditarstringElementoEnMultiArregloRecursivo(texto_a_retornar, tem_array_col_recorrer, texto_a_sustituir,tem_array_caracter_separacion); // Llamada recursiva
             }
-            reu
+            else
+            {
+                texto_a_retornar = texto_a_sustituir;
+                espliteado_texto[0] = texto_a_retornar;
+            }
+            texto_a_retornar = string.Join(caracterSeparacion[0], espliteado_texto);
+            return texto_a_retornar;
         }
 
+
+        public string incrementar_decrementar_stringElementoEnMultiArregloRecursivo(string texto, object columnas_a_recorrer, string cantidad_a_incrementar_decrementar, string[] caracterSeparacion = null)
+        {
+            if (caracterSeparacion == null)
+            {
+                caracterSeparacion = G_caracter_separacion;
+            }
+
+            string[] espliteado_columnas_recorrer = { };
+
+            if (columnas_a_recorrer is string)
+            {
+                espliteado_columnas_recorrer = columnas_a_recorrer.ToString().Split(Convert.ToChar(caracterSeparacion[0]));
+            }
+            else if (columnas_a_recorrer is string[] temp)
+            {
+
+                espliteado_columnas_recorrer = temp;
+            }
+            string[] espliteado_texto = texto.Split(Convert.ToChar(caracterSeparacion[0]));
+
+            string texto_a_retornar = "";
+            if (espliteado_columnas_recorrer.Length > 1)
+            {
+                string[] tem_array_col_recorrer = new string[espliteado_columnas_recorrer.Length - 1];
+                string[] tem_array_caracter_separacion = new string[caracterSeparacion.Length - 1];
+                for (int i = 1; i < espliteado_columnas_recorrer.Length; i++)
+                {
+                    tem_array_col_recorrer[i - 1] = espliteado_columnas_recorrer[i];
+                    tem_array_caracter_separacion[i - 1] = caracterSeparacion[i];
+                }
+
+                //espliteado_texto = texto.Split(Convert.ToChar(tem_array_caracter_separacion[0]));
+                texto_a_retornar = espliteado_texto[Convert.ToInt32(tem_array_col_recorrer[0])];
+
+                espliteado_texto[Convert.ToInt32(espliteado_columnas_recorrer[1])]=incrementar_decrementar_stringElementoEnMultiArregloRecursivo(texto_a_retornar, tem_array_col_recorrer, cantidad_a_incrementar_decrementar,tem_array_caracter_separacion); // Llamada recursiva
+                
+                
+            }
+
+            else
+            {
+                texto_a_retornar = ""+(Convert.ToDouble(espliteado_texto[0]) +Convert.ToDouble(cantidad_a_incrementar_decrementar));
+                espliteado_texto[0] = texto_a_retornar;
+            }
+
+
+            texto_a_retornar = string.Join(caracterSeparacion[0], espliteado_texto);
+            return texto_a_retornar;
+        }
 
 
         //-----------------------------------------------------------------------------------------------
@@ -303,8 +397,8 @@ namespace tienda_todo_funciones.procesos
 
                 }
 
-
-
+                editar_string_archivo_y_arreglo_todo_conjunto("incrementar_decrementar_celda", variables_glob_conf.GG_dir_nom_archivos[0, 0], -1, "cod_barras", detalles_del_producto_lista[0], null,"-" + detalles_del_producto_lista[5],"cantidad");
+                
                 //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
 
 

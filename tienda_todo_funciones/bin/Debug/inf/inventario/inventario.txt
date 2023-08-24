@@ -1,4 +1,3 @@
 producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
 coca cola vidrio|500|ML|11|7501055302086|1|8|COCA COLA|1||1|||IVA°NOSE|
-|0|NOSE|0|a|1|0|NOSE|1||1|||NOSE|
-coca menos azucar|355|ML|14|7501055300075|1|11|COCA COLA|1||1|||IVA|
+coca menos azucar|355|ML|14|7501055300075|0|11|COCA COLA|1||1|||IVA|

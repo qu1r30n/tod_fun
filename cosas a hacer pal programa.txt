@@ -12,4 +12,4 @@ que todos los modelos dirijan a procesos porque cantidad_venta_compra_resultado 
 
 checar que chequeo_provedor_sino_agrega funcione si es un arreglo para los datos del provedor como direccion telefono info del supervisor entre otros
 
-
+talves falte columnas a recorrer  para checar y como se hace en la funcion incrementar_decrementar_stringElementoEnMultiArregloRecursivo
