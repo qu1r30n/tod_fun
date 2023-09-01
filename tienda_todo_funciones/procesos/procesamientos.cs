@@ -18,22 +18,23 @@ namespace tienda_todo_funciones.procesos
         string[] G_caracter_separacion = variables_glob_conf.GG_caracter_separacion;
 
         //----------------------------------------------------------------------------------------------
+        // funcion para crear archivos al inicio del programa
         public void crear_archivos_inicio_programa()
         {
 
 
-            //archivos del programa
+            // Crear archivos del programa
             for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
                 bas.Crear_archivo_y_directorio(variables_glob_conf.GG_dir_nom_archivos[i, 0], variables_glob_conf.GG_dir_nom_archivos[i, 1]);
             }
 
-            //archivos de registro
+            // Crear archivos de registro
             for (int i = 0; i < variables_glob_conf.GG_dir_reg.GetLength(0); i++)
             {
                 bas.Crear_archivo_y_directorio(variables_glob_conf.GG_dir_reg[i, 0], variables_glob_conf.GG_dir_reg[i, 1]);
             }
-            //recarga informacion arreglos
+            // Recargar información de arreglos desde archivos
             for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
                 variables_glob_conf.GG_arrays_carga_de_archivos[i] = bas.Leer(variables_glob_conf.GG_dir_nom_archivos[i, 0]);
@@ -41,23 +42,27 @@ namespace tienda_todo_funciones.procesos
 
             variables_glob_conf var_glob = new variables_glob_conf();
 
+            // orden que el text box venta deve tener por codigo y por nombre
             string orden_venta = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_codbar_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
             string orden_venta_2 = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_nom_produc_venta, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
 
+            // orden que el text box venta deve tener por codigo y por nombre
             string orden_compra = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_codbar_compra, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
             string orden_compra_2 = bas.arr_str_conv_nom_a_indice(var_glob.GG_orden_nom_produc_compra, variables_glob_conf.GG_arrays_carga_de_archivos[0][0], Convert.ToChar(G_caracter_separacion[0]));
 
-            //carga predicciones en la varable globar GG_autoCompleteCollection que sirve para las predicciones uno es para predictor codbar y el otro para nombre de producto
+            // Cargar predicciones en las variables globales GG_autoCompleteCollection (para predictor de código de barras y nombre de producto)
             for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
             {
                 Operaciones_textos op_tex = new Operaciones_textos();
-
+                
+                // Obtener texto ordenado para ventas y compras
                 string texto_a_agregar_venta = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_venta, G_caracter_separacion[0]);
                 string texto_a_agregar_nom_produc_venta = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_venta_2, G_caracter_separacion[0]);
 
                 string texto_a_agregar_compra = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_compra, G_caracter_separacion[0]);
                 string texto_a_agregar_nom_produc_compra = op_tex.ordenar_string_con_caractere_separacion(variables_glob_conf.GG_arrays_carga_de_archivos[0][i], orden_compra_2, G_caracter_separacion[0]);
 
+                // Agregar a las variables globales GG_autoCompleteCollection
                 variables_glob_conf.GG_autoCompleteCollection_codbar_venta.Add(texto_a_agregar_venta);
                 variables_glob_conf.GG_autoCompleteCollection_nom_produc_venta.Add(texto_a_agregar_nom_produc_venta);
 
@@ -69,11 +74,57 @@ namespace tienda_todo_funciones.procesos
 
         //-----------------------------------------------------------------------------------------------
 
+        public void modelo_de_registros(object id_o_nombre_direccion_registro,string texto)
+        {
+            int id_de_registro_int = -1;
+            
+            if (id_o_nombre_direccion_registro is string)
+            {
+                bool se_encontro_direccion = false;
+                
+                for (int i = 0; i < variables_glob_conf.GG_dir_reg.GetLength(0); i++)
+                {
+                    if (variables_glob_conf.GG_dir_nom_archivos[i, 0] == id_o_nombre_direccion_registro.ToString())
+                    {
+                        id_de_registro_int = i;
+                        se_encontro_direccion = true;
+                        break;
+                    }
+                }
+
+                if (se_encontro_direccion==false)
+                {
+                    if ("ventas" == id_o_nombre_direccion_registro.ToString())
+                    {
+                        id_de_registro_int = 0;
+                    }
+
+                    else if ("compras" == id_o_nombre_direccion_registro.ToString()) 
+                    {
+                        id_de_registro_int = 1;
+                    }
+                }
+            }
+
+            else if (id_o_nombre_direccion_registro is int)
+            {
+                id_de_registro_int = (int)id_o_nombre_direccion_registro;
+            }
+
+            bas.Crear_archivo_y_directorio(variables_glob_conf.GG_dir_reg[id_de_registro_int, 0]);
+            bas.Agregar(variables_glob_conf.GG_dir_reg[id_de_registro_int, 0], texto);
+        }
+
+
+        // Método para agregar un texto a un archivo y actualizar un arreglo
         public void agregar_string_archivo(string direccion, string texto)
         {
+            // Crear el archivo si no existe crea directorios, archivos y agregar el texto
             bas.Crear_archivo_y_directorio(direccion);
             bas.Agregar(direccion, texto);
 
+            // Recorrer los nombres de archivos en el arreglo global GG_dir_nom_archivos
+            //  si coincide el nombre el agrega nuevo registro
             for (int i = 0; i < variables_glob_conf.GG_dir_nom_archivos.GetLength(0); i++)
             {
                 if (direccion == variables_glob_conf.GG_dir_nom_archivos[i, 0])
@@ -87,13 +138,16 @@ namespace tienda_todo_funciones.procesos
         }
 
 
-        
-        public void editar_string_archivo_y_arreglo_todo_conjunto(string operacion, object dir_arch_o_id, int id_fila = -1, object id_o_nom_columna_comparar = null, string comparacion = null, string[] caracter_separacion = null, string texto = null, object id_o_nom_columna_editar = null)
+        // entrada Método para editar un string en un archivo y actualizar un arreglo en conjunto
+        public void editar_string_archivo_y_arreglo_todo_conjunto(string operacion, object dir_arch_o_id, string texto = null, int id_fila = -1, object id_o_nom_columna_comparar = null, string comparacion = null, string[] caracter_separacion = null, object id_o_nom_columna_editar = null,string si_no_existe_info_que_texto_agregar=null)
         {
+            // Variables para almacenar los índices de los arreglos y columnas
+            // no esta el de fila por que es parametro
             int id_arreglo = -1;
             int id_columna_comparar = -1;
             int id_columna_editar = -1;
 
+            // Si el arreglo de separación de caracteres no está definido, usar el valor predeterminado
             if (caracter_separacion == null)
             {
                 caracter_separacion = G_caracter_separacion;
@@ -258,14 +312,32 @@ namespace tienda_todo_funciones.procesos
                 //EditarstringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
             }
 
+            else if (operacion == "incrementar_decrementar_celda_sino_existe_agrega_texto")
+            {
+                if (id_arreglo >= -1 && id_fila >= -1) 
+                {
+                    variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila] = incrementar_decrementar_stringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
+                }
+                else
+                {
+                    if (si_no_existe_info_que_texto_agregar!=null)
+                    {
+                        agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[id_arreglo, 0], si_no_existe_info_que_texto_agregar);
+                    }
+                    
+                }
+                //EditarstringElementoEnMultiArregloRecursivo(variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo][id_fila], "0|" + id_columna_editar, texto);
+            }
+
             bas.cambiar_archivo_con_arreglo(variables_glob_conf.GG_dir_nom_archivos[id_arreglo, 0], variables_glob_conf.GG_arrays_carga_de_archivos[id_arreglo]);
 
         }
 
 
-
+        // Método para editar un elemento en un string de formato arreglo multiple, recursivo
         public string EditarstringElementoEnMultiArregloRecursivo(string texto, object columnas_a_recorrer, string texto_a_sustituir, string[] caracterSeparacion = null)
         {
+            //si no introdujo caracteres de separacion se usara predeterminado
             if (caracterSeparacion == null)
             {
                 caracterSeparacion = G_caracter_separacion;
@@ -273,6 +345,7 @@ namespace tienda_todo_funciones.procesos
 
             string[] espliteado_columnas_recorrer = { };
 
+            //Sí es un string lo splitea Este normalmente es al inicio de la función 
             if (columnas_a_recorrer is string)
             {
                 espliteado_columnas_recorrer = columnas_a_recorrer.ToString().Split(Convert.ToChar(caracterSeparacion[0]));
@@ -282,9 +355,12 @@ namespace tienda_todo_funciones.procesos
                 
                 espliteado_columnas_recorrer = temp;
             }
+            
             string[] espliteado_texto = texto.Split(Convert.ToChar(caracterSeparacion[0]));
 
             string texto_a_retornar = "";
+            //En esta parte Se inicia desde el segundo elemento y se guardan los caracteres y
+            //las columnas para sí hay otro elemento En el arreglo múltiple 
             if (espliteado_columnas_recorrer.Length > 1)
             {
                 string[] tem_array_col_recorrer = new string[espliteado_columnas_recorrer.Length - 1];
@@ -295,30 +371,34 @@ namespace tienda_todo_funciones.procesos
                     tem_array_caracter_separacion[i - 1] = caracterSeparacion[i];
                 }
 
-                //espliteado_texto = texto.Split(Convert.ToChar(tem_array_caracter_separacion[0]));
+                
                 texto_a_retornar = espliteado_texto[Convert.ToInt32(tem_array_col_recorrer[0])];
 
                 espliteado_texto[Convert.ToInt32(espliteado_columnas_recorrer[1])]=EditarstringElementoEnMultiArregloRecursivo(texto_a_retornar, tem_array_col_recorrer, texto_a_sustituir,tem_array_caracter_separacion); // Llamada recursiva
             }
             else
             {
+                //Sí es el último elemento del arreglo múltiple modifica el texto
+                //para finalmente concatenarlos Con Los otros textos a retornar de la función recursiva 
                 texto_a_retornar = texto_a_sustituir;
                 espliteado_texto[0] = texto_a_retornar;
             }
+            //Este concatena todos los resultados para el final ya tener toda la fila recuerda que es un proceso recursivo 
             texto_a_retornar = string.Join(caracterSeparacion[0], espliteado_texto);
             return texto_a_retornar;
         }
 
-
+        // Método para incrementar un elemento en un string de formato arreglo multiple, recursivo
         public string incrementar_decrementar_stringElementoEnMultiArregloRecursivo(string texto, object columnas_a_recorrer, string cantidad_a_incrementar_decrementar, string[] caracterSeparacion = null)
         {
+            //si no introdujo caracteres de separacion se usara predeterminado
             if (caracterSeparacion == null)
             {
                 caracterSeparacion = G_caracter_separacion;
             }
 
             string[] espliteado_columnas_recorrer = { };
-
+            //Sí es un string lo splitea Este normalmente es al inicio de la función 
             if (columnas_a_recorrer is string)
             {
                 espliteado_columnas_recorrer = columnas_a_recorrer.ToString().Split(Convert.ToChar(caracterSeparacion[0]));
@@ -330,6 +410,8 @@ namespace tienda_todo_funciones.procesos
             }
             string[] espliteado_texto = texto.Split(Convert.ToChar(caracterSeparacion[0]));
 
+            //En esta parte Se inicia desde el segundo elemento y se guardan los caracteres y
+            //las columnas para sí hay otro elemento En el arreglo múltiple 
             string texto_a_retornar = "";
             if (espliteado_columnas_recorrer.Length > 1)
             {
@@ -351,11 +433,13 @@ namespace tienda_todo_funciones.procesos
 
             else
             {
+                //Sí es el último elemento del arreglo múltiple modifica el texto
+                //para finalmente concatenarlos Con Los otros textos a retornar de la función recursiva 
                 texto_a_retornar = ""+(Convert.ToDouble(espliteado_texto[0]) +Convert.ToDouble(cantidad_a_incrementar_decrementar));
                 espliteado_texto[0] = texto_a_retornar;
             }
 
-
+            //Este concatena todos los resultados para el final ya tener toda la fila recuerda que es un proceso recursivo 
             texto_a_retornar = string.Join(caracterSeparacion[0], espliteado_texto);
             return texto_a_retornar;
         }
@@ -371,39 +455,54 @@ namespace tienda_todo_funciones.procesos
 
         //-----------------------------------------------------------------------------------------------
 
+        // Método para procesar una venta utilizando información de la lista de venta
         public void procesar_venta(string[] info_lista_venta, string caracter_separacion = null)
         {
             if (caracter_separacion == null)
             {
                 caracter_separacion = G_caracter_separacion[0];
             }
+            double total_venta = 0;
+            double total_costo_compra = 0;
             for (int i = 0; i < info_lista_venta.Length; i++)
             {
+                // Dividir los detalles del producto en la lista de venta utilizando el caracter de separación
                 string[] detalles_del_producto_lista = info_lista_venta[i].Split(Convert.ToChar(caracter_separacion));
+                
+                // Obtener el índice del producto en el arreglo de carga
                 int indice_producto = Convert.ToInt32(detalles_del_producto_lista[detalles_del_producto_lista.Length - 1]);
+                
+                // Dividir la información del producto en el inventario utilizando el caracter de separación global
                 string[] produ_invent = variables_glob_conf.GG_arrays_carga_de_archivos[0][indice_producto].Split(Convert.ToChar(G_caracter_separacion[0]));
 
                 if (produ_invent[4] != detalles_del_producto_lista[0])
                 {
+                    // Extraer información e índice del producto utilizando la función extraer_info_e_indise
                     produ_invent = extraer_info_e_indise(detalles_del_producto_lista[0]);
 
+                    // Si no se pudo extraer la información del producto, detener el proceso
                     if (produ_invent[0] == null)
                     {
                         return;
                     }
-                    //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
+
+                    // Dividir la información del producto extraída utilizando el caracter de separación global
                     produ_invent = produ_invent[0].Split(Convert.ToChar(G_caracter_separacion[0]));
+                    // Actualizar el índice del producto a partir de la nueva información obtenida
                     indice_producto = Convert.ToInt32(produ_invent[1]);
 
                 }
 
-                editar_string_archivo_y_arreglo_todo_conjunto("incrementar_decrementar_celda", variables_glob_conf.GG_dir_nom_archivos[0, 0], -1, "cod_barras", detalles_del_producto_lista[0], null,"-" + detalles_del_producto_lista[5],"cantidad");
-                
-                //producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
-
-
+                // Llamar al método para editar una celda en el archivo y arreglo
+                //decrementa cantidad del producto en el inventario
+                editar_string_archivo_y_arreglo_todo_conjunto("incrementar_decrementar_celda", variables_glob_conf.GG_dir_nom_archivos[0, 0], "-" + detalles_del_producto_lista[5], -1, "cod_barras", detalles_del_producto_lista[0], null,"cantidad", info_lista_venta[i]);
+                editar_string_archivo_y_arreglo_todo_conjunto("incrementar_decrementar_celda", variables_glob_conf.GG_dir_nom_archivos[1, 0],detalles_del_producto_lista[5], -1, "provedor", produ_invent[7], null, "dinero");
+                total_venta = total_venta + (Convert.ToDouble(produ_invent[3]) * Convert.ToDouble(detalles_del_producto_lista[5]));
+                total_costo_compra = total_costo_compra + (Convert.ToDouble(produ_invent[6]) * Convert.ToDouble(detalles_del_producto_lista[5]));
             }
-
+            //hora_min_seg|total_transaccion|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|pagado_por_promocion|
+            //string text_agregar = DateTime.Now.ToString("HHmmss") + G_caracter_separacion[0] + ;
+            //modelo_de_registros("venta", text_agregar);
         }
 
         public void procesar_compra(string[] info_lista_venta, string caracter_separacion = null)
@@ -441,24 +540,28 @@ namespace tienda_todo_funciones.procesos
 
         }
 
+        // Método para agregar un registro a un arreglo de strings
         public string[] agregar_registro_del_array(string[] arreglo, string registro)
         {
             string[] temp = { "" };
 
+            //Este if es por si no tienen nada el arreglo Agrega el registro inicial 
             if (arreglo == null)
             {
-                arreglo = new string[] { "" };
+                arreglo = new string[] { "" };// Crear un nuevo arreglo con un elemento vacío
                 temp = new string[arreglo.Length];
-
+                
+                // Copiar los elementos del arreglo original al arreglo temporal
                 for (int i = 0; i < arreglo.Length; i++)
                 {
                     temp[i] = arreglo[i];
                 }
 
+                // Agregar el nuevo registro al último elemento del arreglo temporal
                 temp[arreglo.Length - 1] = registro;
 
             }
-
+            //Este si tiene datos el arreglo le agrega otro registro más 
             else
             {
                 temp = new string[arreglo.Length + 1];

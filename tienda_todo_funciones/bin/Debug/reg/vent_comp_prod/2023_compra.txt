@@ -1,1 +1,1 @@
-año|total_venta|total_compra|
+año|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2

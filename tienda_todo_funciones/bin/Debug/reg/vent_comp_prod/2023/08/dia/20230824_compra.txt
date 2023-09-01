@@ -1,1 +1,0 @@
-hora_min_seg|codigo¬nombre¬cantidad¬precio_venta¬precio_compra°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2|total_venta|total_compra|
