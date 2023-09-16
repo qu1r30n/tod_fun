@@ -683,7 +683,7 @@ namespace tienda_todo_funciones.desinger
 
 
                 string todos_los_codbar = "";
-                for (int j = 0; j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; j++)
+                for (int j = variables_glob_conf.GG_var_glob_int[0]; j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; j++)
                 {
                     string[] info_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][j].Split(Convert.ToChar(G_caracter_separacion[0]));
                     if (j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length - 1)
@@ -821,7 +821,7 @@ namespace tienda_todo_funciones.desinger
             while (otro_producto)
             {
                 string nom_imp = "";
-                for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
+                for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
                 {
                     string[]temp=variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo][i].Split(Convert.ToChar(G_caracter_separacion[2]));
                     if (i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length-1) 
@@ -850,7 +850,7 @@ namespace tienda_todo_funciones.desinger
                 if (cod_bar != "")
                 {
                     
-                    for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
+                    for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo].Length; i++)
                     {
 
                         string[] inf_produc = variables_glob_conf.GG_arrays_carga_de_archivos[id_array_archivo][i].Split(Convert.ToChar(G_caracter_separacion[0]));

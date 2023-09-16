@@ -1,0 +1,4 @@
+hora_min_seg|total_transaccion_vendida|costo_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2|codigo¬nombre¬cantidad¬precio_venta¬precio_compra¬provedor°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2¬provedor_2|alguna_informacion
+09:02:27|128|112|IVA¬20.48¬16°NOSE¬0¬0|7501055368570¬coca retornable 2.5 LT¬4¬32¬COCA COLA|
+09:13:22|128|112|IVA¬20.48¬16°NOSE¬0¬0|7501055368570¬coca retornable 2.5 LT¬4¬32¬COCA COLA|
+09:20:52|128|112|IVA¬20.48¬16°NOSE¬0¬0|7501055368570¬coca retornable 2.5 LT¬4¬32¬COCA COLA|

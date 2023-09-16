@@ -1,1 +1,1 @@
-
+nombre_producto°cod_bar°cantidad°precio_venta°precio_compra

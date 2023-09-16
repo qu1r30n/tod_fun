@@ -1,1 +1,2 @@
-codigo|total_venta|total_compra|
+codigo|cantidad|nombre
+7501055368570|100|coca retornable 2.5 LT

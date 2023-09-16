@@ -2,6 +2,9 @@ buscar resolver en un futuro (opcional pero porfavor)
 
 busca los comentarios con mod__ err__    estos err__ son errores  y mod__ modificar los dos contiene una descripcion del problema
 
+creo lo programe bien, no se si valla a haber errores en GG_var_glob_int al ser 1 //el objetivo de esa variable es que al iniciar las busquedas  en el arreglo de archivos empiese en la busqueda delarchivo dese la fila uno para que no aparesca el nombre de las columnas
+pero no se si alla efecto al buscar por nombre de columna alguna informacion
+
 *importante* que de la ventana emergente de nuevo productos la ventana emergente que sale al ponerte en produc_elab y ingrediente_parte_de_que_producto tambien se pueda buscar por nombre del producto
 
 primera tarea resolver problema de suma de productos y precios que deveria estar en una funcion todo eso por que estamos copipasteando el mismo codigo ademas de que si se cambia la columna tenemos que cambiarla en todos los codigos

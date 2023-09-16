@@ -160,8 +160,12 @@ namespace tienda_todo_funciones.modelos
             modelo_unico("mod_chequeo_info_arch", ubicacion_rapida: "form_chequeo_impuesto_sino_agrega", texto_rapido: datos_introducidos);
         }
 
-        private string[] mod_chequeo_info_arch(string operacion, string texto, string[] info_extra = null, string[][] caracter_separacion_string_archivos = null)
+        private string[] mod_chequeo_info_arch(string operacion, string texto, string[] info_extra = null, string[] caracter_separacion = null)
         {
+            if (caracter_separacion == null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
             string[] arreglo_a_retornar = null;
             //pr.chequeo_datos_esten_en_archivo("1|1|2|3|4|5|6|7|8|venta_ingrediente||11|12¬0°0_5¬1|13|14°14|15", "0|12", 0, 0, "0",5);
             if (operacion == "chequeo_info_en_archivo")
@@ -175,7 +179,10 @@ namespace tienda_todo_funciones.modelos
                 arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_solo_el_elemento_buscado_faltantes(texto, "0|7", 1, "0");
                 if (arreglo_a_retornar != null)
                 {
-                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1, 0], texto_rapido: arreglo_a_retornar[0]);
+                    string[] texto_espliteado = texto.Split(Convert.ToChar(caracter_separacion[0]));
+                    //provedor|dinero|dias_de_preventa_0°dias_de_preventa_1|dias_de_entrega_0°dias_de_entrega_1|id_de_empleado|nombre_y_apellidos|numero_celular_de_provedor|numero_de_telefono_para_reporte|direccion_empresa|calificacion_preventa¬0°calificacion_entrega¬0|comentarios_preventa_entrega
+                    string info_a_agregar = arreglo_a_retornar[0] + caracter_separacion[0] + "0" + caracter_separacion[0] + "" + caracter_separacion[1] + "" + caracter_separacion[0] + "" + caracter_separacion[1] + "" + caracter_separacion[0] + "" + caracter_separacion[0] + "" + caracter_separacion[0] + "" + caracter_separacion[0] + "" + caracter_separacion[0] + "" + caracter_separacion[0] + "calificacion_preventa¬0" + caracter_separacion[1] + "calificacion_entrega¬0" + caracter_separacion[0] + "";
+                    modelo_unico("agregar_string_al_archivo", ubicacion_rapida: variables_glob_conf.GG_dir_nom_archivos[1, 0], texto_rapido: info_a_agregar);
 
                 }
             }
@@ -190,21 +197,7 @@ namespace tienda_todo_funciones.modelos
                 }
             }
 
-            else if (operacion == "chequeo_informacion_abierto")
-            {
-                if (info_extra != null)
-                {
-                    if (caracter_separacion_string_archivos == null)
-                    {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3]);
-                    }
-                    else
-                    {
-                        arreglo_a_retornar = pr.chequeo_datos_esten_en_archivo_retorna_todo_el_texto_que_ingresaste_faltante(texto, info_extra[0], Convert.ToInt32(info_extra[2]), info_extra[3], caracter_separacion_string_archivos[0], caracter_separacion_string_archivos[1]);
-                    }
-                }
-
-            }
+            
 
             else if (operacion == "form_chequeo_y_agregar_codbar_si_no_esta")
             {

@@ -634,7 +634,7 @@ namespace tienda_todo_funciones.desinger
             if (!esta_el_mismo_producto)
             {
                 
-                for (int j = 0; j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; j++)
+                for (int j = variables_glob_conf.GG_var_glob_int[0]; j < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; j++)
                 {
                     string[] producto_invent=variables_glob_conf.GG_arrays_carga_de_archivos[0][j].Split(Convert.ToChar(G_caracter_separacion[0]));
                     if (codigo== producto_invent[4])
@@ -718,7 +718,7 @@ namespace tienda_todo_funciones.desinger
             string[] informacionProducto = { null, null };
 
             bool encontrado = false;
-            for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+            for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
             {
                 string[] producto_espliteado = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(caracter_separacion));
                 if (producto_espliteado[4] == cod_bar)
@@ -781,9 +781,10 @@ namespace tienda_todo_funciones.desinger
 
         public string indice_producto(string cod_bar)
         {
+            
             string existe = "";
 
-            for (int i = 0; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
+            for (int i = variables_glob_conf.GG_var_glob_int[0]; i < variables_glob_conf.GG_arrays_carga_de_archivos[0].Length; i++)
             {
                 string[] produc_inv_esplit = variables_glob_conf.GG_arrays_carga_de_archivos[0][i].Split(Convert.ToChar(G_caracter_separacion[0]));
                 if (produc_inv_esplit[3] == cod_bar)

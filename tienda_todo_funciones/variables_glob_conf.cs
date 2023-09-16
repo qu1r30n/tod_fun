@@ -37,25 +37,25 @@ namespace tienda_todo_funciones
         //formato   {direccion_de_archivo,fila_inicial_archivo}
         static public string[,] GG_dir_reg =
         {
-             /*0*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\"+ DateTime.Now.ToString("yyyyMMdd") + "_venta.txt", "hora_min_seg" + GG_caracter_separacion[0] + "total_transaccion_vendida" + GG_caracter_separacion[0] + "costo_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2" + GG_caracter_separacion[0] + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "pagado_por_promocion" + GG_caracter_separacion[0] + "descripcion_promocion"},
-             /*1*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_compra.txt" ,"hora_min_seg" + GG_caracter_separacion[0] + "total_transaccion"  + GG_caracter_separacion[0] + "costo_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2" + GG_caracter_separacion[0]  + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "pagado_por_promocion" + GG_caracter_separacion[0] + "descripcion_promocion"},
-             /*2*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre" + GG_caracter_separacion[0]},
+             /*0*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\"+ DateTime.Now.ToString("yyyyMMdd") + "_venta.txt", "hora_min_seg" + GG_caracter_separacion[0] + "total_transaccion_vendida" + GG_caracter_separacion[0] + "costo_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2" + GG_caracter_separacion[0] + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[2] + "provedor" + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[2] + "provedor_2" +  GG_caracter_separacion[0] + "alguna_informacion"},
+             /*1*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_compra.txt" ,"hora_min_seg" + GG_caracter_separacion[0] + "total_transaccion_compra"  + GG_caracter_separacion[0] + "posible_total_venta" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2" + GG_caracter_separacion[0]  + "codigo" + GG_caracter_separacion[2] + "nombre" + GG_caracter_separacion[2] + "cantidad" + GG_caracter_separacion[2] + "precio_venta" + GG_caracter_separacion[2] + "precio_compra" + GG_caracter_separacion[2] + "provedor"  + GG_caracter_separacion[1] + "codigo_2" + GG_caracter_separacion[2] + "nombre_2" + GG_caracter_separacion[2] + "cantidad_2" + GG_caracter_separacion[2] + "precio_venta_2" + GG_caracter_separacion[2] + "precio_compra_2" + GG_caracter_separacion[2] + "provedor_2" + GG_caracter_separacion[0] + "alguna_informacion"},
+             /*2*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\dia\\" + DateTime.Now.ToString("yyyyMMdd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre"},
              //------------------------------------------------------------------------------------------------------------------------
              /*3*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_venta.txt" ,"dia" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2"},
              /*4*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_compra.txt" ,"dia" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2" },
-             /*5*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*5*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "\\" + DateTime.Now.ToString("dd") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre"},
              //-------------------------------------------------------------------------------------------------------------------------
              /*6*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_venta.txt" ,"mes" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2"},
              /*7*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_compra.txt" ,"mes" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2" + GG_caracter_separacion[2] + "porcentage_de_impuesto_2"},
-             /*8*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*8*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("MM") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre"},
              //----------------------------------------------------------------------------------------------------------------------------
              /*9*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_venta.txt" ,"año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2"},
              /*10*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_compra.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2"},
-             /*11*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]},
+             /*11*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\" + DateTime.Now.ToString("yyyy") + "_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre"},
              //--------------------------------------------------------------------------------------------
              /*12*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\tod_venta.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0] + "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2"},
              /*13*/{ GG_direccion_base[1]+"reg\\vent_comp_prod\\tod_compra.txt", "año" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]+ "impuesto_1" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_1" + GG_caracter_separacion[2] + "porcentage_de_impuesto_1" + GG_caracter_separacion[1] + "impuesto_2" + GG_caracter_separacion[2] + "cantidad_a_pagar_impuesto_2"},
-             /*14*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\tod_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "total_venta" + GG_caracter_separacion[0] + "total_compra" + GG_caracter_separacion[0]}
+             /*14*/{ GG_direccion_base[1] + "reg\\vent_comp_prod\\tod_producto.txt" ,"codigo" + GG_caracter_separacion[0] + "cantidad" + GG_caracter_separacion[0] + "nombre"}
              //------------------------------------------------------------------------------------------------------
              //-------------------------------------------------------------------------------------------------------
              
@@ -109,7 +109,7 @@ namespace tienda_todo_funciones
         static public string[,] GG_ventana_emergente_productos = new string[,]
         {
             /*0*/ { "1", "producto", "" },
-            /*1*/ { "1", "cant_produc", "0|solo_numeros" },
+            /*1*/ { "1", "contenido", "0|solo_numeros" },
             /*2*/ { "4", "tipo_medida", "NOSE|todas_mayusculas|" + GG_variables_string[5] + '|' + GG_variables_string[6] },
             /*3*/ { "1", "precio_venta", "0|solo_numeros" },
             /*4*/ { "2", "cod_barras", GG_variables_string[0] },
@@ -124,12 +124,13 @@ namespace tienda_todo_funciones
             /*13*/ { "1", "impuestos", "|todas_mayusculas|||reyeno_textbox_ventana_impu" },
             /*14*/ { "1", "parte_de_que_producto", "||||no_visible°venta_ingrediente" }
         };
+
         public static void RecargarVentanaEmergenteProductos(string al_finalizar_que_borrar_para_proxima_ventana="")
         {
             GG_ventana_emergente_productos = new string[,]
             {
                 /*0*/ { "1", "producto", "" },
-                /*1*/ { "1", "cant_produc", "0|solo_numeros" },
+                /*1*/ { "1", "contenido", "0|solo_numeros" },
                 /*2*/ { "4", "tipo_medida", "NOSE|todas_mayusculas|" + GG_variables_string[5] + '|' + GG_variables_string[6] },
                 /*3*/ { "1", "precio_venta", "0|solo_numeros" },
                 /*4*/ { "2", "cod_barras", GG_variables_string[0] },
@@ -197,7 +198,7 @@ namespace tienda_todo_funciones
             { "1","numero_celular_de_provedor","0|solo_numeros" },
             { "1","numero_de_telefono_para_reporte","0|solo_numeros" },
             { "1","direccion_empresa","" },
-            { "1","calificacion_preventa:0°calificacion_entrega:0","" },
+            { "1","calificacion_preventa¬0°calificacion_entrega¬0","" },
             { "1","comentarios_preventa_entrega","" }
         };
 
@@ -255,13 +256,14 @@ namespace tienda_todo_funciones
         //GG_arrays_carga_de_archivos[5][]//tipos_de_medida
         static public string[][] GG_arrays_carga_de_archivos = new string[GG_dir_nom_archivos.GetLength(0)][];
 
+        static public string[][] GG_arrays_carga_de_registros = new string[GG_dir_reg.GetLength(0)][];
 
         //-----------------------------------------------------------------------------------------
 
         static public int[] GG_var_glob_int =
         {
-            0,//este es donde va a empesar la lectura de los archivos y arreglos en 0 apareceran tambien los nombres de las columnas
-            0,//cantidad_total_de_productos_inventario//este servira para que si dentro de ventana emergente abre otra ventana emergente al momento de guardar el producto incremente la cantidad total para el otro producto 
+            0//este es donde va a empesar la lectura de los archivos y arreglos en 0 apareceran tambien los nombres de las columnas
+            
         };
 
 
