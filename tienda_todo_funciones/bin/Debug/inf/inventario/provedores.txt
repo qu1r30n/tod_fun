@@ -1,2 +1,3 @@
 provedor|dinero|dias_de_preventa_0°dias_de_preventa_1|dias_de_entrega_0°dias_de_entrega_1|id_de_empleado|nombre_y_apellidos|numero_celular_de_provedor|numero_de_telefono_para_reporte|direccion_empresa|calificacion_preventa¬0°calificacion_entrega¬0|comentarios_preventa_entrega
 COCA COLA|8256|°|°||||||calificacion_preventa¬0°calificacion_entrega¬0|
+CASA_VARGAS|0|°|°||||||calificacion_preventa¬0°calificacion_entrega¬0|

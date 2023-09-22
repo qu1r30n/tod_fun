@@ -1,2 +1,2 @@
 año|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2
-2023|32|28|IVA¬30.72¬16°NOSE¬0¬0
+2023|32|28|IVA¬37.6¬16°NOSE¬0¬0
