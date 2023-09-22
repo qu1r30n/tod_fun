@@ -1,2 +1,0 @@
-dia|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2
-20230914|192|168|IVA¬30.72¬16°NOSE¬0¬0|7501055368570¬coca retornable 2.5 LT¬6¬32¬COCA COLA|

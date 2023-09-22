@@ -1,2 +1,0 @@
-codigo|cantidad|nombre
-7501055368570|36|coca retornable 2.5 LT

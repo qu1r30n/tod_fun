@@ -55,7 +55,7 @@ namespace tienda_todo_funciones.modelos
             {
                 if (ubicacion_rapida != null && texto_rapido != null)
                 {
-                    pr.agregar_string_archivo(ubicacion_rapida, texto_rapido);
+                    pr.agregar_string_ARCHIVOS(ubicacion_rapida, texto_rapido);
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace tienda_todo_funciones.modelos
             {
                 if (texto_rapido != null)
                 {
-                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido);
+                    pr.agregar_string_ARCHIVOS(variables_glob_conf.GG_dir_nom_archivos[0, 0], texto_rapido);
                 }
                 else
                 {
@@ -105,7 +105,7 @@ namespace tienda_todo_funciones.modelos
                 else
                 {
                     string datos = DateTime.Now.ToString("yyyyMMdd") + G_caracter_separacion[1] + "0" + G_caracter_separacion[1] + "0";
-                    pr.agregar_string_archivo(variables_glob_conf.GG_dir_nom_archivos[3, 0], datos);
+                    pr.agregar_string_ARCHIVOS(variables_glob_conf.GG_dir_nom_archivos[3, 0], datos);
                     objeto_a_retornar = datos;
 
                 }

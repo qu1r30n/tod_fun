@@ -1,2 +1,2 @@
 producto|cant_produc|tipo_medida|precio_venta|cod_barras|cantidad|costo_comp|provedor|grupo|no poner nada|cant_produc_x_paquet|tipo_de_producto|ligar_produc_sab|impuestos|parte_de_que_producto
-coca retornable|2.5|LT|32|7501055368570|-129|28|COCA COLA|1||1|||IVA°NOSE|
+coca retornable|2.5|LT|32|7501055368570|-263|28|COCA COLA|1||1|||IVA°NOSE|
