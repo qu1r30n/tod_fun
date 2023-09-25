@@ -1,1 +1,0 @@
-hora_min_seg|total_transaccion_vendida|costo_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2|codigo¬nombre¬cantidad¬precio_venta¬precio_compra¬provedor°codigo_2¬nombre_2¬cantidad_2¬precio_venta_2¬precio_compra_2¬provedor_2|alguna_informacion

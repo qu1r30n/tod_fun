@@ -1,2 +1,0 @@
-dia|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2
-20230923|43|35|IVA¬6.88¬16°NOSE¬0¬0
