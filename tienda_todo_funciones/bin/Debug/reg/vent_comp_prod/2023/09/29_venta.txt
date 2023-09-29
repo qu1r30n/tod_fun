@@ -1,2 +1,2 @@
 dia|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2
-20230928|823|707|IVA¬15.52¬16°NOSE¬0¬0
+20230929|4252|3668|IVA¬680.32¬16°NOSE¬0¬0

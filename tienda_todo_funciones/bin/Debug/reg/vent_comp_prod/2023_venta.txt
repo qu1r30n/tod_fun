@@ -1,2 +1,2 @@
 año|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2
-
+2023|1009|833|IVA¬680.32¬16°NOSE¬0¬0

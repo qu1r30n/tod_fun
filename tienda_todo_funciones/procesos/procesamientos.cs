@@ -591,31 +591,26 @@ namespace tienda_todo_funciones.procesos
             {
                 //impuestos//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,            9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
                 {/*0*/                              "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "3",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyyMMdd")+info_fecha_vacia_y_sin_producto},
-                //{/*1*/                              "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "3",                                         "0",    DateTime.Now.ToString("yyyyMM"),                        "0|3",                     "0°0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyyMM")+info_fecha_vacia_y_sin_producto},
-                //{/*2*/                              "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
-                //{/*3*/                              "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
+                {/*1*/                              "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "3",                                         "0",    DateTime.Now.ToString("yyyyMM"),                        "0|3",                     "0°0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyyMM")+info_fecha_vacia_y_sin_producto},
+                {/*2*/                              "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
+                {/*3*/                              "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
                 //total_venta//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO,    8_id_col_EDITAR_ARCHIVO, 9_comparar,       10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
                 {/*4*/                                "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "0",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyyMMdd"),  venta_comp,                    "incrementar", ""},
-                {/*5*/                                "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "0",                                         "0",    DateTime.Now.ToString("yyyyMM"),                        "0|1",                      null,                      "1|2", DateTime.Now.ToString("yyyyMM"),          null,                   "incrementar", ""},
-                {/*6*/                                "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|1",                      null,                      "1|2", DateTime.Now.ToString("yyyy"),            null,                   "incrementar", ""},
-                {/*7*/                                "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|1",                      null,                      "1|2", DateTime.Now.ToString("yyyy"),            null,                   "incrementar", ""},
-                //total_compras//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO, 9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
-                {/*8*/                                  "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "0",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*9*/                                  "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "0",                                         "0",    DateTime.Now.ToString("yyyyMM"),                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*10*/                                 "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*11*/                                 "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
+                {/*5*/                                "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "0",                                         "0",    DateTime.Now.ToString("yyyyMM"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyyMM"),    venta_comp,                   "incrementar", ""},
+                {/*6*/                                "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyy"),      venta_comp,                   "incrementar", ""},
+                {/*7*/                                "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyy"),      venta_comp,                   "incrementar", ""},
                 //productoscantidades//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA, 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO, 9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
-                {/*12*/                                       "registros",  variables_glob_conf.GG_dir_reg[2,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*13*/                                       "registros",  variables_glob_conf.GG_dir_reg[5,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*14*/                                       "registros",  variables_glob_conf.GG_dir_reg[8,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*15*/                                       "registros", variables_glob_conf.GG_dir_reg[11,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                {/*16*/                                       "registros", variables_glob_conf.GG_dir_reg[14,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""}
+                //{/*8*/                                       "registros",  variables_glob_conf.GG_dir_reg[2,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
+                //{/*9*/                                       "registros",  variables_glob_conf.GG_dir_reg[5,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
+                //{/*10*/                                       "registros",  variables_glob_conf.GG_dir_reg[8,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
+                //{/*11*/                                       "registros", variables_glob_conf.GG_dir_reg[11,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
+                //{/*12*/                                       "registros", variables_glob_conf.GG_dir_reg[14,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""}
             };
 
             //id_archivo
             for (int i = 0; i < info_lugar_a_buscar.GetLength(0); i++)
             {
-                if (i == 3 || i == 4)
+                if (i == 2 || i == 3)
                 {
 
                 }
@@ -1115,6 +1110,7 @@ namespace tienda_todo_funciones.procesos
 
             else
             {
+                //si no profundiso en el arreglo 
                 if (columnas_a_recorrer is string)
                 {
                     string[] id_editar = ids_archivo_a_editar.Split(Convert.ToChar(caracterSeparacion[0]));
@@ -1154,7 +1150,7 @@ namespace tienda_todo_funciones.procesos
                     
                 }
 
-
+                //si profundiso en  el arreglo entonses es un multiarregl y se introdujo
                 else if (columnas_a_recorrer is string[] temp)
                 {
 
@@ -1163,11 +1159,6 @@ namespace tienda_todo_funciones.procesos
                 }
                 
 
-                //Sí es el último elemento del arreglo múltiple modifica el texto
-                //para finalmente concatenarlos Con Los otros textos a retornar de la función recursiva 
-                //err__ = 2;
-                //texto_a_retornar = "" + (Convert.ToDouble(espliteado_texto[id_string_al_esplitear_editar]) + Convert.ToDouble(cantidad_a_incrementar_decrementar));
-                //espliteado_texto[id_string_al_esplitear_editar] = texto_a_retornar;
             }
 
             //Este concatena todos los resultados para el final ya tener toda la fila recuerda que es un proceso recursivo 
@@ -1254,11 +1245,11 @@ namespace tienda_todo_funciones.procesos
                             //este es de los id_de_editar
                             if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
                             {
-                                for (int k = 0; k < espliteado_ids_archivo_a_editar.Length; k++)
+                                for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
                                 {
                                     //ve la funcion que esta dentro del if 
 
-                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[j])] == espliteado_comparar_info_del_STRING[k])
+                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
                                     {
                                         info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
                                     }
