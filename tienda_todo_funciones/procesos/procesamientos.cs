@@ -581,77 +581,154 @@ namespace tienda_todo_funciones.procesos
             string dinero_impuestos_joineado = string.Join(caracter_separacion[1], dinero_impuestos);
 
             string[] espliteado_info_venta=informacion_venta.Split(Convert.ToChar(caracter_separacion[0]));
-            string venta_comp = espliteado_info_venta[1] + "|" + espliteado_info_venta[2];
+            string venta_comp = espliteado_info_venta[1] + caracter_separacion[0] + espliteado_info_venta[2];
 
+            string[] codigos = extraer_info_de_un_arreglo_de_un_elemento_de_otro_arreglo_RETORNA_ARREGLO(informacion_venta, "0|4|0", 0);
+            string[] nombres = extraer_info_de_un_arreglo_de_un_elemento_de_otro_arreglo_RETORNA_ARREGLO(informacion_venta, "0|4|0", 1);
+            string[] cantidades = extraer_info_de_un_arreglo_de_un_elemento_de_otro_arreglo_RETORNA_ARREGLO(informacion_venta, "0|4|0", 2);
+            string codigos_joineados = string.Join(caracter_separacion[0], codigos);
+            string cantidades_joineados = string.Join(caracter_separacion[0], cantidades);
+
+            string si_no_esta_reg_producto = "";
+            for (int i = 0; i < codigos.Length; i++)
+            {
+                if (i < codigos.Length-1)
+                {
+                    si_no_esta_reg_producto = si_no_esta_reg_producto + codigos[i] + caracter_separacion[0] + cantidades[i] + caracter_separacion[0] + nombres[i] + caracter_separacion[1];
+                }
+                else
+                {
+                    si_no_esta_reg_producto = si_no_esta_reg_producto + codigos[i] + caracter_separacion[0] + cantidades[i] + caracter_separacion[0] + nombres[i];
+                }
+                
+            }
             int a = 1 + 1;
 
             //¡IMPORTANTE! los caracteres de separacion de 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,
             //tienen que ser los mismos que los de 9_comparar, 10_dato_editar_o_incrementar O CREO QUE de los ultimos caracteres que se van a comparar
             string[,] info_lugar_a_buscar = new string[,]
             {
-                //impuestos//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,            9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
-                {/*0*/                              "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "3",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyyMMdd")+info_fecha_vacia_y_sin_producto},
-                {/*1*/                              "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "3",                                         "0",    DateTime.Now.ToString("yyyyMM"),                        "0|3",                     "0°0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyyMM")+info_fecha_vacia_y_sin_producto},
-                {/*2*/                              "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                   "1°1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
-                {/*3*/                              "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,   dinero_impuestos_joineado,                    "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto},
-                //total_venta//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO,    8_id_col_EDITAR_ARCHIVO, 9_comparar,       10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
-                {/*4*/                                "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "0",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyyMMdd"),  venta_comp,                    "incrementar", ""},
-                {/*5*/                                "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "0",                                         "0",    DateTime.Now.ToString("yyyyMM"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyyMM"),    venta_comp,                   "incrementar", ""},
-                {/*6*/                                "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyy"),      venta_comp,                   "incrementar", ""},
-                {/*7*/                                "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                      "1|2", DateTime.Now.ToString("yyyy"),      venta_comp,                   "incrementar", ""},
-                //productoscantidades//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA, 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO, 9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta
-                //{/*8*/                                       "registros",  variables_glob_conf.GG_dir_reg[2,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                //{/*9*/                                       "registros",  variables_glob_conf.GG_dir_reg[5,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                //{/*10*/                                       "registros",  variables_glob_conf.GG_dir_reg[8,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                //{/*11*/                                       "registros", variables_glob_conf.GG_dir_reg[11,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""},
-                //{/*12*/                                       "registros", variables_glob_conf.GG_dir_reg[14,0],      "-1",                                            "0",                                         "0",                 "",                          "0",                      null,                      "",         "",                         null,                   "incrementar", ""}
+                //impuestos//{0_sera_en_archivos_o_en_registros,                        1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,             9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar,                                                     12_si_no_esta,13_caracteres_separacion
+                {/*0*/                              "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "3",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,    dinero_impuestos_joineado,                   "incrementar", DateTime.Now.ToString("yyyyMMdd")+info_fecha_vacia_y_sin_producto, ""},
+                {/*1*/                              "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "3",                                         "0",    DateTime.Now.ToString("yyyyMM"),                        "0|3",                     "0°0",                   "1°1", nom_impuestos_joineado,    dinero_impuestos_joineado,                   "incrementar", DateTime.Now.ToString("yyyyMM")+info_fecha_vacia_y_sin_producto  , ""},
+                {/*2*/                              "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                   "1°1", nom_impuestos_joineado,    dinero_impuestos_joineado,                   "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto    , ""},
+                {/*3*/                              "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "3",                                         "0",      DateTime.Now.ToString("yyyy"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,    dinero_impuestos_joineado,                   "incrementar", DateTime.Now.ToString("yyyy")+info_fecha_vacia_y_sin_producto    , ""},
+                //total_venta  //{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,                        9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta, 13_caracteres_separacion_de_sino_esta
+                {/*4*/                                "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "0",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                          "0",                       "0",                   "1|2", DateTime.Now.ToString("yyyyMMdd"),                   venta_comp,                   "incrementar",            "", ""},
+                {/*5*/                                "registros",  variables_glob_conf.GG_dir_reg[6,0],      "-1",                                            "0",                                         "0",    DateTime.Now.ToString("yyyyMM"),                          "0",                       "0",                   "1|2",   DateTime.Now.ToString("yyyyMM"),                   venta_comp,                   "incrementar",            "", ""},
+                {/*6*/                                "registros",  variables_glob_conf.GG_dir_reg[9,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                   "1|2",     DateTime.Now.ToString("yyyy"),                   venta_comp,                   "incrementar",            "", ""},
+                {/*7*/                                "registros", variables_glob_conf.GG_dir_reg[12,0],      "-1",                                            "0",                                         "0",      DateTime.Now.ToString("yyyy"),                          "0",                       "0",                   "1|2",     DateTime.Now.ToString("yyyy"),                   venta_comp,                   "incrementar",            "", ""},
+                //productoscantidades//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA, 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO, 9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar,           12_si_no_esta, 13_caracteres_separacion
+                {/*8*/                                       "registros",  variables_glob_conf.GG_dir_reg[2,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"},
+                {/*9*/                                       "registros",  variables_glob_conf.GG_dir_reg[5,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"},
+                {/*10*/                                      "registros",  variables_glob_conf.GG_dir_reg[8,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"},
+                {/*11*/                                      "registros", variables_glob_conf.GG_dir_reg[11,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"},
+                {/*12*/                                      "registros", variables_glob_conf.GG_dir_reg[14,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"}
             };
 
             //id_archivo
+            string[] esta_direccion_fue_agregado=null;
             for (int i = 0; i < info_lugar_a_buscar.GetLength(0); i++)
             {
-                if (i == 2 || i == 3)
+                string[] espliteado_comparacion_fila = info_lugar_a_buscar[i, 5].Split(Convert.ToChar(G_caracter_separacion[0]));
+                for (int j = 0; j < espliteado_comparacion_fila.Length; j++)
                 {
 
-                }
-                int id_archivo_o_registro = sacar_id_arreglo_archivo_o_registro(info_lugar_a_buscar[i, 0], info_lugar_a_buscar[i, 1]);
 
-                string sera_en_archivos_o_en_registros = info_lugar_a_buscar[i, 0];
-                string id_o_nom_columna_COMPARAR = info_lugar_a_buscar[i, 4];
-                string comparacion = info_lugar_a_buscar[i, 5];
+                    int id_archivo_o_registro = sacar_id_arreglo_archivo_o_registro(info_lugar_a_buscar[i, 0], info_lugar_a_buscar[i, 1]);
 
-                string[] id_o_fila_a_trabajar = sacar_fila_comparando_simple(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_nom_columna_COMPARAR), comparacion);
+                    string sera_en_archivos_o_en_registros = info_lugar_a_buscar[i, 0];
+                    string id_o_nom_columna_COMPARAR = info_lugar_a_buscar[i, 4];
+                    string comparacion = espliteado_comparacion_fila[j];
 
-                bool agrego_informacion_al_archivo = false;
-                if (id_o_fila_a_trabajar == null)
-                {
+                    string[] id_o_fila_a_trabajar = sacar_fila_comparando_simple(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_nom_columna_COMPARAR), comparacion);
 
+                    bool agrego_informacion_al_archivo = false;
                     string direccion = info_lugar_a_buscar[i, 1];
-                    string si_no_esta = info_lugar_a_buscar[i, 12];
-                    agregar_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, direccion, si_no_esta);
-                    agrego_informacion_al_archivo = true;
+                    if (id_o_fila_a_trabajar == null)
+                    {
+
+                        
+                        string si_no_esta = info_lugar_a_buscar[i, 12];
+                        string[] espliteado_si_no_esta=null;
+                        if (info_lugar_a_buscar[i, 13] != "" && info_lugar_a_buscar[i, 13] != null)
+                        {
+                            espliteado_si_no_esta = si_no_esta.Split(Convert.ToChar(info_lugar_a_buscar[i, 13]));
+                        }
+                        else
+                        {
+                            espliteado_si_no_esta = new string[] { si_no_esta };
+                        }
+                        
+                        for (int m = 0; m < espliteado_si_no_esta.Length; m++)
+                        {
+                            agregar_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, direccion, espliteado_si_no_esta[m]);
+                        }
+
+                        esta_direccion_fue_agregado = agregar_registro_del_array(esta_direccion_fue_agregado, direccion);
+                        
+                        
+                        break;
+                    }
+
+                    if (i == 8 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
+                    {
+
+                    }
+                    bool modificar = true;
+                    if (esta_direccion_fue_agregado != null)
+                    {
+                        //checa que las direcciones no alla sido agregado la informacion anterior mente
+                        //por que si incrementa cuando previamente fue agregado estaria duplicando la venta
+                        for (int k = 0; k < esta_direccion_fue_agregado.Length; k++)
+                        {
+                            if (direccion == esta_direccion_fue_agregado[k])
+                            {
+                                modificar = false;
+                            }
+                        }
+                    }
+                    
+
+                    if (modificar == true)
+                    {
+                        if (agrego_informacion_al_archivo == false)
+                        {
+
+
+                            //extraer_arreglo_de_string(fila_a_trabajar,);
+
+                            string columna_a_RECORRER_ARCHIVO_ = info_lugar_a_buscar[i, 6];
+                            string id_col_COMPARAR_ARCHIVO_ = info_lugar_a_buscar[i, 7];
+                            string comparar = info_lugar_a_buscar[i, 9];
+                            string id_col_EDITAR_ARCHIVO_ = info_lugar_a_buscar[i, 8];
+                            string dato_editar = info_lugar_a_buscar[i, 10];
+                            string proceso = info_lugar_a_buscar[i, 11];
+
+                            string texto_modificado = null;
+
+                            if (id_col_COMPARAR_ARCHIVO_ != null && comparar != null && id_col_COMPARAR_ARCHIVO_ != "" && comparar != "")
+                            {
+                                
+                                texto_modificado = incrementar_editar_MultiArregloRecursivo(proceso, id_o_fila_a_trabajar[1], columna_a_RECORRER_ARCHIVO_, id_col_COMPARAR_ARCHIVO_, comparar, id_col_EDITAR_ARCHIVO_, dato_editar);
+
+                                editar_fila_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_fila_a_trabajar[0]), texto_modificado);
+
+                            }
+                            else
+                            {
+                                string[] espliteado_dato_editar = dato_editar.Split(Convert.ToChar(caracter_separacion[0]));
+                                texto_modificado = incrementar_editar_MultiArregloRecursivo(proceso, id_o_fila_a_trabajar[1], columna_a_RECORRER_ARCHIVO_, id_col_COMPARAR_ARCHIVO_, comparar, id_col_EDITAR_ARCHIVO_, espliteado_dato_editar[j]);
+
+                                editar_fila_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_fila_a_trabajar[0]), texto_modificado);
+                            }
+
+                        }
+                    }
+                    
+                    
+                    
                 }
-
-                if (agrego_informacion_al_archivo == false)
-                {
-
-
-                    //extraer_arreglo_de_string(fila_a_trabajar,);
-
-                    string columna_a_RECORRER_ARCHIVO_ = info_lugar_a_buscar[i, 6];
-                    string id_col_COMPARAR_ARCHIVO_ = info_lugar_a_buscar[i, 7];
-                    string comparar = info_lugar_a_buscar[i, 9];
-                    string id_col_EDITAR_ARCHIVO_ = info_lugar_a_buscar[i, 8];
-                    string dato_editar = info_lugar_a_buscar[i, 10];
-                    string proceso = info_lugar_a_buscar[i, 11];
-
-                    string texto_modificado = incrementar_editar_MultiArregloRecursivo(proceso, id_o_fila_a_trabajar[1], columna_a_RECORRER_ARCHIVO_, id_col_COMPARAR_ARCHIVO_, comparar, id_col_EDITAR_ARCHIVO_, dato_editar);
-
-                    editar_fila_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_fila_a_trabajar[0]), texto_modificado);
-
-
-                }
-
             }
         }
 
@@ -1125,7 +1202,7 @@ namespace tienda_todo_funciones.procesos
                             }
                             else if (id_editar.Length==1)
                             {
-                                espliteado_texto[Convert.ToInt32(id_editar[0])] = "" + (Convert.ToDouble(espliteado_texto[Convert.ToInt32(id_editar[i])]) + Convert.ToDouble(cant_inc_edit[i]));
+                                espliteado_texto[Convert.ToInt32(id_editar[0])] = "" + (Convert.ToDouble(espliteado_texto[Convert.ToInt32(id_editar[0])]) + Convert.ToDouble(cant_inc_edit[i]));
                             }
 
                             
@@ -1177,107 +1254,147 @@ namespace tienda_todo_funciones.procesos
 
                 //modificar
                 //string operacion,string texto, object columnas_a_recorrer, string id_string_al_esplitear_comparar, string comparar_info_del_STRING, string ids_archivo_a_editar, string cantidad_a_incrementar_decrementar, string[] caracterSeparacion = null
-
-                string[] espliteado_id_string_al_esplitear_comparar = id_comp.Split(Convert.ToChar(caracterSeparacion[0]));
-                string[] espliteado_comparar_info_del_STRING = comparacion.Split(Convert.ToChar(caracterSeparacion[0]));
-
-                //si tienen la misma cantidad espliteada id_string_al_esplitear_comparar que comparar_info_del_STRING
-                if (espliteado_id_string_al_esplitear_comparar.Length == espliteado_comparar_info_del_STRING.Length)
+                if (id_comp!=null && comparacion!=null)
                 {
-                    for (int j = 0; j < espliteado_id_string_al_esplitear_comparar.Length; j++)
+                    string[] espliteado_id_string_al_esplitear_comparar = id_comp.Split(Convert.ToChar(caracterSeparacion[0]));
+                    string[] espliteado_comparar_info_del_STRING = comparacion.Split(Convert.ToChar(caracterSeparacion[0]));
+
+                    //si tienen la misma cantidad espliteada id_string_al_esplitear_comparar que comparar_info_del_STRING
+                    if (espliteado_id_string_al_esplitear_comparar.Length == espliteado_comparar_info_del_STRING.Length)
                     {
-                        //mod__ aqui creo que debo comparar el que eta em eñ archivo con el de el string para que si son iguales se procede
-                        //porque estoy pensando que solo se estan auto comparandose la misma variable com a==a 
-                        //este es de los id_de_comparar //creo?
-                        if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[j])] == espliteado_comparar_info_del_STRING[j])
+                        for (int j = 0; j < espliteado_id_string_al_esplitear_comparar.Length; j++)
                         {
-                            string[] espliteado_ids_archivo_a_editar = id_editar.Split(Convert.ToChar(caracterSeparacion[0]));
-                            string[] espliteado_cantidad_a_incrementar_decrementar = incremetar_editar.Split(Convert.ToChar(caracterSeparacion[0]));
-
-                            //mod__ aqui creo que deberia comparar 
-                            //este es de los id_de_editar
-                            if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
+                            //mod__ aqui creo que debo comparar el que eta em eñ archivo con el de el string para que si son iguales se procede
+                            //porque estoy pensando que solo se estan auto comparandose la misma variable com a==a 
+                            //este es de los id_de_comparar //creo?
+                            if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[j])] == espliteado_comparar_info_del_STRING[j])
                             {
-                                for (int k = 0; k < espliteado_ids_archivo_a_editar.Length; k++)
+                                string[] espliteado_ids_archivo_a_editar = id_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+                                string[] espliteado_cantidad_a_incrementar_decrementar = incremetar_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+
+                                //mod__ aqui creo que deberia comparar 
+                                //este es de los id_de_editar
+                                if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
                                 {
-                                    //ve la funcion que esta dentro del if 
-
-                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[j])] == espliteado_comparar_info_del_STRING[k])
+                                    for (int k = 0; k < espliteado_ids_archivo_a_editar.Length; k++)
                                     {
-                                        info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
-                                    }
+                                        //ve la funcion que esta dentro del if 
+
+                                        if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[j])] == espliteado_comparar_info_del_STRING[k])
+                                        {
+                                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
+                                        }
 
 
-                                }
-                            }
-
-                            else if (espliteado_ids_archivo_a_editar.Length == 1)
-                            {
-                                for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
-                                {
-                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
-                                    {
-                                        info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])], espliteado_cantidad_a_incrementar_decrementar[k]);
                                     }
                                 }
+
+                                else if (espliteado_ids_archivo_a_editar.Length == 1)
+                                {
+                                    for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
+                                    {
+                                        if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
+                                        {
+                                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])], espliteado_cantidad_a_incrementar_decrementar[k]);
+                                        }
+                                    }
+                                }
+
+                                else
+                                {
+                                    string error = "espliteado_ids_archivo_a_editar debe tener solo 1 elemento o espliteado_ids_archivo_a_editar y espliteado_cantidad_a_incrementar_decrementar deben tener la misma cantidad de espliteado o ";
+                                    int error_a_proposito = Convert.ToInt32(error);
+                                }
+
                             }
 
-                            else
-                            {
-                                string error = "espliteado_ids_archivo_a_editar debe tener solo 1 elemento o espliteado_ids_archivo_a_editar y espliteado_cantidad_a_incrementar_decrementar deben tener la misma cantidad de espliteado o ";
-                                int error_a_proposito = Convert.ToInt32(error);
-                            }
-
+                            
                         }
+                    }
 
+                    else if (espliteado_id_string_al_esplitear_comparar.Length == 1)
+                    {
+                        for (int j = 0; j < espliteado_comparar_info_del_STRING.Length; j++)
+                        {
+                            if (info_del_espliteado[Convert.ToInt32(id_comp)] == espliteado_comparar_info_del_STRING[j])
+                            {
+                                string[] espliteado_ids_archivo_a_editar = id_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+                                string[] espliteado_cantidad_a_incrementar_decrementar = incremetar_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+
+                                //este es de los id_de_editar
+                                if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
+                                {
+                                    for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
+                                    {
+                                        //ve la funcion que esta dentro del if 
+
+                                        if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
+                                        {
+                                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
+                                        }
+
+
+                                    }
+                                }
+
+                                else if (espliteado_ids_archivo_a_editar.Length == 1)
+                                {
+                                    for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
+                                    {
+                                        if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
+                                        {
+                                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])], espliteado_cantidad_a_incrementar_decrementar[k]);
+                                        }
+                                    }
+                                }
+
+                                else
+                                {
+                                    string error = "espliteado_ids_archivo_a_editar debe tener solo 1 elemento o espliteado_ids_archivo_a_editar y espliteado_cantidad_a_incrementar_decrementar deben tener la misma cantidad de espliteado o ";
+                                    int error_a_proposito = Convert.ToInt32(error);
+                                }
+
+                            }
+                        }
                     }
                 }
 
-                else if (espliteado_id_string_al_esplitear_comparar.Length == 1)
+                else
                 {
-                    for (int j = 0; j < espliteado_comparar_info_del_STRING.Length; j++)
+                    string[] espliteado_ids_archivo_a_editar = id_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+                    string[] espliteado_cantidad_a_incrementar_decrementar = incremetar_editar.Split(Convert.ToChar(caracterSeparacion[0]));
+
+                    //mod__ aqui creo que deberia comparar 
+                    //este es de los id_de_editar
+                    if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
                     {
-                        if (info_del_espliteado[Convert.ToInt32(id_comp)] == espliteado_comparar_info_del_STRING[j])
+                        for (int k = 0; k < espliteado_ids_archivo_a_editar.Length; k++)
                         {
-                            string[] espliteado_ids_archivo_a_editar = id_editar.Split(Convert.ToChar(caracterSeparacion[0]));
-                            string[] espliteado_cantidad_a_incrementar_decrementar = incremetar_editar.Split(Convert.ToChar(caracterSeparacion[0]));
-
-                            //este es de los id_de_editar
-                            if (espliteado_ids_archivo_a_editar.Length == espliteado_cantidad_a_incrementar_decrementar.Length)
-                            {
-                                for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
-                                {
-                                    //ve la funcion que esta dentro del if 
-
-                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
-                                    {
-                                        info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
-                                    }
+                            //ve la funcion que esta dentro del if 
 
 
-                                }
-                            }
+                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[k])], espliteado_cantidad_a_incrementar_decrementar[k]);
 
-                            else if (espliteado_ids_archivo_a_editar.Length == 1)
-                            {
-                                for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
-                                {
-                                    if (info_del_espliteado[Convert.ToInt32(espliteado_id_string_al_esplitear_comparar[0])] == espliteado_comparar_info_del_STRING[k])
-                                    {
-                                        info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])], espliteado_cantidad_a_incrementar_decrementar[k]);
-                                    }
-                                }
-                            }
 
-                            else
-                            {
-                                string error = "espliteado_ids_archivo_a_editar debe tener solo 1 elemento o espliteado_ids_archivo_a_editar y espliteado_cantidad_a_incrementar_decrementar deben tener la misma cantidad de espliteado o ";
-                                int error_a_proposito = Convert.ToInt32(error);
-                            }
 
                         }
                     }
+
+                    else if (espliteado_ids_archivo_a_editar.Length == 1)
+                    {
+                        for (int k = 0; k < espliteado_cantidad_a_incrementar_decrementar.Length; k++)
+                        {
+                            info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])] = funcion_solo_utilisa_la_modificacion_informacion_editar_o_incrementar(operacion, info_del_espliteado[Convert.ToInt32(espliteado_ids_archivo_a_editar[0])], espliteado_cantidad_a_incrementar_decrementar[k]);
+                        }
+                    }
+
+                    else
+                    {
+                        string error = "espliteado_ids_archivo_a_editar debe tener solo 1 elemento o espliteado_ids_archivo_a_editar y espliteado_cantidad_a_incrementar_decrementar deben tener la misma cantidad de espliteado o ";
+                        int error_a_proposito = Convert.ToInt32(error);
+                    }
                 }
+                
 
 
 

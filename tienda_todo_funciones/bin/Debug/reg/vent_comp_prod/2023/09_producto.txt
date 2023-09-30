@@ -1,1 +1,3 @@
 codigo|cantidad|nombre
+75000011|10|leche nesquik 240 ML
+7501055368570|11|coca retornable 2.5 LT

@@ -1,2 +1,2 @@
 mes|total_venta|total_compra|impuesto_1¬cantidad_a_pagar_impuesto_1¬porcentage_de_impuesto_1°impuesto_2¬cantidad_a_pagar_impuesto_2¬porcentage_de_impuesto_2
-202309|1009|833|IVA¬680.32¬16°NOSE¬0¬0
+202309|462|378|IVA¬73.92¬16°NOSE¬0¬0
