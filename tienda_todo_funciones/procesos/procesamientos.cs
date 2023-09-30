@@ -626,8 +626,27 @@ namespace tienda_todo_funciones.procesos
                 {/*12*/                                      "registros", variables_glob_conf.GG_dir_reg[14,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"}
             };
 
+            modificadores(info_lugar_a_buscar, caracter_separacion);
+        }
+
+        public void modificadores(string[,] info_lugar_a_buscar, string[] caracter_separacion = null)
+        {
+            //nombres columna y ejemplos
+            //impuestos//{0_sera_en_archivos_o_en_registros,                        1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,             9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar,                                                     12_si_no_esta,13_caracteres_separacion
+            //{/*0*/                              "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "3",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                        "0|3",                       "0",                     "1", nom_impuestos_joineado,    dinero_impuestos_joineado,                   "incrementar", DateTime.Now.ToString("yyyyMMdd")+info_fecha_vacia_y_sin_producto, ""},
+            //total_venta  //{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA,                 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO,                        9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar, 12_si_no_esta, 13_caracteres_separacion_de_sino_esta
+            //{/*4*/                                "registros",  variables_glob_conf.GG_dir_reg[3,0],      "-1",                                            "0",                                         "0",  DateTime.Now.ToString("yyyyMMdd"),                          "0",                       "0",                   "1|2", DateTime.Now.ToString("yyyyMMdd"),                   venta_comp,                   "incrementar",            "", ""},
+            //productoscantidades//{0_sera_en_archivos_o_en_registros,                      1_dir_arch_o_id, 2_id_fila, 3_columnas_a_recorrer_COMPARAR_para_sacar_FILA, 4_id_o_nom_columna_COMPARAR_para_sacar_FILA, 5_comparacion_FILA, 6_columna_a_RECORRER_ARCHIVO, 7_id_col_COMPARAR_ARCHIVO, 8_id_col_EDITAR_ARCHIVO, 9_comparar, 10_dato_editar_o_incrementar, 11_proceso_incrementar_o_editar,           12_si_no_esta, 13_caracteres_separacion
+            //{/*8*/                                       "registros",  variables_glob_conf.GG_dir_reg[2,0],      "-1",                                            "0",                                         "0",   codigos_joineados,                          "0",                      null,                     "1",       null,         cantidades_joineados,                   "incrementar", si_no_esta_reg_producto, "°"},
+
+
+            if (caracter_separacion == null)
+            {
+                caracter_separacion = G_caracter_separacion;
+            }
+
             //id_archivo
-            string[] esta_direccion_fue_agregado=null;
+            string[] esta_direccion_fue_agregado = null;
             for (int i = 0; i < info_lugar_a_buscar.GetLength(0); i++)
             {
                 string[] espliteado_comparacion_fila = info_lugar_a_buscar[i, 5].Split(Convert.ToChar(G_caracter_separacion[0]));
@@ -648,9 +667,9 @@ namespace tienda_todo_funciones.procesos
                     if (id_o_fila_a_trabajar == null)
                     {
 
-                        
+
                         string si_no_esta = info_lugar_a_buscar[i, 12];
-                        string[] espliteado_si_no_esta=null;
+                        string[] espliteado_si_no_esta = null;
                         if (info_lugar_a_buscar[i, 13] != "" && info_lugar_a_buscar[i, 13] != null)
                         {
                             espliteado_si_no_esta = si_no_esta.Split(Convert.ToChar(info_lugar_a_buscar[i, 13]));
@@ -659,22 +678,19 @@ namespace tienda_todo_funciones.procesos
                         {
                             espliteado_si_no_esta = new string[] { si_no_esta };
                         }
-                        
+
                         for (int m = 0; m < espliteado_si_no_esta.Length; m++)
                         {
                             agregar_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, direccion, espliteado_si_no_esta[m]);
                         }
 
                         esta_direccion_fue_agregado = agregar_registro_del_array(esta_direccion_fue_agregado, direccion);
-                        
-                        
+
+
                         break;
                     }
 
-                    if (i == 8 || i == 9 || i == 10 || i == 11 || i == 12 || i == 13)
-                    {
 
-                    }
                     bool modificar = true;
                     if (esta_direccion_fue_agregado != null)
                     {
@@ -688,7 +704,7 @@ namespace tienda_todo_funciones.procesos
                             }
                         }
                     }
-                    
+
 
                     if (modificar == true)
                     {
@@ -709,7 +725,7 @@ namespace tienda_todo_funciones.procesos
 
                             if (id_col_COMPARAR_ARCHIVO_ != null && comparar != null && id_col_COMPARAR_ARCHIVO_ != "" && comparar != "")
                             {
-                                
+
                                 texto_modificado = incrementar_editar_MultiArregloRecursivo(proceso, id_o_fila_a_trabajar[1], columna_a_RECORRER_ARCHIVO_, id_col_COMPARAR_ARCHIVO_, comparar, id_col_EDITAR_ARCHIVO_, dato_editar);
 
                                 editar_fila_string_ARCHIVOS_o_REGISTROS(sera_en_archivos_o_en_registros, id_archivo_o_registro, Convert.ToInt32(id_o_fila_a_trabajar[0]), texto_modificado);
@@ -725,13 +741,14 @@ namespace tienda_todo_funciones.procesos
 
                         }
                     }
-                    
-                    
-                    
+
+
+
                 }
             }
         }
-
+        
+        
         public int sacar_id_arreglo_archivo_o_registro(string arch_o_registro, string direccion_para_sacar_id_arreglo)
         {
             int j = -1;
@@ -804,6 +821,7 @@ namespace tienda_todo_funciones.procesos
 
             return info_id_fila_e_informacion_a_retornar;
         }
+
 
 
         public string mod_proc_extraxion_informacion_archivos_o_registros(string archivos_o_registros, object dir_arch_o_id, int id_fila = -1, object id_o_nom_columna_comparar = null, string comparacion = null, string[] caracter_separacion = null, object id_o_nom_columna_editar = null)
