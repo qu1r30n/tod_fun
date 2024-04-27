@@ -11,6 +11,7 @@
 <button onclick="mostrarDatos()">Mostrar Datos</button>
 <button onclick="borrarCookies()">Borrar Cookies</button>
 <div id="datosContainer" style="display: none;"></div>
+<a href="#" onclick="copiarContenido()">Copiar contenido</a>
 
 <script>
   const textInput = document.getElementById('textInput');
@@ -82,6 +83,17 @@
     alert('Cookies borradas correctamente.');
     document.getElementById('datosContainer').style.display = 'none';
   }
+
+  function copiarContenido() {
+    var contenidoDiv = document.getElementById('datosContainer');
+    var rangoSeleccion = document.createRange();
+    rangoSeleccion.selectNode(contenidoDiv);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(rangoSeleccion);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Contenido copiado al portapapeles.');
+}
 </script>
 </body>
 </html>
