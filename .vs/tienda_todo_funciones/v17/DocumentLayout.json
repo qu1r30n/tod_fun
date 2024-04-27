@@ -1,0 +1,104 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|c:\\users\\pc1\\documents\\github\\tod_fun\\tienda_todo_funciones\\clases\\tex_base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|solutionrelative:tienda_todo_funciones\\clases\\tex_base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|c:\\users\\pc1\\documents\\github\\tod_fun\\tienda_todo_funciones\\modelos\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|solutionrelative:tienda_todo_funciones\\modelos\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|c:\\users\\pc1\\documents\\github\\tod_fun\\tienda_todo_funciones\\procesos\\procesamientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|solutionrelative:tienda_todo_funciones\\procesos\\procesamientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|c:\\users\\pc1\\documents\\github\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|solutionrelative:tienda_todo_funciones\\forms_prueba\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|c:\\users\\pc1\\documents\\github\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2BADEB2D-789C-40D6-B945-FA399FF685AB}|tienda_todo_funciones\\tienda_todo_funciones.csproj|solutionrelative:tienda_todo_funciones\\forms_prueba\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Tex_base.cs",
+              "DocumentMoniker": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\clases\\Tex_base.cs",
+              "RelativeDocumentMoniker": "tienda_todo_funciones\\clases\\Tex_base.cs",
+              "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\clases\\Tex_base.cs",
+              "RelativeToolTip": "tienda_todo_funciones\\clases\\Tex_base.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwMYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T11:33:46.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "model.cs",
+              "DocumentMoniker": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\modelos\\model.cs",
+              "RelativeDocumentMoniker": "tienda_todo_funciones\\modelos\\model.cs",
+              "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\modelos\\model.cs",
+              "RelativeToolTip": "tienda_todo_funciones\\modelos\\model.cs",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAAAIUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T11:06:58.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "procesamientos.cs",
+              "DocumentMoniker": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\procesos\\procesamientos.cs",
+              "RelativeDocumentMoniker": "tienda_todo_funciones\\procesos\\procesamientos.cs",
+              "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\procesos\\procesamientos.cs",
+              "RelativeToolTip": "tienda_todo_funciones\\procesos\\procesamientos.cs",
+              "ViewState": "AQIAAKsFAAAAAAAAAAAqwDgHAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T11:04:24.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ventas.cs",
+              "DocumentMoniker": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "RelativeDocumentMoniker": "tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "RelativeToolTip": "tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAcwFgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T10:59:42.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ventas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "RelativeDocumentMoniker": "tienda_todo_funciones\\forms_prueba\\ventas.cs",
+              "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\tod_fun\\tienda_todo_funciones\\forms_prueba\\ventas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "tienda_todo_funciones\\forms_prueba\\ventas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T10:59:35.487Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
